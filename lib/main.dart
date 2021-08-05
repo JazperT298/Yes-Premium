@@ -1,71 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:sizer/sizer.dart';
+import 'package:yes_premium/routes/app_pages.dart';
+import 'package:yes_premium/routes/app_routes.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/services/transaction_service.dart';
+import 'package:yes_premium/themes/app_theme.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  //_initNotificationService();
+  _initGetStorageService();
+  _initTransactionService();
   runApp(MyApp());
 }
 
+// Future<void> _initNotificationService() async {
+//   print('init NotificationService..');
+//   await Get.putAsync<NotificationService>(() async => NotificationService());
+// }
+
+void _initGetStorageService() {
+  print('init get storage service..');
+  Get.put(GetStorageService());
+}
+
+void _initTransactionService() {
+  print('init TransactionService..');
+  Get.put(TransactionService());
+}
+
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+
+//   print("Handling a background message: ${message.messageId}");
+// }
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+    return Sizer(
+      builder: (context, orientation, screenType) {
+        return GetMaterialApp(
+          supportedLocales: [
+            const Locale('en', 'US'),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          title: 'Yes Premium',
+          smartManagement: SmartManagement.full,
+          debugShowCheckedModeBanner: false,
+          initialRoute: AppRoutes.SPLASHSCREEN,
+          getPages: AppPages.list,
+          theme: AppThemes.light,
+          locale: const Locale('en', 'US'),
+        );
+      },
     );
   }
 }
