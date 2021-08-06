@@ -55,7 +55,7 @@ class VideoLabView extends StatelessWidget {
                     : controller.videoList.length,
                 itemBuilder: (BuildContext context, int index) => Container(
                   width: double.infinity,
-                  height: 360.0,
+                  height: 354.0,
                   alignment: Alignment.center,
                   child: Container(
                       key: new PageStorageKey(
@@ -66,9 +66,10 @@ class VideoLabView extends StatelessWidget {
                           VideoWidget(
                                   play: true,
                                   url: '${controller.videoList[index].video}')
-                              .marginOnly(top: 10.0),
+                              .marginOnly(top: 20.0),
                           Positioned(
                             left: 10,
+                            top: 5,
                             child: Text(
                               '${controller.videoList[index].title}',
                               style: TextStyle(

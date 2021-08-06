@@ -41,31 +41,29 @@ class _VideoWidgetState extends State<VideoWidget> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Container(
-            child: Card(
-              key: PageStorageKey(widget.url),
-              elevation: 5.5,
-              child: Padding(
-                padding: EdgeInsets.only(top: 8.0, bottom: 8.0), //(8.0),
-                child: Chewie(
-                  key: PageStorageKey(widget.url),
-                  controller: ChewieController(
-                    videoPlayerController: videoPlayerController,
-                    aspectRatio: 2.0 / 1.3,
-                    // Prepare the video to be played and display the first frame
-                    autoInitialize: true,
-                    looping: false,
-                    autoPlay: false,
-                    // Errors can occur for example when trying to play a video
-                    // from a non-existent URL
-                    errorBuilder: (context, errorMessage) {
-                      return Center(
-                        child: Text(
-                          errorMessage,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      );
-                    },
-                  ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 8.0,
+              ), //(8.0),
+              child: Chewie(
+                key: PageStorageKey(widget.url),
+                controller: ChewieController(
+                  videoPlayerController: videoPlayerController,
+                  aspectRatio: 2.0 / 1.27,
+                  // Prepare the video to be played and display the first frame
+                  autoInitialize: true,
+                  looping: false,
+                  autoPlay: false,
+                  // Errors can occur for example when trying to play a video
+                  // from a non-existent URL
+                  errorBuilder: (context, errorMessage) {
+                    return Center(
+                      child: Text(
+                        errorMessage,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
