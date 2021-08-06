@@ -25,7 +25,7 @@ class VideolabController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    initializedPlayer();
+    //initializedPlayer();
   }
 
   @override
@@ -42,7 +42,7 @@ class VideolabController extends GetxController {
 
   Future<void> initializedPlayer() async {
     videoPlayerController =
-        VideoPlayerController.asset('${videoList[0].video}');
+        VideoPlayerController.asset('assets/images/solo.mp4');
     await Future.wait([videoPlayerController.initialize()]);
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
