@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
@@ -103,18 +104,41 @@ class HomeView extends GetView<HomeController> {
                       SizedBox(
                         width: 10.0,
                       ),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration.collapsed(
-                            hintText: 'Write something here...',
+                      Container(
+                        width: 80.0.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                          border: Border.all(
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        padding: EdgeInsets.only(
+                          top: 1.h,
+                          bottom: 1.h,
+                          left: 3.w,
+                        ),
+                        child: Text(
+                          'Write something here...',
+                          style: TextStyle(
+                            fontSize: 11.sp,
                           ),
                         ),
                       ),
+                      // Expanded(
+                      //   child: TextField(
+                      //     decoration: InputDecoration.collapsed(
+                      //       hintText: 'Write something here...',
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   Divider(
                     height: 10.0,
                     thickness: 0.5,
+                    color: Colors.grey.shade300,
                   ),
                   Container(
                     height: 40.0,
@@ -139,6 +163,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                         VerticalDivider(
                           width: 8.0,
+                          color: Colors.grey.shade300,
                         ),
                         ElevatedButton.icon(
                           onPressed: () => print('Photo'),

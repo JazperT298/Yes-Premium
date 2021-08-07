@@ -4,6 +4,7 @@ import 'package:yes_premium/modules/account/account_view.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_view.dart';
 import 'package:yes_premium/modules/home/home_view.dart';
 import 'package:yes_premium/modules/meeting/facultymeeting_view.dart';
+import 'package:yes_premium/modules/notification/notification_view.dart';
 import 'package:yes_premium/modules/studentlist/studentlist_view.dart';
 import 'package:yes_premium/modules/videolab/videolab_view.dart';
 
@@ -17,7 +18,7 @@ class BottomNavController extends GetxController {
     HomeView(),
     VideoLabView(),
     FacultyMeetingView(),
-    EducatorListView(),
+    NotificationView(),
     AccountView(),
   ];
   List<BottomNavigationBarItem> navItem = [
@@ -44,7 +45,7 @@ class BottomNavController extends GetxController {
     ),
     BottomNavigationBarItem(
       icon: Icon(
-        Icons.person,
+        Icons.notifications,
         size: 30,
       ),
       label: '',
