@@ -5,6 +5,7 @@ import 'package:video_player/video_player.dart';
 import 'package:yes_premium/modules/videolab/videolab_controller.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/modules/videolab/videolab_widget.dart';
+import 'package:yes_premium/routes/app_routes.dart';
 
 class VideoLabView extends StatelessWidget {
   const VideoLabView({Key? key}) : super(key: key);
@@ -18,24 +19,26 @@ class VideoLabView extends StatelessWidget {
         SliverAppBar(
           brightness: Brightness.light,
           backgroundColor: Colors.white,
-          // leading: Container(
-          //   margin: EdgeInsets.only(top: 7.0, bottom: 7.0),
-          //   decoration: BoxDecoration(
-          //     shape: BoxShape.circle,
-          //     color: Colors.grey.shade300,
-          //   ),
-          //   child: IconButton(
-          //     onPressed: () {},
-          //     icon: Icon(
-          //       Icons.close,
-          //       size: 30,
-          //     ),
-          //   ),
-          // ),
           title: Text(
             'Videos',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
           ),
+          actions: [
+            Container(
+              margin: EdgeInsets.only(top: 7.0, bottom: 7.0, right: 7.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey.shade300,
+              ),
+              child: IconButton(
+                onPressed: () => Get.toNamed(AppRoutes.SEARCH),
+                icon: Icon(
+                  Icons.search_rounded,
+                  size: 30,
+                ),
+              ),
+            ),
+          ],
           centerTitle: true,
           floating: true,
         ),

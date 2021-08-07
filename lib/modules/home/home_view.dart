@@ -4,13 +4,16 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
+import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
+import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    var announceController = Get.put(AnnouncementController());
     Get.put(HomeController());
     return CustomScrollView(
       controller: controller.scrollController,
@@ -33,8 +36,7 @@ class HomeView extends GetView<HomeController> {
               ),
               child: IconButton(
                 onPressed: () {
-                  print(
-                      '${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}');
+                  Get.toNamed(AppRoutes.SEARCH);
                 },
                 icon: Icon(
                   Icons.search_rounded,
@@ -50,7 +52,7 @@ class HomeView extends GetView<HomeController> {
                 color: Colors.grey.shade300,
               ),
               child: IconButton(
-                onPressed: () => Dialogs.showLogout(context),
+                onPressed: () => Get.toNamed(AppRoutes.ANNOUNCEMENT),
                 icon: Icon(
                   Icons.chat_bubble_outlined,
                   size: 30,
@@ -104,25 +106,28 @@ class HomeView extends GetView<HomeController> {
                       SizedBox(
                         width: 10.0,
                       ),
-                      Container(
-                        width: 80.0.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50.0),
+                      GestureDetector(
+                        onTap: () => Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                        child: Container(
+                          width: 80.0.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50.0),
+                            ),
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                            ),
                           ),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
+                          padding: EdgeInsets.only(
+                            top: 1.h,
+                            bottom: 1.h,
+                            left: 3.w,
                           ),
-                        ),
-                        padding: EdgeInsets.only(
-                          top: 1.h,
-                          bottom: 1.h,
-                          left: 3.w,
-                        ),
-                        child: Text(
-                          'Write something here...',
-                          style: TextStyle(
-                            fontSize: 11.sp,
+                          child: Text(
+                            'Write something here...',
+                            style: TextStyle(
+                              fontSize: 11.sp,
+                            ),
                           ),
                         ),
                       ),
@@ -166,7 +171,7 @@ class HomeView extends GetView<HomeController> {
                           color: Colors.grey.shade300,
                         ),
                         ElevatedButton.icon(
-                          onPressed: () => print('Photo'),
+                          onPressed: () => announceController.getImage(),
                           icon: Icon(
                             Icons.photo_library,
                             color: Colors.green,

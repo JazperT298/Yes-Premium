@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/account/account_controller.dart';
+import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 import 'package:sizer/sizer.dart';
@@ -32,10 +33,7 @@ class AccountView extends GetView<AccountController> {
                 color: Colors.grey.shade300,
               ),
               child: IconButton(
-                onPressed: () {
-                  print(
-                      '${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}');
-                },
+                onPressed: () => Get.toNamed(AppRoutes.SEARCH),
                 icon: Icon(
                   Icons.search_rounded,
                   size: 30,
@@ -81,14 +79,6 @@ class AccountView extends GetView<AccountController> {
                                 shape: BoxShape.circle,
                               ),
                             ),
-                      // Image.asset(
-                      //   'assets/images/user_placeholder.png',
-                      //   width: 40.0,
-                      //   height: 40.0,
-                      // ),
-                      // SizedBox(
-                      //   width: 10.0,
-                      // ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -115,10 +105,6 @@ class AccountView extends GetView<AccountController> {
                       ),
                     ],
                   ),
-                  // Divider(
-                  //   height: 10.0,
-                  //   thickness: 0.5,
-                  // ),
                 ],
               ),
             ),
