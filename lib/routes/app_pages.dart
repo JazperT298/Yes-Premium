@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_view.dart';
 import 'package:yes_premium/modules/home/home_view.dart';
+import 'package:yes_premium/modules/login/login_view.dart';
 import 'package:yes_premium/modules/splashscreen/splashscreen_view.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 
@@ -20,6 +21,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.BOTTOMNAV,
       page: () => BottomNavView(),
+      // transition: Transition.rightToLeft,
+      // curve: Curves.linearToEaseOut,
+    ),
+    GetPage(
+      name: AppRoutes.LOGIN,
+      page: () => LoginView(),
       // transition: Transition.rightToLeft,
       // curve: Curves.linearToEaseOut,
     ),

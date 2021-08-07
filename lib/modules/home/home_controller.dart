@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:yes_premium/modules/home/home_api.dart';
 
 class HomeController extends GetxController {
   final scrollController = TrackingScrollController();
@@ -49,6 +50,22 @@ class HomeController extends GetxController {
       imageUrl: 'assets/images/3.jpg',
     ),
   ].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    HomeApi.getEducatorDetails();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
 }
 
 class Post {

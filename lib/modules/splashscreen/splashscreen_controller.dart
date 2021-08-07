@@ -41,7 +41,7 @@ class SplashScreenController extends GetxController {
           );
         } else {
           Get.offAndToNamed(
-            AppRoutes.BOTTOMNAV,
+            AppRoutes.LOGIN,
           );
         }
       }
