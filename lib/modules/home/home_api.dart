@@ -3,23 +3,25 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:yes_premium/configs/app_endpoints.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:get/get.dart';
 
 class HomeApi {
   static var client = http.Client();
 
   static Future getEducatorDetails() async {
-    var token =
-        'Shxb90CfScC4n9V2Bw66MMzKtIklVWwlRuCWKOzLCW80kQh34b3oCm0O_iIhtSxg6oaQ_CYK2xdzzFHwqPw2tp7FSOJT5jnvwHCTvJ_STf1AlvSxri-WsnIjGRJgiizL8l0fWKt-nOsj_T2yHWFfqoMsSNIXRde0ACWWQDQROI0PX3fic16wSzCMf-eQD3w6aFYdvwqoUKKfiaFu5a0neoQbw4f0bUI250ujYY9WQhytJYgpSRuWrsCqOeYpD2BtVkjdoL9SkiJp6lwedVJIkljbJ4IntSFJAQiTbcsPGGXy8O4lotI11x21HqSl2ocRAWLr4WMJnKlZPXA9TU2seZI29NXxaUM_XiHKprB5n0jyWHQf8ah1ImtARm8Vi12_ZZ2zWFJXMD3HBHV1ao04t_dX2lbTY3jLF3H-wYpletYk5WjLWQA35zI7ztK6_PWku8k0MqR6JNRmM2XeLXq2i9Sk5L-1nYShAfZo9Tov8HBj2WjnzLDpiSppSvwFm4dqEwPBbuozweRUERA327Ow64zUsdqwZmn1ut4zzav3eOA';
     try {
-      var response = await client.post(
-        Uri.parse('https://yestechpremium.com:8080/api/Account/GetLocalInfo'),
+      var response = await client.get(
+        Uri.parse(
+            '$baseUrl/api/Users/GetUserDetails?userName=${Get.find<GetStorageService>().appdata.read('userName')}'),
 
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer $token',
+          'Authorization':
+              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
-        body: {},
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
         const Duration(seconds: 10),

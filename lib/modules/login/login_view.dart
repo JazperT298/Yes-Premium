@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_config.dart';
 import 'package:yes_premium/modules/login/login_controller.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class LoginView extends StatelessWidget {
   final controller = Get.put(LoginController());
@@ -71,27 +72,27 @@ class LoginView extends StatelessWidget {
               ),
               onPressed: () async {
                 node.unfocus();
-                // if (!controller.username.text.contains('@') ||
-                //     !controller.username.text.endsWith('.com')) {
-                //   Dialogs.showMyToast(context, "Invalid email address");
-                // } else if (controller.username.text.isEmpty) {
-                //   Dialogs.showMyToast(
-                //       context, "Phone number must not be Empty");
-                // } else if (controller.password.text.isEmpty) {
-                //   Dialogs.showMyToast(context, "Password must not be Empty");
-                // } else {
-                //   var loginReturn = await controller.loadingLogin(context,
-                //       controller.username.text, controller.password.text);
-                //   await controller.loadingGetUserInfo(context);
-                //   print(loginReturn);
-                //   if (loginReturn != 'success') {
-                //     Dialogs.showMyToast(context, "Invalid credentials");
-                //   } else if (loginReturn == 'catch') {
-                //     Dialogs.showMyToast(context, "Oops, something went wrong");
-                //   } else {
-                //     controller.successNavigate();
-                //   }
-                //}
+                if (!controller.username.text.contains('@') ||
+                    !controller.username.text.endsWith('.com')) {
+                  Dialogs.showMyToast(context, "Invalid email address");
+                } else if (controller.username.text.isEmpty) {
+                  Dialogs.showMyToast(
+                      context, "Phone number must not be Empty");
+                } else if (controller.password.text.isEmpty) {
+                  Dialogs.showMyToast(context, "Password must not be Empty");
+                } else {
+                  var loginReturn = await controller.loadingLogin(context,
+                      controller.username.text, controller.password.text);
+                  //await controller.loadingGetUserInfo(context);
+                  print(loginReturn);
+                  if (loginReturn != 'success') {
+                    Dialogs.showMyToast(context, "Invalid credentials");
+                  } else if (loginReturn == 'catch') {
+                    Dialogs.showMyToast(context, "Oops, something went wrong");
+                  } else {
+                    controller.successNavigate();
+                  }
+                }
               },
             ),
           ),

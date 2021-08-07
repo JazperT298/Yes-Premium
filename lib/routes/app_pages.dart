@@ -27,8 +27,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.LOGIN,
       page: () => LoginView(),
-      // transition: Transition.rightToLeft,
-      // curve: Curves.linearToEaseOut,
     ),
   ];
 }

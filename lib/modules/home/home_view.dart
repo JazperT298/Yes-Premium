@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -35,6 +37,7 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
+            // if (GetStorageService.c.appdata.read('userName') != null)
             Container(
               margin: EdgeInsets.only(top: 7.0, bottom: 7.0, right: 7.0),
               decoration: BoxDecoration(
@@ -42,7 +45,7 @@ class HomeView extends GetView<HomeController> {
                 color: Colors.grey.shade300,
               ),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () => Dialogs.showLogout(context),
                 icon: Icon(
                   Icons.chat_bubble_outlined,
                   size: 30,

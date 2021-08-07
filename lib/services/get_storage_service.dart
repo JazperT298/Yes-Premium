@@ -32,11 +32,14 @@ class GetStorageService extends GetxService {
     }
   }
 
-  void setLoginStorage(userId, userToken, roleType, result) {
-    appdata.write('user_id', userId);
-    appdata.write('user_token', userToken);
-    appdata.write('role_type', roleType);
-    appdata.write('result', result);
+  void setLoginStorage(
+      accessToekn, tokenType, expiresIn, userName, issued, expires) {
+    appdata.write('access_token', accessToekn);
+    appdata.write('token_type', tokenType);
+    appdata.write('expires_in', expiresIn);
+    appdata.write('userName', userName);
+    appdata.write('.issued', issued);
+    appdata.write('.expires', expires);
     print('set user login storage..');
   }
 
