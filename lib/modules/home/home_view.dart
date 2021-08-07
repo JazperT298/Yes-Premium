@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
@@ -30,7 +31,10 @@ class HomeView extends GetView<HomeController> {
                 color: Colors.grey.shade300,
               ),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  print(
+                      '${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}');
+                },
                 icon: Icon(
                   Icons.search_rounded,
                   size: 30,
@@ -65,13 +69,25 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   Row(
                     children: [
-                      Image.asset(
-                        'assets/images/user_placeholder.png',
-                        width: 40.0,
-                        height: 40.0,
+                      Container(
+                        width: 10.w,
+                        height: 7.h,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                            fit: BoxFit.cover,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
                       ),
+                      // Image.asset(
+                      //   'assets/images/user_placeholder.png',
+                      //   width: 40.0,
+                      //   height: 40.0,
+                      // ),
                       SizedBox(
-                        width: 8.0,
+                        width: 10.0,
                       ),
                       Expanded(
                         child: TextField(

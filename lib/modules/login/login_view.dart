@@ -83,7 +83,7 @@ class LoginView extends StatelessWidget {
                 } else {
                   var loginReturn = await controller.loadingLogin(context,
                       controller.username.text, controller.password.text);
-                  //await controller.loadingGetUserInfo(context);
+                  await controller.getUserDetails();
                   print(loginReturn);
                   if (loginReturn != 'success') {
                     Dialogs.showMyToast(context, "Invalid credentials");

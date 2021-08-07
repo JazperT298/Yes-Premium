@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/models/login_data.dart';
+import 'package:yes_premium/models/user_data.dart';
 import 'package:yes_premium/modules/login/login_api.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
@@ -8,8 +9,7 @@ import 'package:yes_premium/widgets/custom_dialog.dart';
 
 class LoginController extends GetxController {
   var loginCredentials = <LoginData>[].obs;
-  Rx<LoginData> loginData = LoginData().obs;
-  // var userCredentials = <UserEducator>[].obs;
+  var userCredentials = <Data>[].obs;
 
   var username = TextEditingController();
   var password = TextEditingController();
@@ -41,7 +41,6 @@ class LoginController extends GetxController {
       },
     );
     var result = await loginUser(usernameParamL, passwordParamL);
-
     Future.delayed(Duration(milliseconds: 500), () {
       Navigator.pop(context);
     });
@@ -51,8 +50,6 @@ class LoginController extends GetxController {
   }
 
   Future<String> loginUser(usernameParam, passwordParam) async {
-    //var finalusername = "+63" + usernameParam;
-
     try {
       var login = await LoginApi.loginUser(usernameParam, passwordParam);
       if (login != null) {
@@ -64,6 +61,31 @@ class LoginController extends GetxController {
           loginCredentials[0].userName,
           loginCredentials[0].issued,
           loginCredentials[0].expires,
+        );
+
+        return "success";
+      } else {
+        return "invalid";
+      }
+    } catch (e) {
+      print('loginEducator $e');
+      return "catch";
+    }
+  }
+
+  Future<String> getUserDetails() async {
+    try {
+      var user = await LoginApi.getUserDetails();
+      if (user != null) {
+        userCredentials.assignAll(user);
+        Get.find<GetStorageService>().setUserDataStorage(
+          userCredentials[0].userId,
+          userCredentials[0].school,
+          userCredentials[0].schoolId,
+          userCredentials[0].schoolAvatar,
+          userCredentials[0].username,
+          userCredentials[0].avatar,
+          userCredentials[0].roles,
         );
 
         return "success";

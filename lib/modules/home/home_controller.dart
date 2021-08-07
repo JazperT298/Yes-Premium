@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:yes_premium/modules/home/home_api.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class HomeController extends GetxController {
   final scrollController = TrackingScrollController();
@@ -51,10 +53,15 @@ class HomeController extends GetxController {
     ),
   ].obs;
 
+  RxString schoolAvatar = ''.obs;
+  static GetStorageService c = Get.find();
+  final appdata = GetStorage();
+
   @override
   void onInit() {
     super.onInit();
     HomeApi.getEducatorDetails();
+    schoolAvatar.value = appdata.read('SchoolAvatar');
   }
 
   @override

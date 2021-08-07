@@ -186,8 +186,6 @@ class Dialogs {
                     onPressed: () {
                       Get.toNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
-
-                      Get.find<BottomNavController>().resetIndex(0);
                     },
                   ),
                 ],
@@ -235,8 +233,6 @@ class Dialogs {
                     onPressed: () {
                       Get.toNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
-
-                      Get.find<BottomNavController>().resetIndex(0);
                     },
                   ),
                 ],

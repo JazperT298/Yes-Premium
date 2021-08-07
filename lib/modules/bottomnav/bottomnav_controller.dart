@@ -41,8 +41,4 @@ class BottomNavController extends GetxController {
       label: 'Student List',
     ),
   ];
-  void resetIndex(int index) {
-    selectedIndex.value = index;
-    update();
-  }
 }

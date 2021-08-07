@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/models/login_data.dart';
+import 'package:yes_premium/models/user_data.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class LoginApi {
   static var client = http.Client();
@@ -45,6 +47,47 @@ class LoginApi {
       return null;
     } catch (e) {
       print('loginUser Services  Err $e');
+      return null;
+    }
+  }
+
+  static Future getUserDetails() async {
+    try {
+      var response = await client.get(
+        Uri.parse(
+            '$baseUrl/api/Users/GetUserDetails?userName=${Get.find<GetStorageService>().appdata.read('userName')}'),
+
+        headers: {
+          "access-control-allow-origin": "*",
+          'content-type': 'application/x-www-form-urlencoded',
+          'Authorization':
+              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        },
+        // encoding: Encoding.getByName('utf-8'),
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException("getUserDetails Services Connection timeout.");
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        var jsonString = jsonDecode(response.body)['Data'];
+        var jsonStringEncoded = jsonEncode(jsonString);
+        print(jsonStringEncoded);
+        return userdataFromJson('[$jsonStringEncoded]');
+      } else {
+        print('getUserDetails Services  error');
+        return null;
+      }
+    } on TimeoutException catch (_) {
+      print('getUserDetails Services Response timeout');
+      return null;
+    } on SocketException catch (_) {
+      print('getUserDetails Services Socket error');
+      return null;
+    } catch (e) {
+      print('getUserDetails Services  Err $e');
       return null;
     }
   }

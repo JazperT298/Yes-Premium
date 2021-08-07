@@ -44,69 +44,22 @@ class GetStorageService extends GetxService {
   }
 
   void setUserDataStorage(
-    userId, // = json['user_id'];1
-    userToken, // = json['user_token'];2
-    userCode, // = json['user_code'];3
-    userEmailAddress, // = json['user_email_address'];4
-    userPassword, // = json['user_password'];5
-    userFirstname, // = json['user_firstname'];6
-    userLastname, // = json['user_lastname'];7
-    userMiddlename, // = json['user_middlename'];8
-    userSuffixes, // = json['user_suffixes'];9
-    userGender, // = json['user_gender'];10
-    userContactNumber, // = json['user_cont0act_number'];11
-    userImage, // = json['user_image'];12
-    userEducationalAttainment, // = json['user_educational_attainment'];13
-    userSubjMajor, // = json['user_subj_major'];14
-    userCurrentSchool, // = json['user_current_school'];15
-    userPosition, // = json['user_position'];16
-    userFacebook, // = json['user_facebook'];17
-    userInstagram, // = json['user_instagram'];18
-    userTwitter, // = json['user_twitter'];19
-    userGmail, // = json['user_gmail'];20
-    userSkype, // = json['user_skype'];21
-    userZoom, // = json['user_zoom'];22
-    userMotto, // = json['user_motto'];23
-    userActivation, // = json['user_activation'];24
-    userNickname, // = json['user_nickname'];25
-    userDreamjob, // = json['user_dreamjob'];26
-    userRole, // = json['user_role'];27
-    validated, // = json['validated'];28
-    result, // = json['result'];29
-    connection, // = json['connection'];30
+    userId,
+    school,
+    schoolId,
+    schoolAvatar,
+    username,
+    avatar,
+    role,
   ) {
-    appdata.write('user_id', userId);
-    appdata.write('user_token', userToken);
-    appdata.write('user_code', userCode);
+    appdata.write('UserId', userId);
+    appdata.write('School', school);
+    appdata.write('SchoolId', schoolId);
+    appdata.write('SchoolAvatar', schoolAvatar);
+    appdata.write('Username', username);
+    appdata.write('Avatar', avatar);
+    appdata.write('Roles', role);
 
-    appdata.write('user_email_address', userEmailAddress);
-    appdata.write('user_password', userPassword);
-
-    appdata.write('user_firstname', userFirstname);
-    appdata.write('user_lastname', userLastname);
-    appdata.write('user_middlename', userMiddlename);
-    appdata.write('user_suffixes', userSuffixes);
-    appdata.write('user_gender', userGender);
-    appdata.write('user_contact_number', userContactNumber);
-    appdata.write('user_image', userImage);
-    appdata.write('user_educational_attainment', userEducationalAttainment);
-    appdata.write('user_subj_major', userSubjMajor);
-    appdata.write('user_current_school', userCurrentSchool);
-    appdata.write('user_position', userPosition);
-    appdata.write('user_facebook', userFacebook);
-    appdata.write('user_instagram', userInstagram);
-    appdata.write('user_twitter', userTwitter);
-    appdata.write('user_gmail', userGmail);
-    appdata.write('user_skype', userSkype);
-    appdata.write('user_zoom', userZoom);
-    appdata.write('user_motto', userMotto);
-    appdata.write('user_activation', userActivation);
-    appdata.write('user_nickname', userNickname);
-    appdata.write('user_dreamjob', userDreamjob);
-    appdata.write('user_role', userRole);
-    appdata.write('validated', validated);
-    appdata.write('result', result);
-    appdata.write('connection', connection);
     print('set user Data storage..');
   }
 
