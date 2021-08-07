@@ -144,16 +144,28 @@ class Dialogs {
       builder: (BuildContext context) {
         return platform == TargetPlatform.android
             ? AlertDialog(
-                title: Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontFamily: theme.textTheme.headline3!.fontFamily,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.logout,
+                      size: 30.0,
+                      color: mainColor,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Log Out',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
                 content: Text(
-                  'Are you sure you want to logout?',
+                  'Are you sure you want to logout?              ',
                   style: TextStyle(
                     fontFamily: theme.textTheme.headline3!.fontFamily,
                     fontSize: 12.sp,
@@ -200,7 +212,7 @@ class Dialogs {
                   ),
                 ),
                 content: Text(
-                  'Are you sure you want to logout?',
+                  'Are you sure you want to logout?              ',
                   style: TextStyle(
                     fontFamily: theme.textTheme.headline3!.fontFamily,
                     fontSize: 12.sp,

@@ -69,18 +69,32 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        width: 10.w,
-                        height: 7.h,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
-                            fit: BoxFit.cover,
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
+                      Get.find<GetStorageService>().appdata.read('Roles') ==
+                              'SchoolAdmin'
+                          ? Container(
+                              width: 10.w,
+                              height: 7.h,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                                  fit: BoxFit.cover,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                            )
+                          : Container(
+                              width: 10.w,
+                              height: 7.h,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
+                                  fit: BoxFit.cover,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                            ),
                       // Image.asset(
                       //   'assets/images/user_placeholder.png',
                       //   width: 40.0,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yes_premium/modules/account/account_view.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_view.dart';
 import 'package:yes_premium/modules/home/home_view.dart';
 import 'package:yes_premium/modules/meeting/facultymeeting_view.dart';
@@ -17,28 +18,43 @@ class BottomNavController extends GetxController {
     VideoLabView(),
     FacultyMeetingView(),
     EducatorListView(),
-    StudentListView(),
+    AccountView(),
   ];
   List<BottomNavigationBarItem> navItem = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: 'Annoucements',
+      icon: Icon(
+        Icons.home,
+        size: 30,
+      ),
+      label: '',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.video_label),
-      label: 'Video Lab',
+      icon: Icon(
+        Icons.video_label,
+        size: 30,
+      ),
+      label: '',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.chat_bubble),
-      label: 'Faculty Meeting',
+      icon: Icon(
+        Icons.chat_bubble,
+        size: 30,
+      ),
+      label: '',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: 'Educator List',
+      icon: Icon(
+        Icons.person,
+        size: 30,
+      ),
+      label: '',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: 'Student List',
+      icon: Icon(
+        Icons.dehaze,
+        size: 30,
+      ),
+      label: '',
     ),
   ];
 }
