@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
+import 'package:yes_premium/models/announcement.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
+import 'package:yes_premium/modules/videolab/videolab_widget.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
@@ -194,96 +196,253 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final Post post = controller.postList[index];
-              return Card(
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            //Post Header
-                            Row(
-                              children: [
-                                ClipOval(
-                                  child: Image.asset(
-                                    '${controller.postList[index].image}',
-                                    height: 40.0,
-                                    width: 40.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 8.0,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${controller.postList[index].name}',
-                                        style: TextStyle(
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.w600,
+        SliverToBoxAdapter(
+          child: Obx(
+            () => controller.isLoading.value &&
+                    controller.listofAnnouncement.length <= 0
+                ? Container(
+                    height: 30.h,
+                    color: Colors.grey[200],
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: controller.listofAnnouncement.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 5.0),
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.0),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    //Post Header
+                                    Row(
+                                      children: [
+                                        ClipOval(
+                                          child: Image.network(
+                                            '$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}',
+                                            height: 40.0,
+                                            width: 40.0,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            '${controller.postList[index].timeAgo}  •  ',
-                                            style: TextStyle(
-                                              color: Colors.grey[600],
-                                              fontSize: 9.sp,
-                                            ),
+                                        SizedBox(
+                                          width: 8.0,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${Get.find<GetStorageService>().appdata.read('School')}',
+                                                style: TextStyle(
+                                                  fontSize: 11.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    '${controller.listofAnnouncement[index].announceCreatedDate}  •  ',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[600],
+                                                      fontSize: 9.sp,
+                                                    ),
+                                                  ),
+                                                  Icon(
+                                                    Icons.public,
+                                                    color: Colors.grey[400],
+                                                    size: 12.0,
+                                                  ),
+                                                ],
+                                              )
+                                            ],
                                           ),
-                                          Icon(
-                                            Icons.public,
-                                            color: Colors.grey[400],
-                                            size: 12.0,
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.more_horiz),
+                                          onPressed: () => {
+                                            print(
+                                                '${controller.listofAnnouncement[index].announceFile}'),
+                                            print(
+                                                '${controller.listofAnnouncement.length}'),
+                                            print(
+                                                '${controller.listofAnnouncement[index].announceDetails} '),
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    //Post caption
+                                    Text(
+                                      '${controller.listofAnnouncement[index].announceDetails} ',
+                                      style: TextStyle(fontSize: 11.sp),
+                                    ),
+
+                                    controller.listofAnnouncement[index]
+                                                    .announceFile !=
+                                                null ||
+                                            controller.listofAnnouncement[index]
+                                                    .announceFile !=
+                                                ""
+                                        ? SizedBox.shrink()
+                                        : SizedBox(
+                                            height: 6.0,
                                           ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                  ],
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.more_horiz),
-                                  onPressed: () => print('More'),
-                                ),
-                              ],
-                            ),
-                            //Post caption
-                            Text(
-                              '${controller.postList[index].caption} ',
-                              style: TextStyle(fontSize: 11.sp),
-                            ),
-                            controller.postList[index].imageUrl != ''
-                                ? SizedBox.shrink()
-                                : SizedBox(height: 6.0),
-                          ],
+                              ),
+                              controller.listofAnnouncement[index]
+                                              .announceFile !=
+                                          "" ||
+                                      controller.listofAnnouncement[index]
+                                              .announceFileExt ==
+                                          ".jpg" ||
+                                      controller.listofAnnouncement[index]
+                                              .announceFileExt ==
+                                          ".png"
+                                  ? Image.network(
+                                          '$photoDir/${controller.listofAnnouncement[index].announceFile}')
+                                      .paddingSymmetric(vertical: 8.0)
+                                  : SizedBox.shrink(),
+                              controller.listofAnnouncement[index]
+                                              .announceFile !=
+                                          "" ||
+                                      controller.listofAnnouncement[index]
+                                              .announceFileExt ==
+                                          ".mp4"
+                                  ? VideoWidget(
+                                      play: true,
+                                      url:
+                                          '${controller.listofAnnouncement[index].announceFile}')
+                                  : SizedBox.shrink(),
+                            ],
+                          ),
                         ),
-                      ),
-                      controller.postList[index].imageUrl != ''
-                          ? Image.asset(
-                                  '${controller.postList[index].imageUrl}')
-                              .paddingSymmetric(vertical: 8.0)
-                          : SizedBox.shrink(),
-                    ],
+                      );
+                    },
                   ),
-                ),
-              );
-            },
-            childCount: controller.postList.length,
           ),
         ),
+        // SliverList(
+        //   delegate: SliverChildBuilderDelegate(
+        //     (context, index) {
+        //       final AnnouncementData announcementData =
+        //           controller.listofAnnouncement[index];
+
+        //       return Card(
+        //         child: Obx(
+        //           () => Container(
+        //             margin: EdgeInsets.symmetric(vertical: 5.0),
+        //             padding: EdgeInsets.symmetric(vertical: 8.0),
+        //             child: Column(
+        //               children: [
+        //                 Padding(
+        //                   padding: EdgeInsets.symmetric(horizontal: 12.0),
+        //                   child: Column(
+        //                     crossAxisAlignment: CrossAxisAlignment.stretch,
+        //                     children: [
+        //                       //Post Header
+        //                       Row(
+        //                         children: [
+        //                           ClipOval(
+        //                             child: Image.network(
+        //                               '$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}',
+        //                               height: 40.0,
+        //                               width: 40.0,
+        //                               fit: BoxFit.cover,
+        //                             ),
+        //                           ),
+        //                           SizedBox(
+        //                             width: 8.0,
+        //                           ),
+        //                           Expanded(
+        //                             child: Column(
+        //                               crossAxisAlignment:
+        //                                   CrossAxisAlignment.start,
+        //                               children: [
+        //                                 Text(
+        //                                   '${Get.find<GetStorageService>().appdata.read('School')}',
+        //                                   style: TextStyle(
+        //                                     fontSize: 11.sp,
+        //                                     fontWeight: FontWeight.w600,
+        //                                   ),
+        //                                 ),
+        //                                 Row(
+        //                                   children: [
+        //                                     Text(
+        //                                       '${controller.listofAnnouncement[index].announceCreatedDate}  •  ',
+        //                                       style: TextStyle(
+        //                                         color: Colors.grey[600],
+        //                                         fontSize: 9.sp,
+        //                                       ),
+        //                                     ),
+        //                                     Icon(
+        //                                       Icons.public,
+        //                                       color: Colors.grey[400],
+        //                                       size: 12.0,
+        //                                     ),
+        //                                   ],
+        //                                 )
+        //                               ],
+        //                             ),
+        //                           ),
+        //                           IconButton(
+        //                             icon: const Icon(Icons.more_horiz),
+        //                             onPressed: () => {
+        //                               print(
+        //                                   '${controller.listofAnnouncement[index].announceFile}'),
+        //                               print(
+        //                                   '${controller.listofAnnouncement.length}'),
+        //                               print(
+        //                                   '${controller.listofAnnouncement[index].announceDetails} '),
+        //                             },
+        //                           ),
+        //                         ],
+        //                       ),
+        //                       //Post caption
+        //                       Obx(
+        //                         () => Text(
+        //                           '${controller.listofAnnouncement[index].announceDetails} ',
+        //                           style: TextStyle(fontSize: 11.sp),
+        //                         ),
+        //                       ),
+        //                       Obx(
+        //                         () => controller.listofAnnouncement[index]
+        //                                     .announceFile !=
+        //                                 null
+        //                             ? SizedBox.shrink()
+        //                             : SizedBox(
+        //                                 height: 6.0,
+        //                               ),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //                 Obx(
+        //                   () => controller
+        //                               .listofAnnouncement[index].announceFile !=
+        //                           null
+        //                       ? Image.network(
+        //                               '$photoDir/${controller.listofAnnouncement[index].announceFile}')
+        //                           .paddingSymmetric(vertical: 8.0)
+        //                       : SizedBox.shrink(),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       );
+        //     },
+        //     childCount: controller.listofAnnouncement.length,
+        //   ),
+        // ),
       ],
     );
   }

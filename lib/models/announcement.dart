@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 class Announcement {
-  List<Data>? data;
+  List<AnnouncementData>? data;
   String? message;
   String? status;
 
@@ -7,9 +9,9 @@ class Announcement {
 
   Announcement.fromJson(Map<String, dynamic> json) {
     if (json['Data'] != null) {
-      data = <Data>[];
+      data = <AnnouncementData>[];
       json['Data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new AnnouncementData.fromJson(v));
       });
     }
     message = json['Message'];
@@ -27,7 +29,20 @@ class Announcement {
   }
 }
 
-class Data {
+// List<AnnouncementData> announcementdataFromJson(String str) =>
+//     List<AnnouncementData>.from(
+//         json.decode(str).map((x) => AnnouncementData.fromJson(x)));
+
+// String announcementdataToJson(List<AnnouncementData> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+AnnouncementData announcementdataFromJson(String str) =>
+    AnnouncementData.fromJson(json.decode(str));
+
+String announcementdataToJson(AnnouncementData data) =>
+    json.encode(data.toJson());
+
+class AnnouncementData {
   String? announceID;
   String? announceSchoolID;
   String? announceDetails;
@@ -37,7 +52,7 @@ class Data {
   String? announceCreatedDate;
   String? announceFileExt;
 
-  Data(
+  AnnouncementData(
       {this.announceID,
       this.announceSchoolID,
       this.announceDetails,
@@ -47,7 +62,7 @@ class Data {
       this.announceCreatedDate,
       this.announceFileExt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  AnnouncementData.fromJson(Map<String, dynamic> json) {
     announceID = json['Announce_ID'];
     announceSchoolID = json['Announce_School_ID'];
     announceDetails = json['Announce_Details'];
