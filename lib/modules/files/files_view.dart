@@ -41,6 +41,20 @@ class FilesView extends StatelessWidget {
                   ),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(top: 7.0, bottom: 7.0, right: 7.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey.shade300,
+                ),
+                child: IconButton(
+                  onPressed: () {}, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                  icon: Icon(
+                    Icons.add,
+                    size: 30,
+                  ),
+                ),
+              ),
             ],
           ),
           SliverToBoxAdapter(

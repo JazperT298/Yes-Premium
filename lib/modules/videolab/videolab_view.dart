@@ -40,8 +40,24 @@ class VideoLabView extends StatelessWidget {
                   ),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(top: 7.0, bottom: 7.0, right: 7.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey.shade300,
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    //controller.isSearchClick.value = true;
+                  }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                  icon: Icon(
+                    Icons.add_to_drive_sharp,
+                    size: 30,
+                  ),
+                ),
+              )
             ],
-            centerTitle: true,
+            centerTitle: false,
             floating: true,
           ),
           SliverList(
