@@ -9,6 +9,7 @@ import 'package:yes_premium/modules/profile/profile_view.dart';
 import 'package:yes_premium/modules/search/search_view.dart';
 import 'package:yes_premium/modules/splashscreen/logout_loading.dart';
 import 'package:yes_premium/modules/splashscreen/splashscreen_view.dart';
+import 'package:yes_premium/modules/studentlist/studentlist_view.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 
 class AppPages {
@@ -60,6 +61,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.EDUCATORLIST,
       page: () => EducatorListView(),
+      transition: Transition.downToUp,
+      curve: Curves.linearToEaseOut,
+    ),
+    GetPage(
+      name: AppRoutes.STUDENTLIST,
+      page: () => StudentListView(),
       transition: Transition.downToUp,
       curve: Curves.linearToEaseOut,
     ),

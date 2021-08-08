@@ -49,8 +49,7 @@ class VideolabController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        print('yawa');
-        print(jsonStringEncoded);
+
         videolibList.add(videolibdataFromJson(jsonStringEncoded));
       }
       isLoading(false);
