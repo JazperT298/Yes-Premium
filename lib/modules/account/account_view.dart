@@ -43,69 +43,72 @@ class AccountView extends GetView<AccountController> {
           ],
         ),
         SliverToBoxAdapter(
-          child: Card(
-            child: Container(
-              // height: 120.0,
-              // width: double.infinity,
-              padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
-              // color: Colors.red,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Get.find<GetStorageService>().appdata.read('Roles') ==
-                              'SchoolAdmin'
-                          ? Container(
-                              width: 10.w,
-                              height: 7.h,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
-                                  fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () => Get.toNamed(AppRoutes.PROFILE),
+            child: Card(
+              child: Container(
+                // height: 120.0,
+                // width: double.infinity,
+                padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
+                // color: Colors.red,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Get.find<GetStorageService>().appdata.read('Roles') ==
+                                'SchoolAdmin'
+                            ? Container(
+                                width: 10.w,
+                                height: 7.h,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                        "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  shape: BoxShape.circle,
                                 ),
-                                shape: BoxShape.circle,
-                              ),
-                            )
-                          : Container(
-                              width: 10.w,
-                              height: 7.h,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
-                                  fit: BoxFit.cover,
+                              )
+                            : Container(
+                                width: 10.w,
+                                height: 7.h,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                        "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  shape: BoxShape.circle,
                                 ),
-                                shape: BoxShape.circle,
                               ),
-                            ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${Get.find<GetStorageService>().appdata.read('School')}',
-                            style: TextStyle(
-                              fontSize: 11.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ).marginOnly(left: 20.0),
-                          SizedBox(
-                            height: 4.0,
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'View your profile',
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${Get.find<GetStorageService>().appdata.read('School')}',
                               style: TextStyle(
-                                fontSize: 10.sp,
+                                fontSize: 11.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ).marginOnly(left: 20.0),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'View your profile',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

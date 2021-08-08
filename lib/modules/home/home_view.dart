@@ -280,7 +280,9 @@ class HomeView extends GetView<HomeController> {
                                             print(
                                                 '${controller.listofAnnouncement[index].announceFileExt}'),
                                             print(
-                                                '${controller.listofAnnouncement[index].announceDetails} '),
+                                                '${Get.find<GetStorageService>().appdata.read('UserId')} '),
+                                            print(
+                                                '${Get.find<GetStorageService>().appdata.read('access_token')} '),
                                           },
                                         ),
                                       ],
@@ -304,9 +306,7 @@ class HomeView extends GetView<HomeController> {
                                   ],
                                 ),
                               ),
-                              controller.listofAnnouncement[index]
-                                                  .announceFile !=
-                                              "" &&
+                              controller.listofAnnouncement[index].announceFile != "" &&
                                           controller.listofAnnouncement[index]
                                                   .announceFileExt ==
                                               ".jpg" ||
@@ -320,13 +320,16 @@ class HomeView extends GetView<HomeController> {
                                           '$photoDir/${controller.listofAnnouncement[index].announceFile}')
                                       .paddingSymmetric(vertical: 8.0)
                                   : controller.listofAnnouncement[index]
-                                                  .announceFile !=
-                                              "" &&
+                                                      .announceFile !=
+                                                  "" &&
+                                              controller
+                                                      .listofAnnouncement[index]
+                                                      .announceFileExt ==
+                                                  ".mp4" ||
                                           controller.listofAnnouncement[index]
                                                   .announceFileExt ==
-                                              ".mp4" || controller.listofAnnouncement[index]
-                                                  .announceFileExt ==
-                                              ".flv" || controller.listofAnnouncement[index]
+                                              ".flv" ||
+                                          controller.listofAnnouncement[index]
                                                   .announceFileExt ==
                                               ".wmv"
                                       ? Container(

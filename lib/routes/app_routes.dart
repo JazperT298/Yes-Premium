@@ -6,4 +6,5 @@ class AppRoutes {
   static const String LOGOUTLOADING = '/logoutloading';
   static const String SEARCH = '/search';
   static const String ANNOUNCEMENT = '/announcement';
+  static const String PROFILE = '/profile';
 }

@@ -4,6 +4,7 @@ import 'package:yes_premium/modules/announcement/announcement_view.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_view.dart';
 import 'package:yes_premium/modules/home/home_view.dart';
 import 'package:yes_premium/modules/login/login_view.dart';
+import 'package:yes_premium/modules/profile/profile_view.dart';
 import 'package:yes_premium/modules/search/search_view.dart';
 import 'package:yes_premium/modules/splashscreen/logout_loading.dart';
 import 'package:yes_premium/modules/splashscreen/splashscreen_view.dart';
@@ -47,6 +48,12 @@ class AppPages {
       name: AppRoutes.ANNOUNCEMENT,
       page: () => AnnouncementView(),
       transition: Transition.downToUp,
+      curve: Curves.linearToEaseOut,
+    ),
+    GetPage(
+      name: AppRoutes.PROFILE,
+      page: () => ProfileView(),
+      transition: Transition.leftToRight,
       curve: Curves.linearToEaseOut,
     ),
   ];
