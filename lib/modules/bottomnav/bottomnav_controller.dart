@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/modules/account/account_view.dart';
-import 'package:yes_premium/modules/educatorlist/educatorlist_view.dart';
+import 'package:yes_premium/modules/files/files_view.dart';
 import 'package:yes_premium/modules/home/home_view.dart';
-import 'package:yes_premium/modules/meeting/facultymeeting_view.dart';
 import 'package:yes_premium/modules/notification/notification_view.dart';
-import 'package:yes_premium/modules/studentlist/studentlist_view.dart';
 import 'package:yes_premium/modules/videolab/videolab_view.dart';
 
 class BottomNavController extends GetxController {
@@ -17,7 +15,7 @@ class BottomNavController extends GetxController {
   List<Widget> bodyContext = [
     HomeView(),
     VideoLabView(),
-    FacultyMeetingView(),
+    FilesView(),
     NotificationView(),
     AccountView(),
   ];
@@ -38,7 +36,7 @@ class BottomNavController extends GetxController {
     ),
     BottomNavigationBarItem(
       icon: Icon(
-        Icons.chat_bubble,
+        Icons.note,
         size: 30,
       ),
       label: '',

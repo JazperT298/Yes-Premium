@@ -3,18 +3,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
-import 'package:get/get.dart';
 
-class HomeApi {
+class FilesApi {
   static var client = http.Client();
 
-  static Future getAllAnnouncementBySchool() async {
+  static Future getUserNotesLists() async {
     try {
       var response = await client.get(
         Uri.parse(
-            '$baseUrl/api/Announcement/GetAllAnnouncementBySchool?schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=1'),
+            '$baseUrl/api/UserNotes/GetAllUserNotes?userID=${Get.find<GetStorageService>().appdata.read('UserId')}&schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=1'),
 
         headers: {
           "access-control-allow-origin": "*",
@@ -27,7 +27,7 @@ class HomeApi {
         const Duration(seconds: 10),
         onTimeout: () {
           throw TimeoutException(
-              "getAllAnnouncementBySchool Services Connection timeout.");
+              "getUserNotesLists Services Connection timeout.");
         },
       );
       print(response.body);
@@ -38,17 +38,17 @@ class HomeApi {
         // return announcementdataFromJson(jsonStringEncoded);
         return jsonString;
       } else {
-        print('getAllAnnouncementBySchool Services  error');
+        print('getUserNotesLists Services  error');
         return null;
       }
     } on TimeoutException catch (_) {
-      print('getAllAnnouncementBySchool Services Response timeout');
+      print('getUserNotesLists Services Response timeout');
       return null;
     } on SocketException catch (_) {
-      print('getAllAnnouncementBySchool Services Socket error');
+      print('getUserNotesLists Services Socket error');
       return null;
     } catch (e) {
-      print('getAllAnnouncementBySchool Services  Err $e');
+      print('getUserNotesLists Services  Err $e');
       return null;
     }
   }

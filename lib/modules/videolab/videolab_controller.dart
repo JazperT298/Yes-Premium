@@ -14,20 +14,6 @@ class VideolabController extends GetxController {
   var isLoading = true.obs;
   RxList<VideoLibData> videolibList = <VideoLibData>[].obs;
   ChewieController? chewieController;
-  // RxList<VideoLab> videoList = <VideoLab>[
-  //   VideoLab(
-  //     title: 'Tony Atillo Solo',
-  //     video: 'assets/images/solo.mp4',
-  //   ),
-  //   VideoLab(
-  //     title: 'TMarty Friedman Solo',
-  //     video: 'assets/images/solo.mp4',
-  //   ),
-  //   VideoLab(
-  //     title: 'John Petrucci Solo',
-  //     video: 'assets/images/solo.mp4',
-  //   ),
-  // ].obs;
 
   @override
   void onInit() {
@@ -103,10 +89,3 @@ class VideolabController extends GetxController {
     update();
   }
 }
-
-// class VideoLab {
-//   String? title;
-//   String? video;
-
-//   VideoLab({this.title, this.video});
-// }
