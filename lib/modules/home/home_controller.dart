@@ -1,14 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:encrypt/encrypt.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:html/parser.dart';
 import 'package:yes_premium/models/announcement.dart';
 import 'package:yes_premium/modules/home/home_api.dart';
-import 'package:yes_premium/services/get_storage_service.dart';
 
 class HomeController extends GetxController {
   // final scrollController = TrackingScrollController();

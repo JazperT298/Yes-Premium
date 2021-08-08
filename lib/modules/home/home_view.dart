@@ -1,21 +1,15 @@
-import 'dart:convert';
-import 'dart:typed_data';
 
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
-import 'package:yes_premium/models/announcement.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/modules/home/home_video_widget.dart';
 import 'package:yes_premium/modules/videolab/videolab_controller.dart';
-import 'package:yes_premium/modules/videolab/videolab_widget.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
-import 'package:yes_premium/shared/dialogs.dart';
 
 class HomeView extends GetView<HomeController> {
   final videoController = Get.put(VideolabController());

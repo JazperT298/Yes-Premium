@@ -1,7 +1,6 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
+
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/videolab/videolab_controller.dart';
 import 'package:sizer/sizer.dart';
@@ -163,8 +162,6 @@ class VideoLabView extends StatelessWidget {
                                         url:
                                             '$photoDir/${controller.videolibList[index].videoLibFileName}'),
                                   )
-
-                          
                                 ],
                               ),
                             ),

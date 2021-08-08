@@ -7,4 +7,5 @@ class AppRoutes {
   static const String SEARCH = '/search';
   static const String ANNOUNCEMENT = '/announcement';
   static const String PROFILE = '/profile';
+  static const String EDUCATORLIST = '/educatorlist';
 }

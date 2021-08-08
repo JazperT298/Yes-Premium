@@ -5,7 +5,6 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/colors.dart';
-import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 

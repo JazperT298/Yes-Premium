@@ -5,7 +5,6 @@ import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/profile/profile_controller.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
-import 'package:yes_premium/shared/dialogs.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);

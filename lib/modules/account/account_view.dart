@@ -153,7 +153,7 @@ class AccountView extends GetView<AccountController> {
                     Expanded(
                       flex: 1,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () => Get.toNamed(AppRoutes.EDUCATORLIST),
                         child: _buildTile(
                           color: newbackgroundColor,
                           icon: Icons.person,
