@@ -19,7 +19,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void initState() {
     super.initState();
-    videoPlayerController = new VideoPlayerController.asset(widget.url);
+    videoPlayerController = new VideoPlayerController.network(widget.url);
 
     _initializeVideoPlayerFuture = videoPlayerController.initialize().then((_) {
       //       Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
@@ -49,7 +49,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                 key: PageStorageKey(widget.url),
                 controller: ChewieController(
                   videoPlayerController: videoPlayerController,
-                  aspectRatio: 2.0 / 1.27,
+                  aspectRatio: 2.0 / 1.35,
                   // Prepare the video to be played and display the first frame
                   autoInitialize: true,
                   looping: false,

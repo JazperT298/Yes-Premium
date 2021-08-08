@@ -1,31 +1,38 @@
+import 'dart:convert';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:html/parser.dart';
 import 'package:video_player/video_player.dart';
+import 'package:yes_premium/models/video_lib.dart';
+import 'package:yes_premium/modules/videolab/videolab_api.dart';
 
 class VideolabController extends GetxController {
   final scrollController = TrackingScrollController();
   late VideoPlayerController videoPlayerController;
+  var isLoading = true.obs;
+  RxList<VideoLibData> videolibList = <VideoLibData>[].obs;
   ChewieController? chewieController;
-  RxList<VideoLab> videoList = <VideoLab>[
-    VideoLab(
-      title: 'Tony Atillo Solo',
-      video: 'assets/images/solo.mp4',
-    ),
-    VideoLab(
-      title: 'TMarty Friedman Solo',
-      video: 'assets/images/solo.mp4',
-    ),
-    VideoLab(
-      title: 'John Petrucci Solo',
-      video: 'assets/images/solo.mp4',
-    ),
-  ].obs;
+  // RxList<VideoLab> videoList = <VideoLab>[
+  //   VideoLab(
+  //     title: 'Tony Atillo Solo',
+  //     video: 'assets/images/solo.mp4',
+  //   ),
+  //   VideoLab(
+  //     title: 'TMarty Friedman Solo',
+  //     video: 'assets/images/solo.mp4',
+  //   ),
+  //   VideoLab(
+  //     title: 'John Petrucci Solo',
+  //     video: 'assets/images/solo.mp4',
+  //   ),
+  // ].obs;
 
   @override
   void onInit() {
     super.onInit();
-    //initializedPlayer();
+    getSchoolVideoLibrary();
   }
 
   @override
@@ -38,6 +45,40 @@ class VideolabController extends GetxController {
     super.onClose();
     videoPlayerController.dispose();
     chewieController!.dispose();
+  }
+
+  void getSchoolVideoLibrary() async {
+    try {
+      List result = await VideoLabApi.getSchoolVideoLibrary();
+      if (!isLoading.value) isLoading(true);
+      for (var i = 0; i < result.length; i++) {
+        Map mapping = {
+          "VideoLib_ID": result[i]['VideoLib_ID'],
+          "School_ID": result[i]['School_ID'],
+          "VideoLib_Title": result[i]['VideoLib_Title'],
+          "VideoLib_Details": result[i]['VideoLib_Details'],
+          "VideoLib_FileName": result[i]['VideoLib_FileName'],
+          "VideoLib_FileExt": result[i]['VideoLib_FileExt'],
+          "VideoLib_CreatedDate": result[i]['VideoLib_CreatedDate'],
+        };
+
+        var jsonStringEncoded = jsonEncode(mapping);
+        print('yawa');
+        print(jsonStringEncoded);
+        videolibList.add(videolibdataFromJson(jsonStringEncoded));
+      }
+      isLoading(false);
+    } catch (e) {
+      print('err $e');
+    }
+  }
+
+  String parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString =
+        parse(document.body!.text).documentElement!.text;
+
+    return parsedString;
   }
 
   Future<void> initializedPlayer() async {
@@ -63,9 +104,9 @@ class VideolabController extends GetxController {
   }
 }
 
-class VideoLab {
-  String? title;
-  String? video;
+// class VideoLab {
+//   String? title;
+//   String? video;
 
-  VideoLab({this.title, this.video});
-}
+//   VideoLab({this.title, this.video});
+// }
