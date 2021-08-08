@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,18 +10,21 @@ import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/models/announcement.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
+import 'package:yes_premium/modules/home/home_video_widget.dart';
+import 'package:yes_premium/modules/videolab/videolab_controller.dart';
 import 'package:yes_premium/modules/videolab/videolab_widget.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 
 class HomeView extends GetView<HomeController> {
+  final videoController = Get.put(VideolabController());
   @override
   Widget build(BuildContext context) {
     var announceController = Get.put(AnnouncementController());
     Get.put(HomeController());
     return CustomScrollView(
-      controller: controller.scrollController,
+      controller: videoController.scrollController,
       slivers: [
         SliverAppBar(
           brightness: Brightness.light,
@@ -272,7 +278,7 @@ class HomeView extends GetView<HomeController> {
                                             print(
                                                 '${controller.listofAnnouncement[index].announceFile}'),
                                             print(
-                                                '${controller.listofAnnouncement.length}'),
+                                                '${controller.listofAnnouncement[index].announceFileExt}'),
                                             print(
                                                 '${controller.listofAnnouncement[index].announceDetails} '),
                                           },
@@ -281,7 +287,7 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                     //Post caption
                                     Text(
-                                      '${controller.listofAnnouncement[index].announceDetails} ',
+                                      '${controller.parseHtmlString(controller.listofAnnouncement[index].announceDetails!)}',
                                       style: TextStyle(fontSize: 11.sp),
                                     ),
 
@@ -299,29 +305,50 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ),
                               controller.listofAnnouncement[index]
-                                              .announceFile !=
-                                          "" ||
+                                                  .announceFile !=
+                                              "" &&
+                                          controller.listofAnnouncement[index]
+                                                  .announceFileExt ==
+                                              ".jpg" ||
                                       controller.listofAnnouncement[index]
                                               .announceFileExt ==
-                                          ".jpg" ||
+                                          ".jpeg" ||
                                       controller.listofAnnouncement[index]
                                               .announceFileExt ==
                                           ".png"
                                   ? Image.network(
                                           '$photoDir/${controller.listofAnnouncement[index].announceFile}')
                                       .paddingSymmetric(vertical: 8.0)
-                                  : SizedBox.shrink(),
-                              controller.listofAnnouncement[index]
-                                              .announceFile !=
-                                          "" ||
-                                      controller.listofAnnouncement[index]
-                                              .announceFileExt ==
-                                          ".mp4"
-                                  ? VideoWidget(
-                                      play: true,
-                                      url:
-                                          '${controller.listofAnnouncement[index].announceFile}')
-                                  : SizedBox.shrink(),
+                                  : controller.listofAnnouncement[index]
+                                                  .announceFile !=
+                                              "" &&
+                                          controller.listofAnnouncement[index]
+                                                  .announceFileExt ==
+                                              ".mp4" || controller.listofAnnouncement[index]
+                                                  .announceFileExt ==
+                                              ".flv" || controller.listofAnnouncement[index]
+                                                  .announceFileExt ==
+                                              ".wmv"
+                                      ? Container(
+                                          width: double.infinity,
+                                          height: 345.0,
+                                          child: HomeVideoWidget(
+                                              play: true,
+                                              url:
+                                                  '$photoDir/${controller.listofAnnouncement[index].announceFile}'),
+                                        )
+                                      : SizedBox.shrink(),
+                              // controller.listofAnnouncement[index]
+                              //                 .announceFile !=
+                              //             "" ||
+                              //         controller.listofAnnouncement[index]
+                              //                 .announceFileExt ==
+                              //             ".mp4"
+                              //     ? VideoWidget(
+                              //         play: true,
+                              //         url:
+                              //             '$photoDir/${controller.listofAnnouncement[index].announceFile}')
+                              //     : SizedBox.shrink(),
                             ],
                           ),
                         ),
@@ -333,111 +360,129 @@ class HomeView extends GetView<HomeController> {
         // SliverList(
         //   delegate: SliverChildBuilderDelegate(
         //     (context, index) {
-        //       final AnnouncementData announcementData =
-        //           controller.listofAnnouncement[index];
-
-        //       return Card(
-        //         child: Obx(
-        //           () => Container(
-        //             margin: EdgeInsets.symmetric(vertical: 5.0),
-        //             padding: EdgeInsets.symmetric(vertical: 8.0),
-        //             child: Column(
-        //               children: [
-        //                 Padding(
-        //                   padding: EdgeInsets.symmetric(horizontal: 12.0),
+        //       return Obx(
+        //         () => controller.isLoading.value &&
+        //                 controller.listofAnnouncement.length <= 0
+        //             ? Container(
+        //                 height: 30.h,
+        //                 color: Colors.grey[200],
+        //               )
+        //             : Card(
+        //                 child: Container(
+        //                   margin: EdgeInsets.symmetric(vertical: 5.0),
+        //                   padding: EdgeInsets.symmetric(vertical: 8.0),
         //                   child: Column(
-        //                     crossAxisAlignment: CrossAxisAlignment.stretch,
         //                     children: [
-        //                       //Post Header
-        //                       Row(
-        //                         children: [
-        //                           ClipOval(
-        //                             child: Image.network(
-        //                               '$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}',
-        //                               height: 40.0,
-        //                               width: 40.0,
-        //                               fit: BoxFit.cover,
-        //                             ),
-        //                           ),
-        //                           SizedBox(
-        //                             width: 8.0,
-        //                           ),
-        //                           Expanded(
-        //                             child: Column(
-        //                               crossAxisAlignment:
-        //                                   CrossAxisAlignment.start,
+        //                       Padding(
+        //                         padding: EdgeInsets.symmetric(horizontal: 12.0),
+        //                         child: Column(
+        //                           crossAxisAlignment:
+        //                               CrossAxisAlignment.stretch,
+        //                           children: [
+        //                             //Post Header
+        //                             Row(
         //                               children: [
-        //                                 Text(
-        //                                   '${Get.find<GetStorageService>().appdata.read('School')}',
-        //                                   style: TextStyle(
-        //                                     fontSize: 11.sp,
-        //                                     fontWeight: FontWeight.w600,
+        //                                 ClipOval(
+        //                                   child: Image.network(
+        //                                     '$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}',
+        //                                     height: 40.0,
+        //                                     width: 40.0,
+        //                                     fit: BoxFit.cover,
         //                                   ),
         //                                 ),
-        //                                 Row(
-        //                                   children: [
-        //                                     Text(
-        //                                       '${controller.listofAnnouncement[index].announceCreatedDate}  •  ',
-        //                                       style: TextStyle(
-        //                                         color: Colors.grey[600],
-        //                                         fontSize: 9.sp,
+        //                                 SizedBox(
+        //                                   width: 8.0,
+        //                                 ),
+        //                                 Expanded(
+        //                                   child: Column(
+        //                                     crossAxisAlignment:
+        //                                         CrossAxisAlignment.start,
+        //                                     children: [
+        //                                       Text(
+        //                                         '${Get.find<GetStorageService>().appdata.read('School')}',
+        //                                         style: TextStyle(
+        //                                           fontSize: 11.sp,
+        //                                           fontWeight: FontWeight.w600,
+        //                                         ),
         //                                       ),
-        //                                     ),
-        //                                     Icon(
-        //                                       Icons.public,
-        //                                       color: Colors.grey[400],
-        //                                       size: 12.0,
-        //                                     ),
-        //                                   ],
-        //                                 )
+        //                                       Row(
+        //                                         children: [
+        //                                           Text(
+        //                                             '${controller.listofAnnouncement[index].announceCreatedDate}  •  ',
+        //                                             style: TextStyle(
+        //                                               color: Colors.grey[600],
+        //                                               fontSize: 9.sp,
+        //                                             ),
+        //                                           ),
+        //                                           Icon(
+        //                                             Icons.public,
+        //                                             color: Colors.grey[400],
+        //                                             size: 12.0,
+        //                                           ),
+        //                                         ],
+        //                                       )
+        //                                     ],
+        //                                   ),
+        //                                 ),
+        //                                 IconButton(
+        //                                   icon: const Icon(Icons.more_horiz),
+        //                                   onPressed: () => {
+        //                                     print(
+        //                                         '${controller.listofAnnouncement[index].announceFile}'),
+        //                                     print(
+        //                                         '${controller.listofAnnouncement.length}'),
+        //                                     print(
+        //                                         '${controller.listofAnnouncement[index].announceDetails} '),
+        //                                   },
+        //                                 ),
         //                               ],
         //                             ),
-        //                           ),
-        //                           IconButton(
-        //                             icon: const Icon(Icons.more_horiz),
-        //                             onPressed: () => {
-        //                               print(
-        //                                   '${controller.listofAnnouncement[index].announceFile}'),
-        //                               print(
-        //                                   '${controller.listofAnnouncement.length}'),
-        //                               print(
-        //                                   '${controller.listofAnnouncement[index].announceDetails} '),
-        //                             },
-        //                           ),
-        //                         ],
-        //                       ),
-        //                       //Post caption
-        //                       Obx(
-        //                         () => Text(
-        //                           '${controller.listofAnnouncement[index].announceDetails} ',
-        //                           style: TextStyle(fontSize: 11.sp),
+        //                             //Post caption
+        //                             Text(
+        //                               '${controller.parseHtmlString(controller.listofAnnouncement[index].announceDetails!)}',
+        //                               style: TextStyle(fontSize: 11.sp),
+        //                             ),
+        //                             controller.listofAnnouncement[index]
+        //                                             .announceFile !=
+        //                                         null ||
+        //                                     controller.listofAnnouncement[index]
+        //                                             .announceFile !=
+        //                                         ""
+        //                                 ? SizedBox.shrink()
+        //                                 : SizedBox(
+        //                                     height: 6.0,
+        //                                   ),
+        //                           ],
         //                         ),
         //                       ),
-        //                       Obx(
-        //                         () => controller.listofAnnouncement[index]
-        //                                     .announceFile !=
-        //                                 null
-        //                             ? SizedBox.shrink()
-        //                             : SizedBox(
-        //                                 height: 6.0,
-        //                               ),
-        //                       ),
+        //                       controller.listofAnnouncement[index]
+        //                                       .announceFile !=
+        //                                   "" ||
+        //                               controller.listofAnnouncement[index]
+        //                                       .announceFileExt ==
+        //                                   ".jpg" ||
+        //                               controller.listofAnnouncement[index]
+        //                                       .announceFileExt ==
+        //                                   ".png"
+        //                           ? Image.network(
+        //                                   '$photoDir/${controller.listofAnnouncement[index].announceFile}')
+        //                               .paddingSymmetric(vertical: 8.0)
+        //                           : SizedBox.shrink(),
+        //                       controller.listofAnnouncement[index]
+        //                                       .announceFile !=
+        //                                   "" ||
+        //                               controller.listofAnnouncement[index]
+        //                                       .announceFileExt ==
+        //                                   ".mp4"
+        //                           ? VideoWidget(
+        //                               play: true,
+        //                               url:
+        //                                   '$photoDir/schoolannouncementfiles/212258004mdo.mp4')
+        //                           : SizedBox.shrink(),
         //                     ],
         //                   ),
         //                 ),
-        //                 Obx(
-        //                   () => controller
-        //                               .listofAnnouncement[index].announceFile !=
-        //                           null
-        //                       ? Image.network(
-        //                               '$photoDir/${controller.listofAnnouncement[index].announceFile}')
-        //                           .paddingSymmetric(vertical: 8.0)
-        //                       : SizedBox.shrink(),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
+        //               ),
         //       );
         //     },
         //     childCount: controller.listofAnnouncement.length,
