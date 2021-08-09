@@ -5,12 +5,13 @@ import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:yes_premium/models/announcement.dart';
 import 'package:yes_premium/modules/home/home_api.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class HomeController extends GetxController {
   // final scrollController = TrackingScrollController();
   var isLoading = true.obs;
   RxList<AnnouncementData> listofAnnouncement = <AnnouncementData>[].obs;
-
+  final storageService = Get.find<GetStorageService>();
   RxString schoolAvatar = ''.obs;
 
   @override
@@ -46,8 +47,7 @@ class HomeController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        print('yawa');
-        print(jsonStringEncoded);
+        storageService.saveAnnouncementItems(jsonStringEncoded);
         listofAnnouncement.add(announcementdataFromJson(jsonStringEncoded));
       }
       isLoading(false);

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/account/account_controller.dart';
+import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
@@ -10,8 +11,11 @@ import 'package:sizer/sizer.dart';
 
 class AccountView extends GetView<AccountController> {
   final TextStyle whiteText = TextStyle(color: Colors.white);
+  //
+
   @override
   Widget build(BuildContext context) {
+    final botnavController = Get.put(BottomNavController());
     Get.put(AccountController());
     return SafeArea(
       child: CustomScrollView(
@@ -125,7 +129,9 @@ class AccountView extends GetView<AccountController> {
                       Expanded(
                         flex: 1,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            botnavController.selectedIndex.value = 1;
+                          },
                           child: _buildTile(
                             color: toungeColor,
                             icon: Icons.video_label,
@@ -184,7 +190,9 @@ class AccountView extends GetView<AccountController> {
                       Expanded(
                         flex: 1,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            botnavController.selectedIndex.value = 2;
+                          },
                           child: _buildTile(
                             color: mainColor,
                             icon: Icons.note,

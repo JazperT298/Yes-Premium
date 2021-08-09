@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:yes_premium/models/notes.dart';
 import 'package:yes_premium/modules/files/files_api.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class FilesController extends GetxController {
   final scrollController = TrackingScrollController();
+  final storageService = Get.find<GetStorageService>();
   RxList<NotesData> notesdataList = <NotesData>[].obs;
 
   var isLoading = true.obs;
@@ -41,8 +43,7 @@ class FilesController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        print('yawa');
-        print(jsonStringEncoded);
+        storageService.saveNotesItems(jsonStringEncoded);
         notesdataList.add(notesdataFromJson(jsonStringEncoded));
       }
       isLoading(false);

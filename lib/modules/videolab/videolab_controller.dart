@@ -7,9 +7,12 @@ import 'package:html/parser.dart';
 import 'package:video_player/video_player.dart';
 import 'package:yes_premium/models/video_lib.dart';
 import 'package:yes_premium/modules/videolab/videolab_api.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class VideolabController extends GetxController {
   final scrollController = TrackingScrollController();
+  final storageService = Get.find<GetStorageService>();
+
   late VideoPlayerController videoPlayerController;
   var isLoading = true.obs;
   RxList<VideoLibData> videolibList = <VideoLibData>[].obs;
@@ -49,7 +52,7 @@ class VideolabController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-
+        storageService.saveVideoLibItems(jsonStringEncoded);
         videolibList.add(videolibdataFromJson(jsonStringEncoded));
       }
       isLoading(false);

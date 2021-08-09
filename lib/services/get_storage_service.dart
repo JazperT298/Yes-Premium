@@ -69,11 +69,59 @@ class GetStorageService extends GetxService {
   }
 
   void printStorage() {
-    print(appdata.read('firstname'));
-    print(appdata.read('lastname'));
-    print(appdata.read('contactnumber'));
-    print(appdata.read('email'));
+    print(appdata.read('UserId'));
+    print(appdata.read('School'));
+    print(appdata.read('SchoolId'));
+    print(appdata.read('SchoolAvatar'));
   }
+  void saveAnnouncementItems(announcementItems) {
+    appdata.write('announcementItems', announcementItems);
+  }
+
+  void deleteAnnouncementItems() {
+    appdata.remove('announcementItems');
+  }
+
+  void saveVideoLibItems(videoLibItems) {
+    appdata.write('videoLibItems', videoLibItems);
+  }
+
+  void deleteVideoLibItems() {
+    appdata.remove('videoLibItems');
+  }
+
+  void saveNotesItems(notesItems) {
+    appdata.write('notesItems', notesItems);
+  }
+
+  void deleteNotesItems() {
+    appdata.remove('notesItems');
+  }
+
+  void saveNotificationItems(notificationItems) {
+    appdata.write('notificationItems', notificationItems);
+  }
+
+  void deleteNotificationItems() {
+    appdata.remove('notificationItems');
+  }
+
+  void saveEducatorItems(educatorItems) {
+    appdata.write('educatorItems', educatorItems);
+  }
+
+  void deleteEducatorItems() {
+    appdata.remove('educatorItems');
+  }
+
+  void saveStudentItems(studentItems) {
+    appdata.write('studentItems', studentItems);
+  }
+
+  void deleteStudentItems() {
+    appdata.remove('studentItems');
+  }
+
 
   DeviceInfoPlugin androiddeviceInfo = DeviceInfoPlugin();
   DeviceInfoPlugin iosdeviceInfo = DeviceInfoPlugin();

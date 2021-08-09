@@ -19,15 +19,18 @@ class SplashScreenController extends GetxController {
   void onInit() async {
     super.onInit();
     await Future.delayed(Duration(seconds: 3));
-    _checkUserLoggedin();
+    _checkUserLoggedIn();
+    print('${box.read('UserId')}');
   }
 
   //Check if user has logged in
-  void _checkUserLoggedin() {
-    if (box.read('userName') != 0) {
-      Get.offNamed(AppRoutes.BOTTOMNAV);
-    } else {
+  void _checkUserLoggedIn() {
+    if (box.read('UserId') == "" || box.read('UserId') == null) {
       Get.offNamed(AppRoutes.LOGIN);
+    } else {
+      Get.offNamed(AppRoutes.BOTTOMNAV);
     }
   }
+
+
 }

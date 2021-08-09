@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/models/students.dart';
 import 'package:yes_premium/modules/studentlist/student_api.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class StudentListController extends GetxController {
   final scrollController = TrackingScrollController();
-
+  final storageService = Get.find<GetStorageService>();
   RxBool isSearchClick = false.obs;
   RxBool isAccountDisabled = false.obs;
   var isLoading = true.obs;
@@ -63,7 +64,7 @@ class StudentListController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-
+        storageService.saveStudentItems(jsonStringEncoded);
         studentsDataList.add(studentsdataFromJson(jsonStringEncoded));
       }
       isLoading(false);

@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/models/educators.dart';
 import 'package:yes_premium/modules/educatorlist/educator_api.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class EducatorListController extends GetxController {
   final scrollController = TrackingScrollController();
-
+  final storageService = Get.find<GetStorageService>();
   RxBool isSearchClick = false.obs;
   var isLoading = true.obs;
   RxList<EducatorsData> educatorsDataList = <EducatorsData>[].obs;
@@ -61,8 +62,7 @@ class EducatorListController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        print('yawa');
-        print(jsonStringEncoded);
+        storageService.saveEducatorItems(jsonStringEncoded);
         educatorsDataList.add(eucatorsdataFromJson(jsonStringEncoded));
       }
       isLoading(false);
