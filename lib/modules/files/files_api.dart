@@ -10,11 +10,11 @@ import 'package:yes_premium/services/get_storage_service.dart';
 class FilesApi {
   static var client = http.Client();
 
-  static Future getUserNotesLists() async {
+  static Future getUserNotesLists(counter) async {
     try {
       var response = await client.get(
         Uri.parse(
-            '$baseUrl/api/UserNotes/GetAllUserNotes?userID=${Get.find<GetStorageService>().appdata.read('UserId')}&schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=1'),
+            '$baseUrl/api/UserNotes/GetAllUserNotes?userID=${Get.find<GetStorageService>().appdata.read('UserId')}&schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=$counter'),
 
         headers: {
           "access-control-allow-origin": "*",

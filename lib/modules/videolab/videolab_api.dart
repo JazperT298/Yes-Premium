@@ -10,11 +10,11 @@ import 'package:http/http.dart' as http;
 class VideoLabApi {
   static var client = http.Client();
 
-  static Future getSchoolVideoLibrary() async {
+  static Future getSchoolVideoLibrary(counter) async {
     try {
       var response = await client.get(
         Uri.parse(
-            '$baseUrl/api/VideoLibrary/GetVideoLibraryBySchool?schoolID=${Get.find<GetStorageService>().appdata.read('SchoolId')}&userID=${Get.find<GetStorageService>().appdata.read('UserId')}&offset=1'),
+            '$baseUrl/api/VideoLibrary/GetVideoLibraryBySchool?schoolID=${Get.find<GetStorageService>().appdata.read('SchoolId')}&userID=${Get.find<GetStorageService>().appdata.read('UserId')}&offset=$counter'),
 
         headers: {
           "access-control-allow-origin": "*",

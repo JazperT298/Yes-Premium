@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:chewie/chewie.dart';
@@ -17,11 +18,13 @@ class VideolabController extends GetxController {
   var isLoading = true.obs;
   RxList<VideoLibData> videolibList = <VideoLibData>[].obs;
   ChewieController? chewieController;
-
+  int counter = 1;
+  Timer? timer;
   @override
   void onInit() {
     super.onInit();
-    getSchoolVideoLibrary();
+    getSchoolVideoLibrary(counter);
+    incrementVideoData();
   }
 
   @override
@@ -36,9 +39,9 @@ class VideolabController extends GetxController {
     chewieController!.dispose();
   }
 
-  void getSchoolVideoLibrary() async {
+  void getSchoolVideoLibrary(counter) async {
     try {
-      List result = await VideoLabApi.getSchoolVideoLibrary();
+      List result = await VideoLabApi.getSchoolVideoLibrary(counter);
       if (!isLoading.value) isLoading(true);
       for (var i = 0; i < result.length; i++) {
         Map mapping = {
@@ -59,6 +62,18 @@ class VideolabController extends GetxController {
     } catch (e) {
       print('err $e');
     }
+  }
+
+  incrementVideoData() async {
+    Timer.periodic(Duration(seconds: 3), (timer) {
+      print('YAWA VIDEO ${videolibList.length}');
+      if (counter == 10) {
+        timer.cancel();
+      } else {
+        counter++;
+        getSchoolVideoLibrary(counter);
+      }
+    });
   }
 
   String parseHtmlString(String htmlString) {

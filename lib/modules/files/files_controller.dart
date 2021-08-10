@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -13,11 +14,13 @@ class FilesController extends GetxController {
   RxList<NotesData> notesdataList = <NotesData>[].obs;
 
   var isLoading = true.obs;
-
+  int counter = 1;
+  Timer? timer;
   @override
   void onInit() {
     super.onInit();
-    getUserNotesLists();
+    getUserNotesLists(counter);
+    incrementNotesData();
   }
 
   @override
@@ -25,9 +28,9 @@ class FilesController extends GetxController {
     super.onReady();
   }
 
-  void getUserNotesLists() async {
+  void getUserNotesLists(counter) async {
     try {
-      List result = await FilesApi.getUserNotesLists();
+      List result = await FilesApi.getUserNotesLists(counter);
       if (!isLoading.value) isLoading(true);
       for (var i = 0; i < result.length; i++) {
         Map mapping = {
@@ -58,5 +61,17 @@ class FilesController extends GetxController {
         parse(document.body!.text).documentElement!.text;
 
     return parsedString;
+  }
+
+  incrementNotesData() async {
+    Timer.periodic(Duration(seconds: 3), (timer) {
+      print('YAWA FILES ${notesdataList.length}');
+      if (counter == 10) {
+        timer.cancel();
+      } else {
+        counter++;
+        getUserNotesLists(counter);
+      }
+    });
   }
 }

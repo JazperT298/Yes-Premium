@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -217,7 +215,8 @@ class HomeView extends GetView<HomeController> {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 12.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
@@ -275,6 +274,8 @@ class HomeView extends GetView<HomeController> {
                                               print(
                                                   '${controller.listofAnnouncement[index].announceFileExt}'),
                                               print(
+                                                  '${controller.listofAnnouncement.length}'),
+                                              print(
                                                   '${Get.find<GetStorageService>().appdata.read('UserId')} '),
                                               print(
                                                   '${Get.find<GetStorageService>().appdata.read('access_token')} '),
@@ -287,11 +288,12 @@ class HomeView extends GetView<HomeController> {
                                         '${controller.parseHtmlString(controller.listofAnnouncement[index].announceDetails!)}',
                                         style: TextStyle(fontSize: 11.sp),
                                       ),
-    
+
                                       controller.listofAnnouncement[index]
                                                       .announceFile !=
                                                   null ||
-                                              controller.listofAnnouncement[index]
+                                              controller
+                                                      .listofAnnouncement[index]
                                                       .announceFile !=
                                                   ""
                                           ? SizedBox.shrink()
@@ -311,14 +313,13 @@ class HomeView extends GetView<HomeController> {
                                         controller.listofAnnouncement[index]
                                                 .announceFileExt ==
                                             ".png"
-                                    ? Image.network(
-                                            '$photoDir/${controller.listofAnnouncement[index].announceFile}')
+                                    ? Image.network('$photoDir/${controller.listofAnnouncement[index].announceFile}')
                                         .paddingSymmetric(vertical: 8.0)
-                                    : controller.listofAnnouncement[index]
-                                                        .announceFile !=
+                                    : controller.listofAnnouncement[index].announceFile !=
                                                     "" &&
                                                 controller
-                                                        .listofAnnouncement[index]
+                                                        .listofAnnouncement[
+                                                            index]
                                                         .announceFileExt ==
                                                     ".mp4" ||
                                             controller.listofAnnouncement[index]

@@ -10,11 +10,11 @@ import 'package:http/http.dart' as http;
 class StudentApi {
   static var client = http.Client();
 
-  static Future getAllStudentBySchoolId() async {
+  static Future getAllStudentBySchoolId(counter) async {
     try {
       var response = await client.get(
         Uri.parse(
-            '$baseUrl/api/Student/GetAllStudentBySchoolId?schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=1'),
+            '$baseUrl/api/Student/GetAllStudentBySchoolId?schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=$counter'),
 
         headers: {
           "access-control-allow-origin": "*",

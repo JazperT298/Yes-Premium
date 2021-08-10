@@ -60,135 +60,125 @@ class VideoLabView extends StatelessWidget {
             centerTitle: false,
             floating: true,
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                // final VideoLab post = controller.videoList[index];
-                return Obx(
-                  () => controller.isLoading.value &&
-                          controller.videolibList.length <= 0
-                      ? Container(
-                          height: 30.h,
-                          color: Colors.grey[200],
-                        )
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: controller.videolibList.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: Container(
-                                margin: EdgeInsets.symmetric(vertical: 5.0),
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 12.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+          SliverToBoxAdapter(
+            child: Obx(
+              () => controller.isLoading.value &&
+                      controller.videolibList.length <= 0
+                  ? Container(
+                      height: 30.h,
+                      color: Colors.grey[200],
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: controller.videolibList.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 5.0),
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 12.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      //Post Header
+                                      Row(
                                         children: [
-                                          //Post Header
-                                          Row(
-                                            children: [
-                                              ClipOval(
-                                                child: Image.network(
-                                                  '$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}',
-                                                  height: 40.0,
-                                                  width: 40.0,
-                                                  fit: BoxFit.cover,
+                                          ClipOval(
+                                            child: Image.network(
+                                              '$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}',
+                                              height: 40.0,
+                                              width: 40.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 8.0,
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '${Get.find<GetStorageService>().appdata.read('School')}',
+                                                  style: TextStyle(
+                                                    fontSize: 11.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 8.0,
-                                              ),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                Row(
                                                   children: [
                                                     Text(
-                                                      '${Get.find<GetStorageService>().appdata.read('School')}',
+                                                      '${controller.videolibList[index].videoLibCreatedDate}  •  ',
                                                       style: TextStyle(
-                                                        fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                        color: Colors.grey[600],
+                                                        fontSize: 9.sp,
                                                       ),
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '${controller.videolibList[index].videoLibCreatedDate}  •  ',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .grey[600],
-                                                            fontSize: 9.sp,
-                                                          ),
-                                                        ),
-                                                        Icon(
-                                                          Icons.public,
-                                                          color:
-                                                              Colors.grey[400],
-                                                          size: 12.0,
-                                                        ),
-                                                      ],
-                                                    )
+                                                    Icon(
+                                                      Icons.public,
+                                                      color: Colors.grey[400],
+                                                      size: 12.0,
+                                                    ),
                                                   ],
-                                                ),
-                                              ),
-                                              IconButton(
-                                                icon: const Icon(
-                                                    Icons.more_horiz),
-                                                onPressed: () => {
-                                                  // print(
-                                                  //     '${controller.videolibList[index].announceFile}'),
-                                                  // print(
-                                                  //     '${controller.videolibList[index].announceFileExt}'),
-                                                  // print(
-                                                  //     '${Get.find<GetStorageService>().appdata.read('UserId')} '),
-                                                  // print(
-                                                  //     '${Get.find<GetStorageService>().appdata.read('access_token')} '),
-                                                },
-                                              ),
-                                            ],
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                          //Post caption
-                                          Text(
-                                            '${controller.parseHtmlString(controller.videolibList[index].videoLibTitle!)}',
-                                            style: TextStyle(fontSize: 11.sp),
+                                          IconButton(
+                                            icon: const Icon(Icons.more_horiz),
+                                            onPressed: () => {
+                                              // print(
+                                              //     '${controller.videolibList[index].announceFile}'),
+                                              print(
+                                                  '${controller.videolibList.length}'),
+                                              // print(
+                                              //     '${Get.find<GetStorageService>().appdata.read('UserId')} '),
+                                              // print(
+                                              //     '${Get.find<GetStorageService>().appdata.read('access_token')} '),
+                                            },
                                           ),
-
-                                          controller.videolibList[index]
-                                                          .videoLibFileName !=
-                                                      null ||
-                                                  controller.videolibList[index]
-                                                          .videoLibFileName !=
-                                                      ""
-                                              ? SizedBox.shrink()
-                                              : SizedBox(
-                                                  height: 6.0,
-                                                ),
                                         ],
                                       ),
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 345.0,
-                                      child: VideoWidget(
-                                          play: true,
-                                          url:
-                                              '$photoDir/${controller.videolibList[index].videoLibFileName}'),
-                                    )
-                                  ],
+                                      //Post caption
+                                      Text(
+                                        '${controller.parseHtmlString(controller.videolibList[index].videoLibTitle!)}',
+                                        style: TextStyle(fontSize: 11.sp),
+                                      ),
+
+                                      controller.videolibList[index]
+                                                      .videoLibFileName !=
+                                                  null ||
+                                              controller.videolibList[index]
+                                                      .videoLibFileName !=
+                                                  ""
+                                          ? SizedBox.shrink()
+                                          : SizedBox(
+                                              height: 6.0,
+                                            ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                );
-              },
-              childCount: controller.videolibList.length,
+                                Container(
+                                  width: double.infinity,
+                                  height: 345.0,
+                                  child: VideoWidget(
+                                      play: true,
+                                      url:
+                                          '$photoDir/${controller.videolibList[index].videoLibFileName}'),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
             ),
           ),
         ],

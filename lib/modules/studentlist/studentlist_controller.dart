@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -13,18 +14,20 @@ class StudentListController extends GetxController {
   RxBool isAccountDisabled = false.obs;
   var isLoading = true.obs;
   RxList<StudentsData> studentsDataList = <StudentsData>[].obs;
-
+  int counter = 1;
+  Timer? timer;
   @override
   void onInit() {
     isSearchClick.value = false;
     isAccountDisabled.value = false;
-    getAllStudentBySchoolId();
+    getAllStudentBySchoolId(counter);
+    //incrementStudentData();
     super.onInit();
   }
 
-  void getAllStudentBySchoolId() async {
+  void getAllStudentBySchoolId(counter) async {
     try {
-      List result = await StudentApi.getAllStudentBySchoolId();
+      List result = await StudentApi.getAllStudentBySchoolId(counter);
       if (!isLoading.value) isLoading(true);
       for (var i = 0; i < result.length; i++) {
         Map mapping = {
@@ -72,4 +75,16 @@ class StudentListController extends GetxController {
       print('err $e');
     }
   }
+
+  // incrementStudentData() async {
+  //   Timer.periodic(Duration(seconds: 3), (timer) {
+  //     print('YAWA STUDENT ${studentsDataList.length}');
+  //     if (counter == 5) {
+  //       timer.cancel();
+  //     } else {
+  //       counter++;
+  //       getAllStudentBySchoolId(counter);
+  //     }
+  //   });
+  // }
 }

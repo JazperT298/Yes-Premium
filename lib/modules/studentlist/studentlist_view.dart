@@ -210,35 +210,6 @@ class StudentListView extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                  // : GestureDetector(
-                                                  //     onTap: () => controller
-                                                  //         .isAccountDisabled
-                                                  //         .value = false,
-                                                  //     child: Container(
-                                                  //       height: 3.h,
-                                                  //       width: 130,
-                                                  //       decoration:
-                                                  //           BoxDecoration(
-                                                  //         color: Colors.red,
-                                                  //         borderRadius:
-                                                  //             BorderRadius.all(
-                                                  //           Radius.circular(5),
-                                                  //         ),
-                                                  //       ),
-                                                  //       child: Center(
-                                                  //         child: Text(
-                                                  //           'Account Disabled',
-                                                  //           style: TextStyle(
-                                                  //             color:
-                                                  //                 Colors.white,
-                                                  //             fontWeight:
-                                                  //                 FontWeight
-                                                  //                     .w600,
-                                                  //           ),
-                                                  //         ),
-                                                  //       ),
-                                                  //     ),
-                                                  //   ),
                                                 ],
                                               ),
                                             ),

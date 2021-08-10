@@ -22,10 +22,9 @@ class _VideoWidgetState extends State<VideoWidget> {
     videoPlayerController = new VideoPlayerController.network(widget.url);
 
     _initializeVideoPlayerFuture = videoPlayerController.initialize().then((_) {
-      //       Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
       setState(() {});
     });
-  } // This closing tag was missing
+  }
 
   @override
   void dispose() {
@@ -50,12 +49,9 @@ class _VideoWidgetState extends State<VideoWidget> {
                 controller: ChewieController(
                   videoPlayerController: videoPlayerController,
                   aspectRatio: 2.0 / 1.35,
-                  // Prepare the video to be played and display the first frame
                   autoInitialize: true,
                   looping: false,
                   autoPlay: false,
-                  // Errors can occur for example when trying to play a video
-                  // from a non-existent URL
                   errorBuilder: (context, errorMessage) {
                     return Center(
                       child: Text(
