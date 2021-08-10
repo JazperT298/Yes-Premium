@@ -1,7 +1,10 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:video_player/video_player.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
+import 'package:yes_premium/modules/announcement/announcement_api.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 
@@ -11,6 +14,7 @@ class AnnouncementView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AnnouncementController());
+    final node = FocusScope.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -18,7 +22,16 @@ class AnnouncementView extends StatelessWidget {
         title: Text('Create Announcement'),
         actions: [
           MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                node.unfocus();
+                controller.uploadSchoolPosts(
+                  context,
+                  controller.imgprofile!,
+                  controller.detailsEditingController.text,
+                  Get.find<GetStorageService>().appdata.read('SchoolId'),
+                );
+                print('BURIKAT ${controller.imgprofile!}');
+              },
               child: Text(
                 'Post',
                 style: TextStyle(fontSize: 11.sp),
@@ -106,6 +119,64 @@ class AnnouncementView extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 15.0),
+              Obx(
+                () => controller.attachments.length == 0
+                    ? Container()
+                    : Badge(
+                        position: BadgePosition.topEnd(top: -10, end: -5),
+                        badgeColor: Colors.grey,
+                        badgeContent: GestureDetector(
+                          onTap: () {
+                            controller.attachments.length = 0;
+                            controller.filenamevideoprofile.value = '';
+                            controller.fileTypevideoprofile.value = '';
+                          },
+                          child: Container(
+                            width: 20,
+                            height: 30,
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 20.0,
+                            ),
+                          ),
+                        ),
+                        child: controller.filenamevideoprofile.value != ""
+                            ? Text(
+                                '${controller.filenamevideoprofile.value}',
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            : Container(
+                                // margin: EdgeInsets.only(left: 4.0, right: 8.0),
+                                height: 180,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                      5.0,
+                                    ),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: FileImage(
+                                          controller.image!,
+                                        ),
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ),
+              ),
             ],
           ),
         ),
@@ -145,23 +216,26 @@ class AnnouncementView extends StatelessWidget {
               thickness: 0.5,
               color: Colors.grey.shade300,
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.videocam,
-                    size: 30,
-                    color: Colors.red,
-                  ),
-                  SizedBox(
-                    width: 12.0,
-                  ),
-                  Text('Videos',
-                      style: TextStyle(
-                          fontSize: 10.sp, fontWeight: FontWeight.w600)),
-                ],
-              ).paddingOnly(left: 12.0, right: 12.0, top: 8.0, bottom: 8.0),
+            GestureDetector(
+              onTap: () => controller.getVideo(),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.videocam,
+                      size: 30,
+                      color: Colors.red,
+                    ),
+                    SizedBox(
+                      width: 12.0,
+                    ),
+                    Text('Videos',
+                        style: TextStyle(
+                            fontSize: 10.sp, fontWeight: FontWeight.w600)),
+                  ],
+                ).paddingOnly(left: 12.0, right: 12.0, top: 8.0, bottom: 8.0),
+              ),
             ),
           ],
         ),

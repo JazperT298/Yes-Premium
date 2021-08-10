@@ -30,6 +30,26 @@ class Dialogs {
     );
   }
 
+  static void showMyToast2(message) {
+    final theme = Theme.of(Get.context!);
+    showToast(
+      message,
+      animation: StyledToastAnimation.scale,
+      reverseAnimation: StyledToastAnimation.fade,
+      position: StyledToastPosition(align: Alignment.bottomCenter, offset: 225),
+      animDuration: Duration(seconds: 1),
+      duration: Duration(seconds: 3),
+      curve: Curves.elasticOut,
+      reverseCurve: Curves.linear,
+      backgroundColor: newmainColor,
+      textStyle: TextStyle(
+        fontFamily: theme.textTheme.headline3!.fontFamily,
+        color: Colors.white,
+        fontSize: 12.sp,
+      ),
+    );
+  }
+
   static Future<bool> onBackPressedExit(context) {
     final theme = Theme.of(context);
     final platform = Theme.of(context).platform;

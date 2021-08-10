@@ -75,28 +75,34 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         Get.find<GetStorageService>().appdata.read('Roles') ==
                                 'SchoolAdmin'
-                            ? Container(
-                                width: 10.w,
-                                height: 7.h,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
-                                    fit: BoxFit.cover,
+                            ? GestureDetector(
+                                onTap: () => Get.toNamed(AppRoutes.PROFILE),
+                                child: Container(
+                                  width: 10.w,
+                                  height: 7.h,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    shape: BoxShape.circle,
                                   ),
-                                  shape: BoxShape.circle,
                                 ),
                               )
-                            : Container(
-                                width: 10.w,
-                                height: 7.h,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
-                                    fit: BoxFit.cover,
+                            : GestureDetector(
+                                onTap: () => Get.toNamed(AppRoutes.PROFILE),
+                                child: Container(
+                                  width: 10.w,
+                                  height: 7.h,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    shape: BoxShape.circle,
                                   ),
-                                  shape: BoxShape.circle,
                                 ),
                               ),
                         // Image.asset(
@@ -152,7 +158,10 @@ class HomeView extends GetView<HomeController> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton.icon(
-                            onPressed: () => print('Video'),
+                            onPressed: () {
+                              announceController.getVideo();
+                              Get.toNamed(AppRoutes.ANNOUNCEMENT);
+                            },
                             icon: Icon(
                               Icons.videocam,
                               color: Colors.red,
@@ -172,7 +181,10 @@ class HomeView extends GetView<HomeController> {
                             color: Colors.grey.shade300,
                           ),
                           ElevatedButton.icon(
-                            onPressed: () => announceController.getImage(),
+                            onPressed: () {
+                              announceController.getImage();
+                              Get.toNamed(AppRoutes.ANNOUNCEMENT);
+                            },
                             icon: Icon(
                               Icons.photo_library,
                               color: Colors.green,
@@ -277,6 +289,8 @@ class HomeView extends GetView<HomeController> {
                                                   '${controller.listofAnnouncement.length}'),
                                               print(
                                                   '${Get.find<GetStorageService>().appdata.read('UserId')} '),
+                                              print(
+                                                  '${Get.find<GetStorageService>().appdata.read('SchoolId')} '),
                                               print(
                                                   '${Get.find<GetStorageService>().appdata.read('access_token')} '),
                                             },
