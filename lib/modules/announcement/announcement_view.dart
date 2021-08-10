@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
-import 'package:yes_premium/modules/announcement/announcement_api.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class AnnouncementView extends StatelessWidget {
   const AnnouncementView({Key? key}) : super(key: key);
@@ -24,13 +24,16 @@ class AnnouncementView extends StatelessWidget {
           MaterialButton(
               onPressed: () {
                 node.unfocus();
-                controller.uploadSchoolPosts(
-                  context,
-                  controller.imgprofile!,
-                  controller.detailsEditingController.text,
-                  Get.find<GetStorageService>().appdata.read('SchoolId'),
-                );
-                print('BURIKAT ${controller.imgprofile!}');
+                if (controller.detailsEditingController.text.isEmpty) {
+                  Dialogs.showMyToast(context, "Please, write the details");
+                } else {
+                  controller.uploadSchoolPosts(
+                    context,
+                    controller.imgprofile!,
+                    controller.detailsEditingController.text,
+                    Get.find<GetStorageService>().appdata.read('SchoolId'),
+                  );
+                }
               },
               child: Text(
                 'Post',
@@ -75,7 +78,6 @@ class AnnouncementView extends StatelessWidget {
                           ),
                         ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         '${Get.find<GetStorageService>().appdata.read('School')}',
@@ -83,19 +85,16 @@ class AnnouncementView extends StatelessWidget {
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w600,
                         ),
-                      ).marginOnly(left: 20.0),
+                      ).marginOnly(left: 10.0),
                       SizedBox(
                         height: 4.0,
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'View your profile',
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                          ),
+                      Text(
+                        '"Your Future, Our Pride"',
+                        style: TextStyle(
+                          fontSize: 10.sp,
                         ),
-                      ),
+                      ).marginOnly(left: 20.0),
                     ],
                   ),
                 ],
@@ -110,7 +109,7 @@ class AnnouncementView extends StatelessWidget {
                 controller: controller.detailsEditingController,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
-                  hintText: 'Please, write the details:',
+                  hintText: 'Write something here...:',
                   hintStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
