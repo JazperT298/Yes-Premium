@@ -24,7 +24,7 @@ class VideolabController extends GetxController {
   void onInit() {
     super.onInit();
     getSchoolVideoLibrary(counter);
-    incrementVideoData();
+    //incrementVideoData();
   }
 
   @override
@@ -64,17 +64,17 @@ class VideolabController extends GetxController {
     }
   }
 
-  incrementVideoData() async {
-    Timer.periodic(Duration(seconds: 3), (timer) {
-      print('YAWA VIDEO ${videolibList.length}');
-      if (counter == 10) {
-        timer.cancel();
-      } else {
-        counter++;
-        getSchoolVideoLibrary(counter);
-      }
-    });
-  }
+  // incrementVideoData() async {
+  //   Timer.periodic(Duration(seconds: 3), (timer) {
+  //     print('YAWA VIDEO ${videolibList.length}');
+  //     if (counter == 10) {
+  //       timer.cancel();
+  //     } else {
+  //       counter++;
+  //       getSchoolVideoLibrary(counter);
+  //     }
+  //   });
+  // }
 
   String parseHtmlString(String htmlString) {
     final document = parse(htmlString);

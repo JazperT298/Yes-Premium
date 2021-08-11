@@ -5,6 +5,9 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/colors.dart';
+import 'package:yes_premium/modules/announcement/announcement_api.dart';
+import 'package:yes_premium/modules/announcement/announcement_controller.dart';
+import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 
@@ -222,13 +225,25 @@ class Dialogs {
                 ],
               )
             : CupertinoAlertDialog(
-                title: Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontFamily: theme.textTheme.headline3!.fontFamily,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.logout,
+                      size: 30.0,
+                      color: mainColor,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Logout',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
                 content: Text(
                   'Are you sure you want to logout?              ',
@@ -264,6 +279,142 @@ class Dialogs {
                     onPressed: () {
                       Get.toNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
+  static void showDelete(context, announceID, schoolID) async {
+    final theme = Theme.of(context);
+    final platform = Theme.of(context).platform;
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return platform == TargetPlatform.android
+            ? AlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 30.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Are you sure?',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'You will not be able to recover this file!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<HomeController>()
+                          .deleteAnnouncement(announceID, schoolID);
+                      Get.back();
+                      // Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      // Get.find<GetStorageService>().removeUserStorage();
+                    },
+                  ),
+                ],
+              )
+            : CupertinoAlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 30.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Are you sure?',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'You will not be able to recover this file!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<AnnouncementController>()
+                          .deleteAnnouncement(announceID, schoolID);
+                      Get.back();
+                      // Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      // Get.find<GetStorageService>().removeUserStorage();
                     },
                   ),
                 ],

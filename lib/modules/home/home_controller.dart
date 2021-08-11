@@ -6,11 +6,13 @@ import 'package:get/get.dart';
 
 import 'package:html/parser.dart';
 import 'package:yes_premium/models/announcement.dart';
+import 'package:yes_premium/modules/announcement/announcement_api.dart';
 import 'package:yes_premium/modules/home/home_api.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 
 class HomeController extends GetxController {
   final scrollController = TrackingScrollController();
+  final GlobalKey<ScaffoldState> scaffoldkey = new GlobalKey<ScaffoldState>();
   var isLoading = true.obs;
   RxList<AnnouncementData> listofAnnouncement = <AnnouncementData>[].obs;
   final storageService = Get.find<GetStorageService>();
@@ -21,7 +23,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     getAllAnnouncementBySchool(counter);
-    incrementAnnoucementData();
+    //incrementAnnoucementData();
   }
 
   @override
@@ -34,7 +36,7 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void getAllAnnouncementBySchool(counter) async {
+  Future<void> getAllAnnouncementBySchool(counter) async {
     try {
       List result = await HomeApi.getAllAnnouncementBySchool(counter);
       if (!isLoading.value) isLoading(true);
@@ -49,9 +51,9 @@ class HomeController extends GetxController {
           "Announce_CreatedDate": result[i]['Announce_CreatedDate'],
           "Announce_FileExt": result[i]['Announce_FileExt'],
         };
-
+        print('getAllAnnouncementBySchool');
         var jsonStringEncoded = jsonEncode(mapping);
-        storageService.saveAnnouncementItems(jsonStringEncoded);
+        // storageService.saveAnnouncementItems(jsonStringEncoded);
         listofAnnouncement.add(announcementdataFromJson(jsonStringEncoded));
       }
       isLoading(false);
@@ -60,17 +62,17 @@ class HomeController extends GetxController {
     }
   }
 
-  incrementAnnoucementData() async {
-    Timer.periodic(Duration(seconds: 3), (timer) {
-      print('YAWA HOME ${listofAnnouncement.length}');
-      if (counter == 10) {
-        timer.cancel();
-      } else {
-        counter++;
-        getAllAnnouncementBySchool(counter);
-      }
-    });
-  }
+  // incrementAnnoucementData() async {
+  //   Timer.periodic(Duration(seconds: 3), (timer) {
+  //     print('YAWA HOME ${listofAnnouncement.length}');
+  //     if (counter == 10) {
+  //       timer.cancel();
+  //     } else {
+  //       counter++;
+  //       getAllAnnouncementBySchool(counter);
+  //     }
+  //   });
+  // }
 
   String parseHtmlString(String htmlString) {
     final document = parse(htmlString);
@@ -78,5 +80,18 @@ class HomeController extends GetxController {
         parse(document.body!.text).documentElement!.text;
 
     return parsedString;
+  }
+
+  //Delete Post
+  void deleteAnnouncement(announceID, schoolID) async {
+    try {
+      await AnnouncementApi.deleteAnnouncement(announceID, schoolID);
+      print('deleteAnnouncement');
+      Get.find<HomeController>().getAllAnnouncementBySchool(1);
+    } catch (error) {
+      print("deleteAnnouncement $error");
+    } finally {
+      Get.find<HomeController>().getAllAnnouncementBySchool(1);
+    }
   }
 }

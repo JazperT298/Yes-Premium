@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:yes_premium/modules/announcement/announcement_api.dart';
+import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 
 class AnnouncementController extends GetxController {
   var detailsEditingController = TextEditingController();
+  // final homeController = Get.find<HomeController>();
   RxList<String> attachments = <String>[].obs;
   RxList<String> videoAttachments = <String>[].obs;
   late VideoPlayerController videoController;
@@ -85,6 +87,8 @@ class AnnouncementController extends GetxController {
       var result = await AnnouncementApi.uploadSchoolPost(
           fileToUpload, details, schoolId);
       if (result == "Success") {
+        print('uploadSchoolPosts');
+        Get.find<HomeController>().getAllAnnouncementBySchool(1);
         Get.back();
         Dialogs.showMyToast(context, "Annoucenment successfully posted!");
         filenamevideoprofile.value = '';
@@ -98,6 +102,21 @@ class AnnouncementController extends GetxController {
       }
     } catch (e) {
       print('err $e');
+    } finally {
+      Get.find<HomeController>().getAllAnnouncementBySchool(1);
+    }
+  }
+
+  //Delete Post
+  void deleteAnnouncement(announceID, schoolID) async {
+    try {
+      await AnnouncementApi.deleteAnnouncement(announceID, schoolID);
+      print('deleteAnnouncement');
+      Get.find<HomeController>().getAllAnnouncementBySchool(1);
+    } catch (error) {
+      print("deleteAnnouncement $error");
+    } finally {
+      Get.find<HomeController>().getAllAnnouncementBySchool(1);
     }
   }
 }

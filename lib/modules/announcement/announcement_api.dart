@@ -78,4 +78,41 @@ class AnnouncementApi {
       return null;
     }
   }
+
+  static Future deleteAnnouncement(announceID, schoolID) async {
+    try {
+      var response = await client.post(
+          Uri.parse('$baseUrl/api/Announcement/DeleteAnnouncement'),
+          headers: {
+            "access-control-allow-origin": "*",
+            'content-type': 'application/x-www-form-urlencoded',
+            'Authorization':
+                'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          },
+          body: {
+            "Announce_ID": announceID.toString(),
+            "Announce_School_ID": schoolID.toString(),
+          }).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException(
+              "deleteAnnouncement Services Connection timeout.");
+        },
+      );
+      if (response.statusCode == 200 && json.decode(response.body)['Success']) {
+        return 'Success';
+      } else {
+        return 'Error';
+      }
+    } on TimeoutException catch (_) {
+      print('deleteAnnouncement Services Response timeout');
+      return null;
+    } on SocketException catch (_) {
+      print('deleteAnnouncement Services Socket error');
+      return null;
+    } catch (e) {
+      print('deleteAnnouncement Services  Err $e');
+      return null;
+    }
+  }
 }
