@@ -101,7 +101,7 @@ class LoginController extends GetxController {
   void successNavigate() {
     Future.delayed(Duration(milliseconds: 200), () {
       Get.offNamed(
-        AppRoutes.BOTTOMNAV,
+        AppRoutes.HOME,
       );
 
       username.clear();

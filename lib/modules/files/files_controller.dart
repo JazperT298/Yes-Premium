@@ -20,7 +20,7 @@ class FilesController extends GetxController {
   void onInit() {
     super.onInit();
     getUserNotesLists(counter);
-    incrementNotesData();
+    // incrementNotesData();
   }
 
   @override
@@ -63,15 +63,15 @@ class FilesController extends GetxController {
     return parsedString;
   }
 
-  incrementNotesData() async {
-    Timer.periodic(Duration(seconds: 3), (timer) {
-      print('YAWA FILES ${notesdataList.length}');
-      if (counter == 10) {
-        timer.cancel();
-      } else {
-        counter++;
-        getUserNotesLists(counter);
-      }
-    });
-  }
+  // incrementNotesData() async {
+  //   Timer.periodic(Duration(seconds: 3), (timer) {
+  //     print('YAWA FILES ${notesdataList.length}');
+  //     if (counter == 10) {
+  //       timer.cancel();
+  //     } else {
+  //       counter++;
+  //       getUserNotesLists(counter);
+  //     }
+  //   });
+  // }
 }

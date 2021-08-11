@@ -348,7 +348,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<HomeController>()
+                      Get.find<AnnouncementController>()
                           .deleteAnnouncement(announceID, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);

@@ -100,9 +100,9 @@ class AnnouncementApi {
         },
       );
       if (response.statusCode == 200 && json.decode(response.body)['Success']) {
-        return 'Success';
+        return response.body;
       } else {
-        return 'Error';
+        return null;
       }
     } on TimeoutException catch (_) {
       print('deleteAnnouncement Services Response timeout');

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import 'package:html/parser.dart';
 import 'package:yes_premium/models/announcement.dart';
-import 'package:yes_premium/modules/announcement/announcement_api.dart';
 import 'package:yes_premium/modules/home/home_api.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 
@@ -22,7 +21,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    getAllAnnouncementBySchool(counter);
+    getAllAnnouncementBySchool();
     //incrementAnnoucementData();
   }
 
@@ -36,9 +35,10 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  Future<void> getAllAnnouncementBySchool(counter) async {
+  Future<void> getAllAnnouncementBySchool() async {
     try {
-      List result = await HomeApi.getAllAnnouncementBySchool(counter);
+      var result = await HomeApi.getAllAnnouncementBySchool();
+      listofAnnouncement.clear();
       if (!isLoading.value) isLoading(true);
       for (var i = 0; i < result.length; i++) {
         Map mapping = {
@@ -51,9 +51,9 @@ class HomeController extends GetxController {
           "Announce_CreatedDate": result[i]['Announce_CreatedDate'],
           "Announce_FileExt": result[i]['Announce_FileExt'],
         };
-        print('getAllAnnouncementBySchool');
+        print('YAWA');
         var jsonStringEncoded = jsonEncode(mapping);
-        // storageService.saveAnnouncementItems(jsonStringEncoded);
+
         listofAnnouncement.add(announcementdataFromJson(jsonStringEncoded));
       }
       isLoading(false);
@@ -80,18 +80,5 @@ class HomeController extends GetxController {
         parse(document.body!.text).documentElement!.text;
 
     return parsedString;
-  }
-
-  //Delete Post
-  void deleteAnnouncement(announceID, schoolID) async {
-    try {
-      await AnnouncementApi.deleteAnnouncement(announceID, schoolID);
-      print('deleteAnnouncement');
-      Get.find<HomeController>().getAllAnnouncementBySchool(1);
-    } catch (error) {
-      print("deleteAnnouncement $error");
-    } finally {
-      Get.find<HomeController>().getAllAnnouncementBySchool(1);
-    }
   }
 }
