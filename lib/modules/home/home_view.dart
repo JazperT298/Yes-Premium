@@ -41,6 +41,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 centerTitle: false,
                 floating: true,
+                automaticallyImplyLeading: false,
                 actions: [
                   Container(
                     margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
@@ -74,20 +75,20 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade300,
-                    ),
-                    child: IconButton(
-                      onPressed: () => HomeApi.getAllAnnouncementBySchool(),
-                      icon: Icon(
-                        Icons.dehaze,
-                        size: 25,
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
+                  //   decoration: BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     color: Colors.grey.shade300,
+                  //   ),
+                  //   child: IconButton(
+                  //     onPressed: () => HomeApi.getAllAnnouncementBySchool(),
+                  //     icon: Icon(
+                  //       Icons.dehaze,
+                  //       size: 25,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               SliverToBoxAdapter(

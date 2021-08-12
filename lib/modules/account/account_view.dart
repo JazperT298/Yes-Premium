@@ -30,6 +30,7 @@ class AccountView extends GetView<AccountController> {
             ),
             centerTitle: false,
             floating: true,
+            automaticallyImplyLeading: false,
             actions: [
               Container(
                 margin: EdgeInsets.only(top: 7.0, bottom: 7.0, right: 7.0),

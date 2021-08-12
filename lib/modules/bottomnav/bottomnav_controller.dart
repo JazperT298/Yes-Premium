@@ -19,41 +19,9 @@ class BottomNavController extends GetxController {
     NotificationView(),
     AccountView(),
   ];
-  List<BottomNavigationBarItem> navItem = [
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.home,
-        size: 30,
-      ),
-      label: '',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.video_label,
-        size: 30,
-      ),
-      label: '',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.note,
-        size: 30,
-      ),
-      label: '',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.notifications,
-        size: 30,
-      ),
-      label: '',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.dehaze,
-        size: 30,
-      ),
-      label: '',
-    ),
-  ];
+
+  void resetIndex(int index) {
+    selectedIndex.value = index;
+    update();
+  }
 }

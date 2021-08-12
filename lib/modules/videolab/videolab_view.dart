@@ -25,6 +25,7 @@ class VideoLabView extends StatelessWidget {
               'Videos',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
             ),
+            automaticallyImplyLeading: false,
             actions: [
               Container(
                 margin: EdgeInsets.only(top: 7.0, bottom: 7.0, right: 7.0),

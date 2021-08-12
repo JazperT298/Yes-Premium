@@ -10,6 +10,44 @@ class BottomNavView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
+    List<BottomNavigationBarItem> navItem = [
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.home,
+          size: 30,
+        ),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.video_label,
+          size: 30,
+        ),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.note,
+          size: 30,
+        ),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.notifications,
+          size: 30,
+        ),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.dehaze,
+          size: 30,
+        ),
+        label: '',
+      ),
+    ];
     return Scaffold(
       body: WillPopScope(
         onWillPop: () => Dialogs.onBackPressedExit(context),
@@ -23,7 +61,7 @@ class BottomNavView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             BottomNavigationBar(
-              items: controller.navItem,
+              items: navItem,
               iconSize: 22,
               elevation: 3.0,
               selectedFontSize: 11.sp,

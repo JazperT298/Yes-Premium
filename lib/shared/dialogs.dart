@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/modules/announcement/announcement_api.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
+import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
@@ -220,6 +221,7 @@ class Dialogs {
                     onPressed: () {
                       Get.toNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
+                      Get.find<BottomNavController>().resetIndex(0);
                     },
                   ),
                 ],
@@ -279,6 +281,7 @@ class Dialogs {
                     onPressed: () {
                       Get.toNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
+                      Get.find<BottomNavController>().resetIndex(0);
                     },
                   ),
                 ],
