@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:yes_premium/configs/app_endpoints.dart';
-import 'package:yes_premium/models/announcement.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +33,7 @@ class HomeApi {
       print(response.body);
       if (response.statusCode == 200) {
         var jsonString = jsonDecode(response.body)['Data'];
-        var jsonStringEncoded = jsonEncode(jsonString);
+        //var jsonStringEncoded = jsonEncode(jsonString);
         // print(jsonStringEncoded);
         //return announcementdataFromJson(jsonStringEncoded);
         return jsonString;

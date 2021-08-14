@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +10,6 @@ import 'package:yes_premium/services/get_storage_service.dart';
 class AnnouncementApi {
   static var client = http.Client();
   static Future uploadSchoolPost(File fileToUpload, details, schoolId) async {
-    Uint8List imagereadasbytes = await fileToUpload.readAsBytes();
     try {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',

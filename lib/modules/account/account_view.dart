@@ -33,7 +33,7 @@ class AccountView extends GetView<AccountController> {
             automaticallyImplyLeading: false,
             actions: [
               Container(
-                margin: EdgeInsets.only(top: 7.0, bottom: 7.0, right: 7.0),
+                margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.grey.shade300,
@@ -42,7 +42,7 @@ class AccountView extends GetView<AccountController> {
                   onPressed: () => Get.toNamed(AppRoutes.SEARCH),
                   icon: Icon(
                     Icons.search_rounded,
-                    size: 30,
+                    size: 25,
                   ),
                 ),
               ),

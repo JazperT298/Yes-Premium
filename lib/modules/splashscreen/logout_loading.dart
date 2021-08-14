@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 
 class LoadingLogout extends StatefulWidget {

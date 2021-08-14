@@ -2,23 +2,23 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
-import 'package:yes_premium/modules/videolab/videolab_controller.dart';
+import 'package:yes_premium/modules/files/files_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 import 'package:sizer/sizer.dart';
 
-class VideoLabAddView extends StatelessWidget {
-  const VideoLabAddView({Key? key}) : super(key: key);
+class FilesAddView extends StatelessWidget {
+  const FilesAddView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(VideolabController());
+    final controller = Get.put(FilesController());
     final node = FocusScope.of(context);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Add Video'),
+        title: Text('Add Files'),
         actions: [
           MaterialButton(
               onPressed: () {
@@ -26,17 +26,11 @@ class VideoLabAddView extends StatelessWidget {
                 if (controller.titleEditingController.text.isEmpty) {
                   Dialogs.showMyToast(context, "Please, write the title");
                 } else {
-                  controller.uploadVideoLibrary(
-                    context,
-                    controller.imgprofile!,
-                    controller.titleEditingController.text,
-                    controller.detailsEditingController.text,
-                    Get.find<GetStorageService>().appdata.read('SchoolId'),
-                  );
+                  controller.mapNotesData(context);
                 }
               },
               child: Text(
-                'Upload',
+                'Save File',
                 style: TextStyle(fontSize: 11.sp),
               )),
         ],
@@ -106,7 +100,7 @@ class VideoLabAddView extends StatelessWidget {
               TextField(
                 controller: controller.titleEditingController,
                 decoration: InputDecoration(
-                  hintText: 'Video title',
+                  hintText: 'File title',
                   hintStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -124,7 +118,7 @@ class VideoLabAddView extends StatelessWidget {
                 controller: controller.detailsEditingController,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
-                  hintText: 'Video details...:',
+                  hintText: 'File Description...:',
                   hintStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -143,8 +137,8 @@ class VideoLabAddView extends StatelessWidget {
                         badgeContent: GestureDetector(
                           onTap: () {
                             controller.attachments.length = 0;
-                            controller.filenamevideoprofile.value = '';
-                            controller.fileTypevideoprofile.value = '';
+                            controller.filenameprofile.value = '';
+                            controller.fileTypeprofile.value = '';
                           },
                           child: Container(
                             width: 20,
@@ -157,9 +151,9 @@ class VideoLabAddView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        child: controller.filenamevideoprofile.value != ""
+                        child: controller.filenameprofile.value != ""
                             ? Text(
-                                '${controller.filenamevideoprofile.value}',
+                                '${controller.filenameprofile.value}',
                                 style: TextStyle(
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w600),
@@ -181,7 +175,7 @@ class VideoLabAddView extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: FileImage(
-                                          controller.image!,
+                                          controller.file!,
                                         ),
                                         fit: BoxFit.fitHeight,
                                       ),
@@ -205,20 +199,20 @@ class VideoLabAddView extends StatelessWidget {
               color: Colors.grey.shade300,
             ),
             GestureDetector(
-              onTap: () => controller.getVideo(),
+              onTap: () => controller.getFiles(),
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(
-                      Icons.videocam,
+                      Icons.file_upload,
                       size: 30,
-                      color: Colors.red,
+                      color: Colors.blue,
                     ),
                     SizedBox(
                       width: 12.0,
                     ),
-                    Text('Videos',
+                    Text('Files',
                         style: TextStyle(
                             fontSize: 10.sp, fontWeight: FontWeight.w600)),
                   ],
