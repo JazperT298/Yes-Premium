@@ -67,8 +67,14 @@ class HomeView extends GetView<HomeController> {
                       color: Colors.grey.shade300,
                     ),
                     child: IconButton(
-                      onPressed: () =>
-                          print('${controller.listofAnnouncement.length}'),
+                      onPressed: () {
+                        print(
+                            '${Get.find<GetStorageService>().appdata.read('UserId')}');
+                        print(
+                            '${Get.find<GetStorageService>().appdata.read('SchoolId')}');
+                        print(
+                            '${Get.find<GetStorageService>().appdata.read('access_token')}');
+                      },
                       icon: Icon(
                         Icons.chat_bubble_outlined,
                         size: 25,

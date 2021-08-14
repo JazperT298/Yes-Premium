@@ -9,4 +9,5 @@ class AppRoutes {
   static const String PROFILE = '/profile';
   static const String EDUCATORLIST = '/educatorlist';
   static const String STUDENTLIST = '/studentlist';
+  static const String FACULTYMEETING = '/facultymeeting';
 }

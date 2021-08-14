@@ -143,6 +143,7 @@ class AccountView extends GetView<AccountController> {
                       SizedBox(width: 15.0),
                       Expanded(
                         child: GestureDetector(
+                          onTap: () => Get.toNamed(AppRoutes.FACULTYMEETING),
                           child: _buildTile(
                             color: colorPeterriver,
                             icon: Icons.chat_bubble,

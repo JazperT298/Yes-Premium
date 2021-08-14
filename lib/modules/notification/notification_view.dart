@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yes_premium/modules/notification/notification_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({Key? key}) : super(key: key);
@@ -32,7 +33,8 @@ class NotificationView extends StatelessWidget {
                   color: Colors.grey.shade300,
                 ),
                 child: IconButton(
-                  onPressed: () => Get.toNamed(AppRoutes.SEARCH),
+                  onPressed: () => Dialogs.showDialogs(
+                      context), //Get.toNamed(AppRoutes.SEARCH),
                   icon: Icon(
                     Icons.search_rounded,
                     size: 30,

@@ -4,6 +4,7 @@ import 'package:yes_premium/modules/announcement/announcement_view.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_binding.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_view.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_view.dart';
+import 'package:yes_premium/modules/meeting/facultymeeting_view.dart';
 import 'package:yes_premium/modules/home/home_view.dart';
 import 'package:yes_premium/modules/login/login_view.dart';
 import 'package:yes_premium/modules/profile/profile_view.dart';
@@ -69,6 +70,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.STUDENTLIST,
       page: () => StudentListView(),
+      transition: Transition.downToUp,
+      curve: Curves.linearToEaseOut,
+    ),
+    GetPage(
+      name: AppRoutes.FACULTYMEETING,
+      page: () => FacultyMeetingView(),
       transition: Transition.downToUp,
       curve: Curves.linearToEaseOut,
     ),

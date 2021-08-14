@@ -53,7 +53,7 @@ class HomeController extends GetxController {
         };
         print('YAWA');
         var jsonStringEncoded = jsonEncode(mapping);
-
+        storageService.saveAnnouncementItems(jsonStringEncoded);
         listofAnnouncement.add(announcementdataFromJson(jsonStringEncoded));
       }
       isLoading(false);
