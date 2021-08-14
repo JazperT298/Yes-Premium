@@ -107,7 +107,6 @@ class AnnouncementController extends GetxController {
     }
   }
 
-  //Delete store rider
   void deleteAnnouncement(announceID, schoolID) async {
     try {
       await AnnouncementApi.deleteAnnouncement(announceID, schoolID);

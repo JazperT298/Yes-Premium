@@ -437,7 +437,7 @@ class HomeView extends GetView<HomeController> {
     void choiceAction(String choice) {
       if (choice == "Delete") {
         //Remove
-        Dialogs.showDelete(context, announceID, schoolID);
+        Dialogs.showDeleteAnnouncement(context, announceID, schoolID);
       }
     }
 

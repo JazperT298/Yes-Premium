@@ -10,4 +10,5 @@ class AppRoutes {
   static const String EDUCATORLIST = '/educatorlist';
   static const String STUDENTLIST = '/studentlist';
   static const String FACULTYMEETING = '/facultymeeting';
+  static const String VIDEOLABADD = '/videolabadd';
 }

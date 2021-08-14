@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yes_premium/modules/videolab/videolab_widget.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class VideoLabView extends StatelessWidget {
   const VideoLabView({Key? key}) : super(key: key);
@@ -48,9 +49,8 @@ class VideoLabView extends StatelessWidget {
                   color: Colors.grey.shade300,
                 ),
                 child: IconButton(
-                  onPressed: () {
-                    //controller.isSearchClick.value = true;
-                  }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                  onPressed: () => Get.toNamed(AppRoutes
+                      .VIDEOLABADD), //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
                   icon: Icon(
                     Icons.add_to_drive_sharp,
                     size: 30,
@@ -132,19 +132,25 @@ class VideoLabView extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                          IconButton(
-                                            icon: const Icon(Icons.more_horiz),
-                                            onPressed: () => {
-                                              // print(
-                                              //     '${controller.videolibList[index].announceFile}'),
-                                              print(
-                                                  '${controller.videolibList.length}'),
-                                              // print(
-                                              //     '${Get.find<GetStorageService>().appdata.read('UserId')} '),
-                                              // print(
-                                              //     '${Get.find<GetStorageService>().appdata.read('access_token')} '),
-                                            },
-                                          ),
+                                          deleteButton(
+                                              context,
+                                              controller.videolibList[index]
+                                                  .videoLibID,
+                                              Get.find<GetStorageService>()
+                                                  .appdata
+                                                  .read('SchoolId')),
+                                          // IconButton(
+                                          //   icon: const Icon(Icons.more_horiz),
+                                          //   onPressed: () => {
+                                          //     deleteButton(context, videoLibId, schoolID);
+                                          //     print(
+                                          //         '${controller.videolibList.length}'),
+                                          //     // print(
+                                          //     //     '${Get.find<GetStorageService>().appdata.read('UserId')} '),
+                                          //     // print(
+                                          //     //     '${Get.find<GetStorageService>().appdata.read('access_token')} '),
+                                          //   },
+                                          // ),
                                         ],
                                       ),
                                       //Post caption
@@ -186,4 +192,27 @@ class VideoLabView extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget deleteButton(context, videoLibId, schoolID) {
+  final List<String> _choices = <String>["Delete"];
+
+  void choiceAction(String choice) {
+    if (choice == "Delete") {
+      //Remove
+      Dialogs.showDeleteVideo(context, videoLibId, schoolID);
+    }
+  }
+
+  return PopupMenuButton<String>(
+    onSelected: choiceAction,
+    itemBuilder: (BuildContext context) {
+      return _choices.map((String choice) {
+        return PopupMenuItem<String>(
+          value: choice,
+          child: Text(choice),
+        );
+      }).toList();
+    },
+  );
 }

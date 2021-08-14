@@ -12,6 +12,7 @@ import 'package:yes_premium/modules/search/search_view.dart';
 import 'package:yes_premium/modules/splashscreen/logout_loading.dart';
 import 'package:yes_premium/modules/splashscreen/splashscreen_view.dart';
 import 'package:yes_premium/modules/studentlist/studentlist_view.dart';
+import 'package:yes_premium/modules/videolab/videolabadd_view.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 
 class AppPages {
@@ -76,6 +77,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.FACULTYMEETING,
       page: () => FacultyMeetingView(),
+      transition: Transition.downToUp,
+      curve: Curves.linearToEaseOut,
+    ),
+    GetPage(
+      name: AppRoutes.VIDEOLABADD,
+      page: () => VideoLabAddView(),
       transition: Transition.downToUp,
       curve: Curves.linearToEaseOut,
     ),
