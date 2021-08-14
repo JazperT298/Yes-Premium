@@ -154,4 +154,29 @@ class FilesController extends GetxController {
       getUserNotesLists();
     }
   }
+
+  void deleteUserNotes(notesID, userID, schoolID) async {
+    try {
+      await FilesApi.deleteUserNotes(notesID, userID, schoolID);
+    } catch (error) {
+      print("deleteStoreRider $error");
+    } finally {
+      getUserNotesLists();
+    }
+  }
+
+  void shareNotesToUser(context, notesID, sharedUserID, ownerUserID) async {
+    try {
+      var result =
+          await FilesApi.shareNotesToUser(notesID, sharedUserID, ownerUserID);
+      if (result == "Success") {
+        Get.back();
+        Dialogs.showMyToast(context, "File successfully shared!");
+      } else {
+        Dialogs.showMyToast(context, "Error sharing a file!");
+      }
+    } catch (error) {
+      print("shareNotesToUser $error");
+    } finally {}
+  }
 }

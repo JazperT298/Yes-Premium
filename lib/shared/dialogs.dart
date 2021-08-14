@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
+import 'package:yes_premium/modules/files/files_controller.dart';
 import 'package:yes_premium/modules/videolab/videolab_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
@@ -557,6 +558,140 @@ class Dialogs {
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
+  static void showDeleteFile(context, notesID, userID, schoolID) async {
+    final theme = Theme.of(context);
+    final platform = Theme.of(context).platform;
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return platform == TargetPlatform.android
+            ? AlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 30.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Are you sure?',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'You will not be able to recover this file!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<FilesController>()
+                          .deleteUserNotes(notesID, userID, schoolID);
+                      Get.back();
+                      // Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      // Get.find<GetStorageService>().removeUserStorage();
+                    },
+                  ),
+                ],
+              )
+            : CupertinoAlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 30.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Are you sure?',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'You will not be able to recover this file!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<FilesController>()
+                          .deleteUserNotes(notesID, userID, schoolID);
+                      Get.back();
                     },
                   ),
                 ],

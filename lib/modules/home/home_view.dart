@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
-import 'package:yes_premium/modules/home/home_api.dart';
 import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/modules/home/home_video_widget.dart';
 import 'package:yes_premium/modules/videolab/videolab_controller.dart';
@@ -24,7 +23,7 @@ class HomeView extends GetView<HomeController> {
             return Future.delayed(
               Duration(seconds: 2),
               () async {
-                await HomeApi.getAllAnnouncementBySchool();
+                await controller.getAllAnnouncementBySchool();
               },
             );
           },
