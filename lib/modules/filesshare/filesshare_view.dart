@@ -5,10 +5,12 @@ import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_controller.dart';
 import 'package:yes_premium/modules/files/files_controller.dart';
+import 'package:yes_premium/modules/filesshare/filesshare_controller.dart';
 
 class FilesShareView extends StatelessWidget {
   final controller = Get.put(EducatorListController());
   final filesController = Get.put(FilesController());
+  final filesShareController = Get.put(FilesShareController());
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +169,7 @@ class FilesShareView extends StatelessWidget {
                                             ),
                                             MaterialButton(
                                               onPressed: () {
-                                                filesController
+                                                filesShareController
                                                     .shareNotesToUser(
                                                         context,
                                                         filesController

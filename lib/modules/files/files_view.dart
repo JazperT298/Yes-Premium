@@ -50,7 +50,21 @@ class FilesView extends StatelessWidget {
                   color: Colors.grey.shade300,
                 ),
                 child: IconButton(
-                  onPressed: () => Get.toNamed(AppRoutes.FILESADD),
+                  onPressed: () {
+                    Get.toNamed(
+                      AppRoutes.FILESADD,
+                      arguments: {
+                        'Title': 'Add Files',
+                        'Notes_ID': '',
+                        'User_ID': '',
+                        'School_ID': '',
+                        'Notes_Title': '',
+                        'Notes_Desc': '',
+                        'Notes_FileName': '',
+                        'Notes_File': null,
+                      },
+                    );
+                  },
                   icon: Icon(
                     Icons.add,
                     size: 25,
@@ -144,14 +158,53 @@ class FilesView extends StatelessWidget {
                                             Row(
                                               children: [
                                                 IconButton(
-                                                  icon: const Icon(
+                                                  icon: Icon(
                                                     Icons.edit,
                                                     color: Colors.green,
                                                   ),
-                                                  onPressed: () => {},
+                                                  onPressed: () => {
+                                                    print(
+                                                        '${controller.notesdataList[index].notesFile}'),
+                                                    Get.toNamed(
+                                                      AppRoutes.FILESADD,
+                                                      arguments: {
+                                                        'Title': 'Update Files',
+                                                        'Notes_ID': controller
+                                                            .notesdataList[
+                                                                index]
+                                                            .notesID,
+                                                        'User_ID': controller
+                                                            .notesdataList[
+                                                                index]
+                                                            .userID,
+                                                        'School_ID': controller
+                                                            .notesdataList[
+                                                                index]
+                                                            .schoolID,
+                                                        'Notes_Title':
+                                                            controller
+                                                                .notesdataList[
+                                                                    index]
+                                                                .notesTitle,
+                                                        'Notes_Desc': controller
+                                                            .notesdataList[
+                                                                index]
+                                                            .notesDesc,
+                                                        'Notes_FileName':
+                                                            controller
+                                                                .notesdataList[
+                                                                    index]
+                                                                .notesFileName,
+                                                        'Notes_File': controller
+                                                            .notesdataList[
+                                                                index]
+                                                            .notesFile,
+                                                      },
+                                                    )
+                                                  },
                                                 ),
                                                 IconButton(
-                                                  icon: const Icon(
+                                                  icon: Icon(
                                                     Icons.delete,
                                                     color: Colors.redAccent,
                                                   ),

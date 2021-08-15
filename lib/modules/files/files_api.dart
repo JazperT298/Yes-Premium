@@ -53,50 +53,6 @@ class FilesApi {
     }
   }
 
-  static Future addUserNotes(notesData) async {
-    try {
-      var headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
-      };
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('$baseUrl/api/UserNotes/AddUserNotes'));
-      request.fields.addAll({
-        'Notes_ID': notesData.notesID!,
-        'User_ID': notesData.userID!,
-        'School_ID': notesData.schoolID!,
-        'Notes_Title': notesData.notesTitle!,
-        'Notes_Desc': notesData.notesDesc!,
-        'Notes_FileName': notesData.notesFileName!,
-      });
-      request.files.add(await http.MultipartFile.fromPath(
-          'Notes_File', notesData.notesFile!.path));
-      request.headers.addAll(headers);
-
-      http.StreamedResponse response = await request.send();
-
-      if (response.statusCode == 200) {
-        var data = await response.stream.bytesToString();
-        var message = jsonDecode(data)['Message'];
-        print('$message');
-        return message;
-      } else {
-        print(response.reasonPhrase);
-      }
-    } on TimeoutException catch (_) {
-      print('uploadSchoolPost Services Response timeout');
-      return null;
-    } on SocketException catch (_) {
-      print('uploadSchoolPost Services Socket error');
-      return null;
-    } catch (e) {
-      print('uploadSchoolPost Services  Err $e');
-      return null;
-    }
-  }
-
   static Future deleteUserNotes(notesID, userID, schoolID) async {
     try {
       var response = await client
@@ -132,44 +88,6 @@ class FilesApi {
       return null;
     } catch (e) {
       print('deleteUserNotes Services  Err $e');
-      return null;
-    }
-  }
-
-  static Future shareNotesToUser(notesID, sharedUserID, ownerUserID) async {
-    try {
-      var response = await client
-          .post(Uri.parse('$baseUrl/api/UserNotes/ShareNotesToUser'), headers: {
-        "access-control-allow-origin": "*",
-        'content-type': 'application/x-www-form-urlencoded',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
-      }, body: {
-        "SharedUserID": sharedUserID.toString(),
-        "Notes_ID": notesID.toString(),
-        "OwnerUserID": ownerUserID.toString(),
-      }).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          throw TimeoutException(
-              "shareNotesToUser Services Connection timeout.");
-        },
-      );
-      if (response.statusCode == 200) {
-        var message = jsonDecode(response.body)['Message'];
-        print('$message');
-        return message;
-      } else {
-        return null;
-      }
-    } on TimeoutException catch (_) {
-      print('shareNotesToUser Services Response timeout');
-      return null;
-    } on SocketException catch (_) {
-      print('shareNotesToUser Services Socket error');
-      return null;
-    } catch (e) {
-      print('shareNotesToUser Services  Err $e');
       return null;
     }
   }
