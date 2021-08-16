@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
+import 'package:yes_premium/models/notes.dart';
 import 'package:yes_premium/modules/filesadd/filesadd_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
@@ -29,7 +32,16 @@ class FilesAddView extends StatelessWidget {
                     if (controller.titleEditingController.text.isEmpty) {
                       Dialogs.showMyToast(context, "Please, write the title");
                     } else {
-                      controller.mapNotesData(context, controller.notesData);
+                      controller.addUserNotes(
+                          context,
+                          Get.find<GetStorageService>().appdata.read('UserId'),
+                          Get.find<GetStorageService>()
+                              .appdata
+                              .read('SchoolId'),
+                          controller.titleEditingController.text,
+                          controller.detailsEditingController.text,
+                          controller.filenameprofile.value,
+                          controller.file!);
                     }
                   },
                   child: Text(
@@ -42,7 +54,17 @@ class FilesAddView extends StatelessWidget {
                     if (controller.titleEditingController.text.isEmpty) {
                       Dialogs.showMyToast(context, "Please, write the title");
                     } else {
-                      controller.mapUpdateNotesData(context);
+                      if (controller.titleEditingController.text.isNotEmpty) {
+                        controller.updateUserNotes(
+                            context,
+                            controller.notesID.value,
+                            controller.userID.value,
+                            controller.schoolID.value,
+                            controller.titleEditingController.text,
+                            controller.detailsEditingController.text,
+                            controller.filenameprofile.value,
+                            controller.file!);
+                      }
                     }
                   },
                   child: Text(

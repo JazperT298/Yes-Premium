@@ -46,11 +46,14 @@ class FilesAddController extends GetxController {
     detailsEditingController.text = Get.arguments['Notes_Desc'];
     filenameprofile.value = Get.arguments['Notes_FileName'];
     imgprofile = Get.arguments['Notes_File'];
+    print(imgprofile);
   }
 
-  void addUserNotes(context, notesData) async {
+  void addUserNotes(context, userID, schoolID, notesTitle, notesDesc,
+      filenameprofile, file) async {
     try {
-      var result = await FilesAddApi.addUserNotes(notesData);
+      var result = await FilesAddApi.addUserNotes(
+          userID, schoolID, notesTitle, notesDesc, filenameprofile, file!);
       if (result == "Success") {
         Get.back();
         Dialogs.showMyToast(context, "Notes successfully posted!");
@@ -104,7 +107,7 @@ class FilesAddController extends GetxController {
       notesData.notesTitle = titleEditingController.text;
       notesData.notesDesc = detailsEditingController.text;
       notesData.notesFileName = filenameprofile.value;
-      notesData.notesFile = file;
+      notesData.notesFile = imgprofile!;
       print('BWESIT KA  ${notesData.userID}');
       print('BWESIT KA  ${notesData.schoolID}');
       print('BWESIT KA  ${notesData.notesTitle}');
@@ -113,13 +116,43 @@ class FilesAddController extends GetxController {
 
       print('BWESIT KA  ${notesData.notesFile}');
 
-      addUserNotes(context, notesData);
+      //addUserNotes(context, notesData);
     }
   }
 
-  void updateUserNotes(context, notesData) async {
+  void mapUpdateNotesData(context) async {
+    if (titleEditingController.text.isNotEmpty) {
+      Map mapping = {
+        "Notes_ID": notesID.value,
+        "User_ID": userID.value,
+        "School_ID": schoolID.value,
+        "Notes_Title": titleEditingController.text,
+        "Notes_Desc": detailsEditingController.text,
+        "Notes_FileName": filenameprofile.value,
+        // "Notes_File": '',
+      };
+
+      var jsonStringEncoded = jsonEncode(mapping);
+      var notesData = notesdataFromJson(jsonStringEncoded);
+
+      print('BWESIT KA1  ${notesData.notesID}');
+      print('BWESIT KA2  ${notesData.userID}');
+      print('BWESIT KA3  ${notesData.schoolID}');
+      print('BWESIT KA4  ${notesData.notesTitle}');
+      print('BWESIT KA5  ${notesData.notesDesc}');
+      print('BWESIT KA6  ${notesData.notesFileName}');
+      // print('BWESIT KA7  ${notesData.notesFile}');
+
+      updateUserNotes(context, notesID, userID, schoolID, notesTitle, notesDesc,
+          filenameprofile, file!);
+    }
+  }
+
+  void updateUserNotes(context, notesID, userID, schoolID, notesTitle,
+      notesDesc, filenameprofile, file) async {
     try {
-      var result = await FilesAddApi.updateUserNotes(notesData);
+      var result = await FilesAddApi.updateUserNotes(notesID, userID, schoolID,
+          notesTitle, notesDesc, filenameprofile, file!);
       if (result == "Success") {
         Get.back();
         Dialogs.showMyToast(context, "Notes successfully posted!");
@@ -136,48 +169,6 @@ class FilesAddController extends GetxController {
       print('err $e');
     } finally {
       Get.find<FilesController>().getUserNotesLists();
-    }
-  }
-
-  void mapUpdateNotesData(context) async {
-    //NotesData? notesData;
-    print('BWESIT KA  $imgprofile');
-    if (titleEditingController.text.isNotEmpty) {
-      Map mapping = {
-        "Notes_ID": notesID.value,
-        "User_ID": userID.value,
-        "School_ID": schoolID.value,
-        "Notes_Title": titleEditingController.text,
-        "Notes_Desc": detailsEditingController.text,
-        "Notes_FileName": filenameprofile.value,
-        "Notes_File": imgprofile!,
-      };
-
-      var jsonStringEncoded = jsonEncode(mapping);
-      var notesData = notesdataFromJson(jsonStringEncoded);
-      // notesData.notesID;
-      // notesData.userID;
-      // notesData.schoolID;
-      // notesData.notesTitle;
-      // notesData.notesDesc;
-      // notesData.notesFileName;
-      // notesData.notesFile;
-      // notesData!.notesID = notesID.value;
-      // notesData.userID = userID.value;
-      // notesData.schoolID = notesTitle.value;
-      // notesData.notesTitle = titleEditingController.text;
-      // notesData.notesDesc = detailsEditingController.text;
-      // notesData.notesFileName = splitTheimage.value;
-      // notesData.notesFile = file;
-      print('BWESIT KA1  ${notesData.notesID}');
-      print('BWESIT KA2  ${notesData.userID}');
-      print('BWESIT KA3  ${notesData.schoolID}');
-      print('BWESIT KA4  ${notesData.notesTitle}');
-      print('BWESIT KA5  ${notesData.notesDesc}');
-      print('BWESIT KA6  ${notesData.notesFileName}');
-      print('BWESIT KA7  ${notesData.notesFile}');
-
-      updateUserNotes(context, notesData);
     }
   }
 }

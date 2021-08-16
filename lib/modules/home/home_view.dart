@@ -152,7 +152,7 @@ class HomeView extends GetView<HomeController> {
                             GestureDetector(
                               onTap: () => Get.toNamed(AppRoutes.ANNOUNCEMENT),
                               child: Container(
-                                width: 80.0.w,
+                                width: 79.0.w,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(50.0),

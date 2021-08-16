@@ -5,12 +5,14 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
+import 'package:yes_premium/models/notes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 
 class FilesAddApi {
   static var client = http.Client();
 
-  static Future addUserNotes(notesData) async {
+  static Future addUserNotes(userID, schoolID, notesTitle, notesDesc,
+      notesFileName, File notesFile) async {
     try {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -21,15 +23,14 @@ class FilesAddApi {
       var request = http.MultipartRequest(
           'POST', Uri.parse('$baseUrl/api/UserNotes/AddUserNotes'));
       request.fields.addAll({
-        // 'Notes_ID': notesData.notesID!,
-        'User_ID': notesData.userID!,
-        'School_ID': notesData.schoolID!,
-        'Notes_Title': notesData.notesTitle!,
-        'Notes_Desc': notesData.notesDesc!,
-        'Notes_FileName': notesData.notesFileName!,
+        'User_ID': userID,
+        'School_ID': schoolID!,
+        'Notes_Title': notesTitle,
+        'Notes_Desc': notesDesc,
+        'Notes_FileName': notesFileName,
       });
-      request.files.add(await http.MultipartFile.fromPath(
-          'Notes_File', notesData.notesFile!.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('Notes_File', notesFile.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -54,7 +55,8 @@ class FilesAddApi {
     }
   }
 
-  static Future updateUserNotes(notesData) async {
+  static Future updateUserNotes(notesID, userID, schoolID, notesTitle,
+      notesDesc, notesFileName, File notesFile) async {
     try {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -65,15 +67,15 @@ class FilesAddApi {
       var request = http.MultipartRequest(
           'POST', Uri.parse('$baseUrl/api/UserNotes/AddUserNotes'));
       request.fields.addAll({
-        'Notes_ID': notesData.notesID!,
-        'User_ID': notesData.userID!,
-        'School_ID': notesData.schoolID!,
-        'Notes_Title': notesData.notesTitle!,
-        'Notes_Desc': notesData.notesDesc!,
-        'Notes_FileName': notesData.notesFileName!,
+        'Notes_ID': notesID,
+        'User_ID': userID,
+        'School_ID': schoolID,
+        'Notes_Title': notesTitle,
+        'Notes_Desc': notesDesc,
+        'Notes_FileName': notesFileName,
       });
-      request.files.add(await http.MultipartFile.fromPath(
-          'Notes_File', notesData.notesFile!.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('Notes_File', notesFile.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
