@@ -76,7 +76,7 @@ class GetStorageService extends GetxService {
     adminUsername,
     adminPassword,
   ) {
-    appdata.write('School_ID', userId);
+    appdata.write('School_ID', schoolID);
     appdata.write('School_Name', schoolName);
     appdata.write('School_Logo', schoolLogo);
     appdata.write('School_Address', schoolAddress);

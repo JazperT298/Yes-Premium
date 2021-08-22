@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
-import 'package:yes_premium/modules/profile/profile_controller.dart';
+// import 'package:yes_premium/modules/profile/profile_controller.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 
 class ProfileView extends StatelessWidget {
@@ -11,7 +12,7 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProfileController());
+    // final controller = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -197,7 +198,30 @@ class ProfileView extends StatelessWidget {
           bottom: 2.h,
         ),
         child: MaterialButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(
+              AppRoutes.EDITSCHOOL,
+              arguments: {
+                "schoolID":
+                    Get.find<GetStorageService>().appdata.read('School_ID'),
+                "schoolName":
+                    Get.find<GetStorageService>().appdata.read('School_Name'),
+                "schoolLogo":
+                    Get.find<GetStorageService>().appdata.read('School_Logo'),
+                "schoolAddress": Get.find<GetStorageService>()
+                    .appdata
+                    .read('School_Address'),
+                "schoolDetails": Get.find<GetStorageService>()
+                    .appdata
+                    .read('School_Details'),
+                "schoolMotto":
+                    Get.find<GetStorageService>().appdata.read('School_Motto'),
+                "adminUsername": Get.find<GetStorageService>()
+                    .appdata
+                    .read('Admin_Username'),
+              },
+            );
+          },
           shape: StadiumBorder(),
           child: Text(
             'Edit Your Profile',
