@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/modules/notification/notification_controller.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 
 class NotificationView extends StatelessWidget {
@@ -18,7 +19,7 @@ class NotificationView extends StatelessWidget {
             brightness: Brightness.light,
             backgroundColor: Colors.white,
             title: Text(
-              'Notification',
+              'Notifications',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
             ),
             centerTitle: false,
@@ -32,8 +33,7 @@ class NotificationView extends StatelessWidget {
                   color: Colors.grey.shade300,
                 ),
                 child: IconButton(
-                  onPressed: () => Dialogs.showDialogs(
-                      context), //Get.toNamed(AppRoutes.SEARCH),
+                  onPressed: () => Get.toNamed(AppRoutes.SEARCH),
                   icon: Icon(
                     Icons.search_rounded,
                     size: 25,

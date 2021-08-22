@@ -43,19 +43,19 @@ class SearchView extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          MaterialButton(
-              onPressed: () {
-                node.unfocus();
-                controller.getAllUserBySearchKeyword(
-                    Get.find<GetStorageService>().appdata.read('SchoolId'),
-                    controller.searchEditingController.text);
-              },
-              child: Text(
-                'Search',
-                style: TextStyle(fontSize: 11.sp),
-              )),
-        ],
+        // actions: [
+        //   MaterialButton(
+        //       onPressed: () {
+        //         node.unfocus();
+        //         controller.getAllUserBySearchKeyword(
+        //             Get.find<GetStorageService>().appdata.read('SchoolId'),
+        //             controller.searchEditingController.text);
+        //       },
+        //       child: Text(
+        //         'Search',
+        //         style: TextStyle(fontSize: 11.sp),
+        //       )),
+        // ],
       ),
       body: Obx(
         () => ListView.builder(

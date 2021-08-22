@@ -30,6 +30,7 @@ class FilesAddController extends GetxController {
 
   var filenameprofile = "".obs;
   var fileTypeprofile = "".obs;
+  var filename = "".obs;
   var splitTheimage;
   var isLoading = true.obs;
   int counter = 1;
@@ -44,7 +45,7 @@ class FilesAddController extends GetxController {
     schoolID.value = Get.arguments['School_ID'];
     titleEditingController.text = Get.arguments['Notes_Title'];
     detailsEditingController.text = Get.arguments['Notes_Desc'];
-    filenameprofile.value = Get.arguments['Notes_FileName'];
+    filename.value = Get.arguments['Notes_FileName'];
     imgprofile = Get.arguments['Notes_File'];
     print(imgprofile);
   }
@@ -98,56 +99,6 @@ class FilesAddController extends GetxController {
     } else {}
   }
 
-  void mapNotesData(context, notesData) async {
-    if (titleEditingController.text.isNotEmpty) {
-      notesData.userID = Get.find<GetStorageService>().appdata.read('UserId');
-      print('BWESIT KA  ${notesData.userID}');
-      notesData.schoolID =
-          Get.find<GetStorageService>().appdata.read('SchoolId');
-      notesData.notesTitle = titleEditingController.text;
-      notesData.notesDesc = detailsEditingController.text;
-      notesData.notesFileName = filenameprofile.value;
-      notesData.notesFile = imgprofile!;
-      print('BWESIT KA  ${notesData.userID}');
-      print('BWESIT KA  ${notesData.schoolID}');
-      print('BWESIT KA  ${notesData.notesTitle}');
-      print('BWESIT KA  ${notesData.notesDesc}');
-      print('BWESIT KA  ${notesData.notesFileName}');
-
-      print('BWESIT KA  ${notesData.notesFile}');
-
-      //addUserNotes(context, notesData);
-    }
-  }
-
-  void mapUpdateNotesData(context) async {
-    if (titleEditingController.text.isNotEmpty) {
-      Map mapping = {
-        "Notes_ID": notesID.value,
-        "User_ID": userID.value,
-        "School_ID": schoolID.value,
-        "Notes_Title": titleEditingController.text,
-        "Notes_Desc": detailsEditingController.text,
-        "Notes_FileName": filenameprofile.value,
-        // "Notes_File": '',
-      };
-
-      var jsonStringEncoded = jsonEncode(mapping);
-      var notesData = notesdataFromJson(jsonStringEncoded);
-
-      print('BWESIT KA1  ${notesData.notesID}');
-      print('BWESIT KA2  ${notesData.userID}');
-      print('BWESIT KA3  ${notesData.schoolID}');
-      print('BWESIT KA4  ${notesData.notesTitle}');
-      print('BWESIT KA5  ${notesData.notesDesc}');
-      print('BWESIT KA6  ${notesData.notesFileName}');
-      // print('BWESIT KA7  ${notesData.notesFile}');
-
-      updateUserNotes(context, notesID, userID, schoolID, notesTitle, notesDesc,
-          filenameprofile, file!);
-    }
-  }
-
   void updateUserNotes(context, notesID, userID, schoolID, notesTitle,
       notesDesc, filenameprofile, file) async {
     try {
@@ -155,7 +106,7 @@ class FilesAddController extends GetxController {
           notesTitle, notesDesc, filenameprofile, file!);
       if (result == "Success") {
         Get.back();
-        Dialogs.showMyToast(context, "Notes successfully posted!");
+        Dialogs.showMyToast(context, "Notes successfully updated!");
         filenameprofile.value = '';
         fileTypeprofile.value = '';
         detailsEditingController.text = "";

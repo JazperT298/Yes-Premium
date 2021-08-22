@@ -53,6 +53,8 @@ class FilesAddView extends StatelessWidget {
                     node.unfocus();
                     if (controller.titleEditingController.text.isEmpty) {
                       Dialogs.showMyToast(context, "Please, write the title");
+                    } else if (controller.file == null) {
+                      Dialogs.showMyToast(context, "File can't be empty");
                     } else {
                       if (controller.titleEditingController.text.isNotEmpty) {
                         controller.updateUserNotes(
@@ -184,6 +186,7 @@ class FilesAddView extends StatelessWidget {
                                         controller.attachments.length = 0;
                                         controller.filenameprofile.value = '';
                                         controller.fileTypeprofile.value = '';
+                                        controller.file = null;
                                       },
                                       child: Container(
                                         width: 20,
@@ -240,6 +243,7 @@ class FilesAddView extends StatelessWidget {
                                     controller.attachments.length = 0;
                                     controller.filenameprofile.value = '';
                                     controller.fileTypeprofile.value = '';
+                                    controller.file = null;
                                   },
                                   child: Container(
                                     width: 20,
