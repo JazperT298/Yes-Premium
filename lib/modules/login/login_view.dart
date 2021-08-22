@@ -29,7 +29,7 @@ class LoginView extends StatelessWidget {
     TextField _usernameInput() {
       return TextField(
         controller: controller.username,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.emailAddress,
         textInputAction: TextInputAction.next,
         onEditingComplete: () => _node.nextFocus(),
         decoration: InputDecoration(
@@ -84,6 +84,7 @@ class LoginView extends StatelessWidget {
                   var loginReturn = await controller.loadingLogin(context,
                       controller.username.text, controller.password.text);
                   await controller.getUserDetails();
+                  await controller.getSchoolDetails();
                   print(loginReturn);
                   if (loginReturn != 'success') {
                     Dialogs.showMyToast(context, "Invalid credentials");

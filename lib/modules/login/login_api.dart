@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/models/login_data.dart';
+import 'package:yes_premium/models/school.dart';
 import 'package:yes_premium/models/user_data.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 
@@ -88,6 +89,48 @@ class LoginApi {
       return null;
     } catch (e) {
       print('getUserDetails Services  Err $e');
+      return null;
+    }
+  }
+
+  static Future getSchoolDetailsByUserId() async {
+    try {
+      var response = await client.get(
+        Uri.parse(
+            '$baseUrl/api/Schools/GetSchoolDetailsByUserId?userId=${Get.find<GetStorageService>().appdata.read('UserId')}'),
+
+        headers: {
+          "access-control-allow-origin": "*",
+          'content-type': 'application/x-www-form-urlencoded',
+          'Authorization':
+              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        },
+        // encoding: Encoding.getByName('utf-8'),
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException(
+              "getSchoolDetailsByUserId Services Connection timeout.");
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        var jsonString = jsonDecode(response.body)['Data'];
+        var jsonStringEncoded = jsonEncode(jsonString);
+        print(jsonStringEncoded);
+        return schooldataFromJson('[$jsonStringEncoded]');
+      } else {
+        print('getSchoolDetailsByUserId Services  error');
+        return null;
+      }
+    } on TimeoutException catch (_) {
+      print('getSchoolDetailsByUserId Services Response timeout');
+      return null;
+    } on SocketException catch (_) {
+      print('getSchoolDetailsByUserId Services Socket error');
+      return null;
+    } catch (e) {
+      print('getSchoolDetailsByUserId Services  Err $e');
       return null;
     }
   }

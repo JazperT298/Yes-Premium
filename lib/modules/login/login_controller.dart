@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/models/login_data.dart';
+import 'package:yes_premium/models/school.dart';
 import 'package:yes_premium/models/user_data.dart';
 import 'package:yes_premium/modules/login/login_api.dart';
 import 'package:yes_premium/routes/app_routes.dart';
@@ -10,11 +11,17 @@ import 'package:yes_premium/widgets/custom_dialog.dart';
 class LoginController extends GetxController {
   var loginCredentials = <LoginData>[].obs;
   var userCredentials = <Data>[].obs;
+  var schoolCredentials = <SchoolData>[].obs;
 
   var username = TextEditingController();
   var password = TextEditingController();
 
   RxBool isObsecureText = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
 
   //login
   Future<String> loadingLogin(context, usernameParamL, passwordParamL) async {
@@ -93,7 +100,36 @@ class LoginController extends GetxController {
         return "invalid";
       }
     } catch (e) {
-      print('loginEducator $e');
+      print('getUserDetails $e');
+      return "catch";
+    }
+  }
+
+  Future<String> getSchoolDetails() async {
+    try {
+      var school = await LoginApi.getSchoolDetailsByUserId();
+      if (school != null) {
+        schoolCredentials.assignAll(school);
+        Get.find<GetStorageService>().setSchoolDataStorage(
+          schoolCredentials[0].schoolID,
+          schoolCredentials[0].schoolName,
+          schoolCredentials[0].schoolLogo,
+          schoolCredentials[0].schoolAddress,
+          schoolCredentials[0].schoolDetails,
+          schoolCredentials[0].schoolCreated,
+          schoolCredentials[0].schoolMotto,
+          schoolCredentials[0].schoolAbbreviation,
+          schoolCredentials[0].schoolCode,
+          schoolCredentials[0].adminUsername,
+          schoolCredentials[0].adminPassword,
+        );
+
+        return "success";
+      } else {
+        return "invalid";
+      }
+    } catch (e) {
+      print('getSchoolDetails $e');
       return "catch";
     }
   }

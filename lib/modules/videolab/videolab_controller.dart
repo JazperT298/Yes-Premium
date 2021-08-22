@@ -87,11 +87,11 @@ class VideolabController extends GetxController {
         storageService.saveVideoLibItems(jsonStringEncoded);
         videolibList.add(videolibdataFromJson(jsonStringEncoded));
 
-        for (var category in videolibList) {
-          urls = category.videoLibFileName!;
-          initializedPlayer('$photoDir/$urls');
-          print('YAWA KA $urls');
-        }
+        // for (var category in videolibList) {
+        //   urls = category.videoLibFileName!;
+        //   initializedPlayer('$photoDir/$urls');
+        //   print('YAWA KA $urls');
+        // }
       }
       isLoading(false);
     } catch (e) {

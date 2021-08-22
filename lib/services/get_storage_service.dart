@@ -63,6 +63,34 @@ class GetStorageService extends GetxService {
     print('set user Data storage..');
   }
 
+  void setSchoolDataStorage(
+    schoolID,
+    schoolName,
+    schoolLogo,
+    schoolAddress,
+    schoolDetails,
+    schoolCreated,
+    schoolMotto,
+    schoolAbbreviation,
+    schoolCode,
+    adminUsername,
+    adminPassword,
+  ) {
+    appdata.write('School_ID', userId);
+    appdata.write('School_Name', schoolName);
+    appdata.write('School_Logo', schoolLogo);
+    appdata.write('School_Address', schoolAddress);
+    appdata.write('School_Details', schoolDetails);
+    appdata.write('School_Created', schoolCreated);
+    appdata.write('School_Motto', schoolMotto);
+    appdata.write('School_Abbreviation', schoolAbbreviation);
+    appdata.write('School_Code', schoolCode);
+    appdata.write('Admin_Username', adminUsername);
+    appdata.write('Admin_Password', adminPassword);
+
+    print('set school Data storage..');
+  }
+
   void removeUserStorage() {
     appdata.erase();
     print('erase user Data storage..');
@@ -74,6 +102,7 @@ class GetStorageService extends GetxService {
     print(appdata.read('SchoolId'));
     print(appdata.read('SchoolAvatar'));
   }
+
   void saveAnnouncementItems(announcementItems) {
     appdata.write('announcementItems', announcementItems);
   }
@@ -121,7 +150,6 @@ class GetStorageService extends GetxService {
   void deleteStudentItems() {
     appdata.remove('studentItems');
   }
-
 
   DeviceInfoPlugin androiddeviceInfo = DeviceInfoPlugin();
   DeviceInfoPlugin iosdeviceInfo = DeviceInfoPlugin();

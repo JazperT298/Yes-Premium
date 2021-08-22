@@ -67,7 +67,7 @@ class ProfileView extends StatelessWidget {
                 height: 100,
               ),
               Text(
-                '${Get.find<GetStorageService>().appdata.read('School')}',
+                '${Get.find<GetStorageService>().appdata.read('School_Name')}',
                 style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.blueGrey,
@@ -78,7 +78,7 @@ class ProfileView extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                "Corner Echem and Tiano Bros. Sts. Cagayan de Oro City, Misamis Oriental Region 10 9000 PH",
+                '${Get.find<GetStorageService>().appdata.read('School_Address')}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 18.0,
@@ -90,7 +90,7 @@ class ProfileView extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                "App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company App Developer at XYZ Company",
+                '${Get.find<GetStorageService>().appdata.read('School_Details')}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 16.0,
@@ -110,7 +110,7 @@ class ProfileView extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                "YOUR FUTURE, OUR PRIDE",
+                '${Get.find<GetStorageService>().appdata.read('School_Motto')}',
                 style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.black45,
