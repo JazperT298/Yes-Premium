@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -175,11 +176,24 @@ class VideoLabView extends StatelessWidget {
                                 Container(
                                   width: double.infinity,
                                   height: 345.0,
-                                  child: VideoWidget(
-                                      play: true,
-                                      url:
-                                          '$photoDir/${controller.videolibList[index].videoLibFileName}'),
-                                )
+                                  child:
+                                      // controller.chewieController != null &&
+                                      //         controller
+                                      //             .chewieController!
+                                      //             .videoPlayerController
+                                      //             .value
+                                      //             .isInitialized
+                                      //     ? Chewie(
+                                      //         key: PageStorageKey(controller.url),
+                                      //         controller:
+                                      //             controller.chewieController!)
+                                      //     : Center(
+                                      //         child: CircularProgressIndicator()),
+                                      VideoWidget(
+                                          play: true,
+                                          url:
+                                              '$photoDir/${controller.videolibList[index].videoLibFileName}'),
+                                ),
                               ],
                             ),
                           ),

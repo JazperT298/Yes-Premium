@@ -73,6 +73,8 @@ class HomeView extends GetView<HomeController> {
                             '${Get.find<GetStorageService>().appdata.read('SchoolId')}');
                         print(
                             '${Get.find<GetStorageService>().appdata.read('access_token')}');
+                        print(
+                            '$photoDir/${controller.listofAnnouncement[0].announceFile}');
                       },
                       icon: Icon(
                         Icons.chat_bubble_outlined,

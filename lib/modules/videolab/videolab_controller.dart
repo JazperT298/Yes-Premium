@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:video_player/video_player.dart';
+import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/models/video_lib.dart';
 import 'package:yes_premium/modules/videolab/videolab_api.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
@@ -16,6 +17,10 @@ import 'package:yes_premium/shared/dialogs.dart';
 class VideolabController extends GetxController {
   var titleEditingController = TextEditingController();
   var detailsEditingController = TextEditingController();
+
+  late VideoPlayerController videoPlayerController;
+  late Future<void> initializeVideoPlayerFuture;
+
   RxList<String> attachments = <String>[].obs;
   RxList<String> videoAttachments = <String>[].obs;
   late VideoPlayerController videoController;
@@ -31,16 +36,22 @@ class VideolabController extends GetxController {
   final scrollController = TrackingScrollController();
   final storageService = Get.find<GetStorageService>();
 
-  late VideoPlayerController videoPlayerController;
   var isLoading = true.obs;
   RxList<VideoLibData> videolibList = <VideoLibData>[].obs;
   ChewieController? chewieController;
   int counter = 1;
   Timer? timer;
+  var url = '';
+  String urls = '';
   @override
   void onInit() {
     super.onInit();
+    // videoPlayerController = VideoPlayerController.network(url.value);
+
+    // initializeVideoPlayerFuture = videoPlayerController.initialize();
+
     getSchoolVideoLibrary();
+
     //incrementVideoData();
   }
 
@@ -75,6 +86,12 @@ class VideolabController extends GetxController {
         var jsonStringEncoded = jsonEncode(mapping);
         storageService.saveVideoLibItems(jsonStringEncoded);
         videolibList.add(videolibdataFromJson(jsonStringEncoded));
+
+        for (var category in videolibList) {
+          urls = category.videoLibFileName!;
+          initializedPlayer('$photoDir/$urls');
+          print('YAWA KA $urls');
+        }
       }
       isLoading(false);
     } catch (e) {
@@ -120,7 +137,7 @@ class VideolabController extends GetxController {
     try {
       var result = await VideoLabApi.uploadVideoLibrary(
           fileToUpload, title, details, schoolId);
-      if (result == "Success") {
+      if (result == "Successfully Uploaded") {
         Get.back();
         Dialogs.showMyToast(context, "Video successfully posted!");
         filenamevideoprofile.value = '';
@@ -150,9 +167,8 @@ class VideolabController extends GetxController {
     }
   }
 
-  Future<void> initializedPlayer() async {
-    videoPlayerController =
-        VideoPlayerController.asset('assets/images/solo.mp4');
+  Future<void> initializedPlayer(url) async {
+    videoPlayerController = VideoPlayerController.network(url);
     await Future.wait([videoPlayerController.initialize()]);
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,

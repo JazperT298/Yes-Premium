@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
    <application
-        android:label="yes_premium"
+        android:label="Yes Premium"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

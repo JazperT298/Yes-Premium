@@ -38,8 +38,9 @@ class HomeApi {
         //return announcementdataFromJson(jsonStringEncoded);
         return jsonString;
       } else {
+        var jsonString = jsonDecode(response.body)['Message'];
         print('getAllAnnouncementBySchool Services  error');
-        return null;
+        return jsonString;
       }
     } on TimeoutException catch (_) {
       print('getAllAnnouncementBySchool Services Response timeout');

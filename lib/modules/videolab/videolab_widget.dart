@@ -1,5 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoWidget extends StatefulWidget {
@@ -13,6 +15,7 @@ class VideoWidget extends StatefulWidget {
 }
 
 class _VideoWidgetState extends State<VideoWidget> {
+  // final controller = Get.put(VideolabController());
   late VideoPlayerController videoPlayerController;
   late Future<void> _initializeVideoPlayerFuture;
 

@@ -700,6 +700,120 @@ class Dialogs {
     );
   }
 
+  static void showSessionExpire(context) async {
+    final theme = Theme.of(context);
+    final platform = Theme.of(context).platform;
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return platform == TargetPlatform.android
+            ? AlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 30.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Log Out',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'You have been automatically logout due to inactivity              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'Ok',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      Get.find<GetStorageService>().removeUserStorage();
+                      Get.find<GetStorageService>().deleteAnnouncementItems();
+                      Get.find<GetStorageService>().deleteVideoLibItems();
+                      Get.find<GetStorageService>().deleteNotesItems();
+                      //  Get.find<GetStorageService>().deleteNotificationItems();
+                      Get.find<BottomNavController>().resetIndex(0);
+                    },
+                  ),
+                ],
+              )
+            : CupertinoAlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 30.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Log Out',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'You have been automatically logout due to inactivity              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'Ok',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      Get.find<GetStorageService>().removeUserStorage();
+                      Get.find<GetStorageService>().deleteAnnouncementItems();
+                      Get.find<GetStorageService>().deleteVideoLibItems();
+                      Get.find<GetStorageService>().deleteNotesItems();
+                      //  Get.find<GetStorageService>().deleteNotificationItems();
+                      Get.find<BottomNavController>().resetIndex(0);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
   static void showDialogs(context) async {
     final theme = Theme.of(context);
     final platform = Theme.of(context).platform;

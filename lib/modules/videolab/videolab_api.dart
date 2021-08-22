@@ -30,7 +30,6 @@ class VideoLabApi {
               "getSchoolVideoLibrary Services Connection timeout.");
         },
       );
-      print(response.body);
       if (response.statusCode == 200) {
         var jsonString = jsonDecode(response.body)['Data'];
         // var jsonStringEncoded = jsonEncode(jsonString);
@@ -78,7 +77,7 @@ class VideoLabApi {
       if (response.statusCode == 200) {
         var data = await response.stream.bytesToString();
         var message = jsonDecode(data)['Message'];
-        print('$message');
+        print('YAW $message');
         return message;
       } else {
         print(response.reasonPhrase);
