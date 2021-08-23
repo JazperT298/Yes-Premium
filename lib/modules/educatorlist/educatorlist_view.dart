@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_controller.dart';
+import 'package:yes_premium/routes/app_routes.dart';
 
 class EducatorListView extends StatelessWidget {
   final controller = Get.put(EducatorListController());
@@ -141,12 +142,22 @@ class EducatorListView extends StatelessWidget {
                                         //Post Header
                                         Row(
                                           children: [
-                                            ClipOval(
-                                              child: Image.network(
-                                                '$photoDir/${controller.educatorsDataList[index].userImage}',
-                                                height: 60.0,
-                                                width: 60.0,
-                                                fit: BoxFit.cover,
+                                            GestureDetector(
+                                              onTap: () => Get.toNamed(
+                                                AppRoutes.USERPROFILE,
+                                                arguments: {
+                                                  "userID": controller
+                                                      .educatorsDataList[index]
+                                                      .userID,
+                                                },
+                                              ),
+                                              child: ClipOval(
+                                                child: Image.network(
+                                                  '$photoDir/${controller.educatorsDataList[index].userImage}',
+                                                  height: 60.0,
+                                                  width: 60.0,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                             SizedBox(
@@ -189,6 +200,19 @@ class EducatorListView extends StatelessWidget {
                                                 color: Colors.green,
                                               ),
                                               onPressed: () => {
+                                                Get.toNamed(
+                                                  AppRoutes.USERPROFILE,
+                                                  arguments: {
+                                                    "userID": controller
+                                                        .educatorsDataList[
+                                                            index]
+                                                        .userID,
+                                                  },
+                                                ),
+                                                print(
+                                                    '${controller.educatorsDataList[index].userID}'),
+                                                print(
+                                                    '${controller.educatorsDataList[index].userName}'),
                                                 print(
                                                     '${controller.educatorsDataList.length}'),
                                               },

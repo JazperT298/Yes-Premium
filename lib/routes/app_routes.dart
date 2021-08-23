@@ -14,4 +14,5 @@ class AppRoutes {
   static const String FILESADD = '/filesadd';
   static const String FILESSHARE = '/filesshare';
   static const String EDITSCHOOL = '/editschool';
+  static const String USERPROFILE = '/userprofile';
 }
