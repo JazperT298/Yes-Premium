@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:yes_premium/models/announcement.dart';
 import 'package:yes_premium/modules/home/home_api.dart';
-import 'package:yes_premium/modules/videolab/videolab_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 

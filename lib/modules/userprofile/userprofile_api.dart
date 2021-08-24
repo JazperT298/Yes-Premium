@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/models/user_model.dart';
 import 'package:yes_premium/services/get_storage_service.dart';

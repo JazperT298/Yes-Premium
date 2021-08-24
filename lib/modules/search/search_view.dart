@@ -28,6 +28,7 @@ class SearchView extends StatelessWidget {
               controller.getAllUserBySearchKeyword(
                   Get.find<GetStorageService>().appdata.read('SchoolId'),
                   controller.searchEditingController.text);
+              node.unfocus();
             },
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(

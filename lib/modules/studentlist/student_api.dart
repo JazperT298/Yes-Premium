@@ -52,4 +52,42 @@ class StudentApi {
       return null;
     }
   }
+
+  static Future searchStudent(schoolID, searchWord) async {
+    try {
+      var response = await client.get(
+        Uri.parse(
+            '$baseUrl/api/Student/SearchStudent?schoolID=$schoolID&searchWord=$searchWord'),
+        headers: {
+          "access-control-allow-origin": "*",
+          'content-type': 'application/x-www-form-urlencoded',
+          'Authorization':
+              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        },
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException("searchStudent Services Connection timeout.");
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        var jsonString = jsonDecode(response.body)['Data'];
+
+        return jsonString;
+      } else {
+        print('searchStudent Services  error');
+        return null;
+      }
+    } on TimeoutException catch (_) {
+      print('searchStudent Services Response timeout');
+      return null;
+    } on SocketException catch (_) {
+      print('searchStudent Services Socket error');
+      return null;
+    } catch (e) {
+      print('searchStudent Services  Err $e');
+      return null;
+    }
+  }
 }

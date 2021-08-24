@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_config.dart';
 import 'package:yes_premium/modules/splashscreen/splashscreen_controller.dart';
-import 'package:yes_premium/shared/dialogs.dart';
 
 class SplashScreenView extends StatelessWidget {
   final controller = Get.put(SplashScreenController());

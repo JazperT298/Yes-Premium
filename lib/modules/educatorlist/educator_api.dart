@@ -67,8 +67,7 @@ class EducatorAoi {
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getAllUserBySearchKeyword Services Connection timeout.");
+          throw TimeoutException("searchEducator Services Connection timeout.");
         },
       );
       print(response.body);

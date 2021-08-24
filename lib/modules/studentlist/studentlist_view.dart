@@ -5,12 +5,14 @@ import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/studentlist/studentlist_controller.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/routes/app_routes.dart';
+import 'package:yes_premium/services/get_storage_service.dart';
 
 class StudentListView extends StatelessWidget {
   const StudentListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
     final controller = Get.put(StudentListController());
     return Scaffold(
       body: SafeArea(
@@ -30,6 +32,16 @@ class StudentListView extends StatelessWidget {
                           maxLines: 1,
                           style: TextStyle(fontSize: 17),
                           textAlignVertical: TextAlignVertical.center,
+                          controller: controller.searchEditingController,
+                          textInputAction: TextInputAction.search,
+                          onSubmitted: (value) {
+                            controller.searchStudent(
+                                Get.find<GetStorageService>()
+                                    .appdata
+                                    .read('SchoolId'),
+                                controller.searchEditingController.text);
+                            node.unfocus();
+                          },
                           decoration: InputDecoration(
                             filled: true,
                             prefixIcon: Icon(Icons.search,
@@ -53,7 +65,7 @@ class StudentListView extends StatelessWidget {
                 Obx(
                   () => controller.isSearchClick.value != true
                       ? Container(
-                          margin: EdgeInsets.only(top: 7.0, bottom: 7.0),
+                          margin: EdgeInsets.only(top: 6.0, bottom: 6.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
@@ -64,7 +76,7 @@ class StudentListView extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.search_rounded,
-                              size: 30,
+                              size: 25,
                             ),
                           ),
                         )
@@ -75,7 +87,7 @@ class StudentListView extends StatelessWidget {
                   () => controller.isSearchClick.value != true
                       ? Container(
                           margin: EdgeInsets.only(
-                              top: 7.0, bottom: 7.0, right: 7.0),
+                              top: 6.0, bottom: 6.0, right: 6.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
@@ -86,7 +98,7 @@ class StudentListView extends StatelessWidget {
                             }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
                             icon: Icon(
                               Icons.person_add,
-                              size: 30,
+                              size: 25,
                             ),
                           ),
                         )
@@ -96,7 +108,7 @@ class StudentListView extends StatelessWidget {
                   () => controller.isSearchClick.value == true
                       ? Container(
                           margin: EdgeInsets.only(
-                              top: 7.0, bottom: 7.0, right: 7.0),
+                              top: 6.0, bottom: 6.0, right: 6.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
@@ -104,10 +116,13 @@ class StudentListView extends StatelessWidget {
                           child: IconButton(
                             onPressed: () {
                               controller.isSearchClick.value = false;
-                            }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                              controller.searchEditingController.text = '';
+                              controller.getAllStudentBySchoolId(1);
+                              node.unfocus();
+                            },
                             icon: Icon(
                               Icons.close,
-                              size: 30,
+                              size: 25,
                             ),
                           ),
                         )

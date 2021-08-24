@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
-import 'package:yes_premium/models/notes.dart';
 import 'package:yes_premium/modules/filesadd/filesadd_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';

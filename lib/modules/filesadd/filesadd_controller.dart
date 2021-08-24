@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -7,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:yes_premium/models/notes.dart';
 import 'package:yes_premium/modules/files/files_controller.dart';
 import 'package:yes_premium/modules/filesadd/filesadd_api.dart';
-import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 
 class FilesAddController extends GetxController {

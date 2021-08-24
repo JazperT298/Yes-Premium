@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:video_player/video_player.dart';
-import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/models/video_lib.dart';
 import 'package:yes_premium/modules/videolab/videolab_api.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
