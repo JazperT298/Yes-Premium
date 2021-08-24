@@ -4,6 +4,7 @@ import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/studentlist/studentlist_controller.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/routes/app_routes.dart';
 
 class StudentListView extends StatelessWidget {
   const StudentListView({Key? key}) : super(key: key);
@@ -143,12 +144,22 @@ class StudentListView extends StatelessWidget {
                                         //Post Header
                                         Row(
                                           children: [
-                                            ClipOval(
-                                              child: Image.network(
-                                                '$photoDir/${controller.studentsDataList[index].userImage}',
-                                                height: 70.0,
-                                                width: 70.0,
-                                                fit: BoxFit.cover,
+                                            GestureDetector(
+                                              onTap: () => Get.toNamed(
+                                                AppRoutes.USERPROFILE,
+                                                arguments: {
+                                                  "userID": controller
+                                                      .studentsDataList[index]
+                                                      .userID,
+                                                },
+                                              ),
+                                              child: ClipOval(
+                                                child: Image.network(
+                                                  '$photoDir/${controller.studentsDataList[index].userImage}',
+                                                  height: 70.0,
+                                                  width: 70.0,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                             SizedBox(

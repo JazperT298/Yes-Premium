@@ -52,4 +52,43 @@ class EducatorAoi {
       return null;
     }
   }
+
+  static Future searchEducator(schoolID, searchWord) async {
+    try {
+      var response = await client.get(
+        Uri.parse(
+            '$baseUrl/api/Educator/SearchEducator?schoolID=$schoolID&searchWord=$searchWord'),
+        headers: {
+          "access-control-allow-origin": "*",
+          'content-type': 'application/x-www-form-urlencoded',
+          'Authorization':
+              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        },
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException(
+              "getAllUserBySearchKeyword Services Connection timeout.");
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        var jsonString = jsonDecode(response.body)['Data'];
+
+        return jsonString;
+      } else {
+        print('searchEducator Services  error');
+        return null;
+      }
+    } on TimeoutException catch (_) {
+      print('searchEducator Services Response timeout');
+      return null;
+    } on SocketException catch (_) {
+      print('searchEducator Services Socket error');
+      return null;
+    } catch (e) {
+      print('searchEducator Services  Err $e');
+      return null;
+    }
+  }
 }
