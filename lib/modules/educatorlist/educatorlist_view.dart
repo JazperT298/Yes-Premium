@@ -92,6 +92,8 @@ class EducatorListView extends StatelessWidget {
                           ),
                           child: IconButton(
                             onPressed: () {
+                              Get.toNamed(AppRoutes.ADDUSER,
+                                  arguments: {'UserType': 'Educator'});
                               //controller.isSearchClick.value = true;
                             }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
                             icon: Icon(

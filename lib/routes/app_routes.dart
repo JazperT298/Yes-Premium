@@ -15,4 +15,5 @@ class AppRoutes {
   static const String FILESSHARE = '/filesshare';
   static const String EDITSCHOOL = '/editschool';
   static const String USERPROFILE = '/userprofile';
+  static const String ADDUSER = '/adduser';
 }

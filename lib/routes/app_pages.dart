@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yes_premium/modules/adduser/adduser_view.dart';
 import 'package:yes_premium/modules/announcement/announcement_view.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_binding.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_view.dart';
@@ -111,6 +112,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.USERPROFILE,
       page: () => UserProfileView(),
+      transition: Transition.downToUp,
+      curve: Curves.linearToEaseOut,
+    ),
+    GetPage(
+      name: AppRoutes.ADDUSER,
+      page: () => AddUserView(),
       transition: Transition.downToUp,
       curve: Curves.linearToEaseOut,
     ),
