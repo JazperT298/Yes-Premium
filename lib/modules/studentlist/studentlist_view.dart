@@ -6,6 +6,7 @@ import 'package:yes_premium/modules/studentlist/studentlist_controller.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class StudentListView extends StatelessWidget {
   const StudentListView({Key? key}) : super(key: key);
@@ -210,32 +211,92 @@ class StudentListView extends StatelessWidget {
                                                   //             .value ==
                                                   //         false
                                                   //     ?
-                                                  GestureDetector(
-                                                    onTap: () => controller
-                                                        .isAccountDisabled
-                                                        .value = true,
-                                                    child: Container(
-                                                      height: 3.h,
-                                                      width: 130,
-                                                      decoration: BoxDecoration(
-                                                        color: mainColor,
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(5),
-                                                        ),
-                                                      ),
-                                                      child: Center(
-                                                        child: Text(
-                                                          'Account Enabled',
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.w600,
+                                                  controller
+                                                              .studentsDataList[
+                                                                  index]
+                                                              .lockoutEnabled ==
+                                                          false
+                                                      ? GestureDetector(
+                                                          onTap: () => Dialogs
+                                                              .showDisableAccount(
+                                                            context,
+                                                            controller
+                                                                .studentsDataList[
+                                                                    index]
+                                                                .userID,
+                                                          ),
+                                                          // onTap: () => controller
+                                                          //     .isAccountDisabled
+                                                          //     .value = true,
+                                                          child: Container(
+                                                            height: 3.h,
+                                                            width: 130,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: mainColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(
+                                                                Radius.circular(
+                                                                    5),
+                                                              ),
+                                                            ),
+                                                            child: Center(
+                                                              child: Text(
+                                                                'Account Enabled',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : GestureDetector(
+                                                          onTap: () => Dialogs
+                                                              .showEnableAccount(
+                                                            context,
+                                                            controller
+                                                                .studentsDataList[
+                                                                    index]
+                                                                .userID,
+                                                          ),
+                                                          // onTap: () => controller
+                                                          //     .isAccountDisabled
+                                                          //     .value = true,
+                                                          child: Container(
+                                                            height: 3.h,
+                                                            width: 130,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Colors
+                                                                  .redAccent,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(
+                                                                Radius.circular(
+                                                                    5),
+                                                              ),
+                                                            ),
+                                                            child: Center(
+                                                              child: Text(
+                                                                'Account Disabled',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -247,6 +308,8 @@ class StudentListView extends StatelessWidget {
                                               onPressed: () => {
                                                 print(
                                                     '${controller.studentsDataList.length}'),
+                                                print(
+                                                    '${controller.studentsDataList[index].lockoutEnabled}'),
                                               },
                                             ),
                                           ],

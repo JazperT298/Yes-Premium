@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:yes_premium/models/students.dart';
 import 'package:yes_premium/modules/studentlist/student_api.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class StudentListController extends GetxController {
   var searchEditingController = TextEditingController();
@@ -13,6 +14,8 @@ class StudentListController extends GetxController {
   final storageService = Get.find<GetStorageService>();
   RxBool isSearchClick = false.obs;
   RxBool isAccountDisabled = false.obs;
+  RxBool disabled = true.obs;
+  RxBool enabled = false.obs;
   var isLoading = true.obs;
   RxList<StudentsData> studentsDataList = <StudentsData>[].obs;
   int counter = 1;
@@ -29,6 +32,7 @@ class StudentListController extends GetxController {
   void getAllStudentBySchoolId(counter) async {
     try {
       List result = await StudentApi.getAllStudentBySchoolId(counter);
+      studentsDataList.clear();
       if (!isLoading.value) isLoading(true);
       for (var i = 0; i < result.length; i++) {
         Map mapping = {
@@ -125,6 +129,38 @@ class StudentListController extends GetxController {
       isLoading(false);
     } catch (e) {
       print('err $e');
+    }
+  }
+
+  void disableStudent(context, studentID) async {
+    try {
+      var result = await StudentApi.disableEnableStudent(studentID, true);
+      if (result == "Success") {
+        Get.back();
+        Dialogs.showMyToast(context, "Account is now disabled");
+      } else {
+        Dialogs.showMyToast(context, "Error in disabling account  !");
+      }
+    } catch (e) {
+      print('err $e');
+    } finally {
+      getAllStudentBySchoolId(counter);
+    }
+  }
+
+  void enableStudent(context, studentID) async {
+    try {
+      var result = await StudentApi.disableEnableStudent(studentID, false);
+      if (result == "Success") {
+        Get.back();
+        Dialogs.showMyToast(context, "Account is now enabled");
+      } else {
+        Dialogs.showMyToast(context, "Error in enabling account  !");
+      }
+    } catch (e) {
+      print('err $e');
+    } finally {
+      getAllStudentBySchoolId(counter);
     }
   }
 

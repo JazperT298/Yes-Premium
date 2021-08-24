@@ -8,6 +8,7 @@ import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/modules/announcement/announcement_controller.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
 import 'package:yes_premium/modules/files/files_controller.dart';
+import 'package:yes_premium/modules/studentlist/studentlist_controller.dart';
 import 'package:yes_premium/modules/videolab/videolab_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
@@ -806,6 +807,281 @@ class Dialogs {
                       Get.find<GetStorageService>().deleteNotesItems();
                       //  Get.find<GetStorageService>().deleteNotificationItems();
                       Get.find<BottomNavController>().resetIndex(0);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
+  static void showDisableAccount(context, studentID) async {
+    final theme = Theme.of(context);
+    final platform = Theme.of(context).platform;
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return platform == TargetPlatform.android
+            ? AlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 40.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Are you sure to disable this account?',
+                        style: TextStyle(
+                          fontFamily: theme.textTheme.headline3!.fontFamily,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'Disabling this account will lock the account of the user!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No, Keep it',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes, disable this account',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<StudentListController>()
+                          .disableStudent(context, studentID);
+
+                      // Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      // Get.find<GetStorageService>().removeUserStorage();
+                    },
+                  ),
+                ],
+              )
+            : CupertinoAlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 40.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Are you sure to disable this account?',
+                        style: TextStyle(
+                          fontFamily: theme.textTheme.headline3!.fontFamily,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'Disabling this account will lock the account of the user!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No, Keep it',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes, disable this account',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<StudentListController>()
+                          .disableStudent(context, studentID);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
+  static void showEnableAccount(context, studentID) async {
+    final theme = Theme.of(context);
+    final platform = Theme.of(context).platform;
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return platform == TargetPlatform.android
+            ? AlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 40.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Are you sure to enable this account?',
+                        style: TextStyle(
+                          fontFamily: theme.textTheme.headline3!.fontFamily,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'Disabling this account will unlock the account of the user!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No, Keep it',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes, enable this account',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<StudentListController>()
+                          .enableStudent(context, studentID);
+                      // Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      // Get.find<GetStorageService>().removeUserStorage();
+                    },
+                  ),
+                ],
+              )
+            : CupertinoAlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      size: 40.0,
+                      color: Colors.orangeAccent,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Are you sure to enable this account?',
+                        style: TextStyle(
+                          fontFamily: theme.textTheme.headline3!.fontFamily,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                content: Text(
+                  'Disabling this account will unlock the account of the user!              ',
+                  style: TextStyle(
+                    fontFamily: theme.textTheme.headline3!.fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    child: Text(
+                      'No, Keep it',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes, enable this account',
+                      style: TextStyle(
+                        fontFamily: theme.textTheme.headline3!.fontFamily,
+                        fontSize: 14.sp,
+                        color: mainColor,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.find<StudentListController>()
+                          .enableStudent(context, studentID);
+
+                      // Get.back();
                     },
                   ),
                 ],

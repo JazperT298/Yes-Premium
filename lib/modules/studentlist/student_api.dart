@@ -90,4 +90,45 @@ class StudentApi {
       return null;
     }
   }
+
+  static Future disableEnableStudent(studentID, bool value) async {
+    try {
+      var response = await client.post(
+          Uri.parse('$baseUrl/api/Student/DisableEnableStudent'),
+          headers: {
+            "access-control-allow-origin": "*",
+            'content-type': 'application/x-www-form-urlencoded',
+            'Authorization':
+                'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          },
+          body: {
+            'Id': studentID.toString(),
+            'LockoutEnabled': value.toString(),
+          }).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException(
+              "disableEnableStudent Services Connection timeout.");
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        var message = jsonDecode(response.body)['Message'];
+        print('message $message');
+        return message;
+      } else {
+        print('disableEnableStudent Services  error');
+        return null;
+      }
+    } on TimeoutException catch (_) {
+      print('disableEnableStudent Services Response timeout');
+      return null;
+    } on SocketException catch (_) {
+      print('disableEnableStudent Services Socket error');
+      return null;
+    } catch (e) {
+      print('disableEnableStudent Services  Err $e');
+      return null;
+    }
+  }
 }
