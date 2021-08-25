@@ -63,28 +63,28 @@ class AddUserController extends GetxController {
       Dialogs.showMyToast(context, "Please input users lastname");
     } else if (emailEditingController.text.trim().isEmpty) {
       Dialogs.showMyToast(context, "Please input users email");
-    } else if (profileImage != null && coverImage == null) {
-      //print('BURIKAT 1');
-      uploadUserPhoto(context);
-      addUserDetails();
-    } else if (profileImage == null && coverImage != null) {
-      //print('BURIKAT 2');
-      uploadUserCoverPhoto(context);
-      addUserDetails();
-    } else if (profileImage != null && coverImage != null) {
-      //print('BURIKAT 3');
-      uploadUserPhoto(context);
-      uploadUserCoverPhoto(context);
-      addUserDetails();
+      // } else if (profileImage != null && coverImage == null) {
+      //   //print('BURIKAT 1');
+      //   uploadUserPhoto(context);
+      //   addUserDetails();
+      // } else if (profileImage == null && coverImage != null) {
+      //   //print('BURIKAT 2');
+      //   uploadUserCoverPhoto(context);
+      //   addUserDetails();
+      // } else if (profileImage != null && coverImage != null) {
+      //   //print('BURIKAT 3');
+      //   uploadUserPhoto(context);
+      //   uploadUserCoverPhoto(context);
+      //   addUserDetails();
     } else {
       //print('BURIKAT 4');
-      addUserDetails();
+      addUserDetails(context);
     }
   }
 
-  void addUserDetails() async {
+  void addUserDetails(context) async {
     try {
-      await AddUserApi.addUserDetails(
+      var result = await AddUserApi.addUserDetails(
         Get.find<GetStorageService>().appdata.read('School_ID'),
         userCode,
         firstnameEditingController.text.trim(),
@@ -111,8 +111,16 @@ class AddUserController extends GetxController {
         parentemailEditingController.text.trim(),
         parentcontactnoEditingController.text.trim(),
       );
+      if (result == "Success") {
+        Get.back();
+        Dialogs.showMyToast(context, "New User successfully saved!");
+      } else if (result == "Email already exists") {
+        Dialogs.showMyToast(context, "Email already exists");
+      } else {
+        Dialogs.showMyToast(context, "Error in inserting new user  !");
+      }
     } catch (error) {
-      print("getProductSingle $error");
+      print("addUserDetails $error");
     } finally {
       Get.find<EducatorListController>().getAllEducatorBySchoolId(1);
     }

@@ -75,8 +75,11 @@ class AddUserApi {
           throw TimeoutException("addUserDetails Services Connection timeout.");
         },
       );
-      if (response.statusCode == 200 && json.decode(response.body)['Success']) {
-        return response.body;
+      print('${response.body}');
+      if (response.statusCode == 200) {
+        var message = json.decode(response.body)['Message'];
+        print('$message');
+        return message;
       } else {
         return null;
       }
@@ -161,6 +164,7 @@ class AddUserApi {
               "updateUserDetails Services Connection timeout.");
         },
       );
+      print('${response.body}');
       if (response.statusCode == 200 && json.decode(response.body)['Success']) {
         return response.body;
       } else {

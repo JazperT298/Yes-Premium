@@ -39,7 +39,7 @@ class AddUserView extends GetView<AddUserController> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          controller.getCoverImage();
+                          //controller.getCoverImage();
                         },
                         child: Container(
                           decoration: controller.attachments1.length != 0
@@ -58,14 +58,16 @@ class AddUserView extends GetView<AddUserController> {
                             width: double.infinity,
                             height: 200,
                             child: GestureDetector(
-                              onTap: () => controller.getProfileImage(),
+                              //onTap: () => controller.getProfileImage(),
                               child: controller.attachments2.length == 0
                                   ? Container(
                                       alignment: Alignment(0.0, 2.4),
                                       child: CircleAvatar(
                                         backgroundColor: Colors.grey,
                                         radius: 60.0,
-                                        child: Text('Add Photo'),
+                                        // child: Text('Add Photo'),
+                                        backgroundImage: AssetImage(
+                                            'assets/images/ic_educator_profile.png'),
                                       ),
                                     )
                                   : Container(
