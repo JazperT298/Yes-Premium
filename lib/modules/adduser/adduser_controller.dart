@@ -84,6 +84,7 @@ class AddUserController extends GetxController {
 
   void addUserDetails(context) async {
     try {
+      isLoading.value = true;
       var result = await AddUserApi.addUserDetails(
         Get.find<GetStorageService>().appdata.read('School_ID'),
         userCode,
@@ -112,11 +113,14 @@ class AddUserController extends GetxController {
         parentcontactnoEditingController.text.trim(),
       );
       if (result == "Success") {
+        isLoading.value = false;
         Get.back();
         Dialogs.showMyToast(context, "New User successfully saved!");
       } else if (result == "Email already exists") {
+        isLoading.value = false;
         Dialogs.showMyToast(context, "Email already exists");
       } else {
+        isLoading.value = false;
         Dialogs.showMyToast(context, "Error in inserting new user  !");
       }
     } catch (error) {

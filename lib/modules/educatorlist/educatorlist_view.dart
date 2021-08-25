@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
@@ -132,11 +134,13 @@ class EducatorListView extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Obx(
-                () => controller.isLoading.value &&
+                () => controller.isLoading.value == true &&
                         controller.educatorsDataList.length <= 0
-                    ? Container(
-                        height: 30.h,
-                        color: Colors.grey[200],
+                    ? Center(
+                        child: SpinKitThreeBounce(
+                          color: mainColor,
+                          size: 30,
+                        ),
                       )
                     : ListView.builder(
                         shrinkWrap: true,
