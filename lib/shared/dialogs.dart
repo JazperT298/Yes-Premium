@@ -35,6 +35,48 @@ class Dialogs {
     );
   }
 
+  static void showWarningToast(context, String message) {
+    final theme = Theme.of(context);
+    showToast(
+      message,
+      context: context,
+      animation: StyledToastAnimation.scale,
+      reverseAnimation: StyledToastAnimation.fade,
+      position: StyledToastPosition(align: Alignment.bottomCenter, offset: 225),
+      animDuration: Duration(seconds: 1),
+      duration: Duration(seconds: 3),
+      curve: Curves.elasticOut,
+      reverseCurve: Curves.linear,
+      backgroundColor: colorCarrot,
+      textStyle: TextStyle(
+        fontFamily: theme.textTheme.headline3!.fontFamily,
+        color: Colors.white,
+        fontSize: 12.sp,
+      ),
+    );
+  }
+
+  static void showErrorToast(context, String message) {
+    final theme = Theme.of(context);
+    showToast(
+      message,
+      context: context,
+      animation: StyledToastAnimation.scale,
+      reverseAnimation: StyledToastAnimation.fade,
+      position: StyledToastPosition(align: Alignment.bottomCenter, offset: 225),
+      animDuration: Duration(seconds: 1),
+      duration: Duration(seconds: 3),
+      curve: Curves.elasticOut,
+      reverseCurve: Curves.linear,
+      backgroundColor: colorAlizarin,
+      textStyle: TextStyle(
+        fontFamily: theme.textTheme.headline3!.fontFamily,
+        color: Colors.white,
+        fontSize: 12.sp,
+      ),
+    );
+  }
+
   static void showMyToast2(message) {
     final theme = Theme.of(Get.context!);
     showToast(

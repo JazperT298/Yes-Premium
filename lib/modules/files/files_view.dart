@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
@@ -7,6 +8,7 @@ import 'package:yes_premium/routes/app_routes.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
+import 'package:yes_premium/shared/loading.dart';
 
 class FilesView extends StatelessWidget {
   const FilesView({Key? key}) : super(key: key);
@@ -15,84 +17,82 @@ class FilesView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(FilesController());
     return Scaffold(
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () {
-            return Future.delayed(
-              Duration(seconds: 2),
-              () async {
-                controller.getUserNotesLists();
-              },
-            );
-          },
-          child: CustomScrollView(
-            controller: controller.scrollController,
-            slivers: [
-              SliverAppBar(
-                brightness: Brightness.light,
-                backgroundColor: Colors.white,
-                title: Text(
-                  'My Files',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
-                ),
-                centerTitle: false,
-                floating: true,
-                automaticallyImplyLeading: false,
-                actions: [
-                  Container(
-                    margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade300,
-                    ),
-                    child: IconButton(
-                      onPressed: () => Get.toNamed(AppRoutes.SEARCH),
-                      icon: Icon(
-                        Icons.search_rounded,
-                        size: 25,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade300,
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        Get.toNamed(
-                          AppRoutes.FILESADD,
-                          arguments: {
-                            'Title': 'Add Files',
-                            'Notes_ID': '',
-                            'User_ID': '',
-                            'School_ID': '',
-                            'Notes_Title': '',
-                            'Notes_Desc': '',
-                            'Notes_FileName': '',
-                            'Notes_File': null,
-                          },
-                        );
+      body: Obx(
+        () => controller.isLoading.value && controller.notesdataList.length <= 0
+            ? LoadingView()
+            : SafeArea(
+                child: RefreshIndicator(
+                  onRefresh: () {
+                    return Future.delayed(
+                      Duration(seconds: 2),
+                      () async {
+                        controller.getUserNotesLists();
                       },
-                      icon: Icon(
-                        Icons.add,
-                        size: 25,
+                    );
+                  },
+                  child: CustomScrollView(
+                    controller: controller.scrollController,
+                    slivers: [
+                      SliverAppBar(
+                        brightness: Brightness.light,
+                        backgroundColor: Colors.white,
+                        title: Text(
+                          'My Files',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.sp),
+                        ),
+                        centerTitle: false,
+                        floating: true,
+                        automaticallyImplyLeading: false,
+                        actions: [
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: 6.0, bottom: 6.0, right: 6.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey.shade300,
+                            ),
+                            child: IconButton(
+                              onPressed: () => Get.toNamed(AppRoutes.SEARCH),
+                              icon: Icon(
+                                Icons.search_rounded,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: 6.0, bottom: 6.0, right: 6.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey.shade300,
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Get.toNamed(
+                                  AppRoutes.FILESADD,
+                                  arguments: {
+                                    'Title': 'Add Files',
+                                    'Notes_ID': '',
+                                    'User_ID': '',
+                                    'School_ID': '',
+                                    'Notes_Title': '',
+                                    'Notes_Desc': '',
+                                    'Notes_FileName': '',
+                                    'Notes_File': null,
+                                  },
+                                );
+                              },
+                              icon: Icon(
+                                Icons.add,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-              SliverToBoxAdapter(
-                child: Obx(
-                  () => controller.isLoading.value &&
-                          controller.notesdataList.length <= 0
-                      ? Container(
-                          height: 30.h,
-                          color: Colors.grey[200],
-                        )
-                      : RefreshIndicator(
+                      SliverToBoxAdapter(
+                        child: RefreshIndicator(
                           onRefresh: () {
                             return Future.delayed(
                               Duration(seconds: 2),
@@ -430,11 +430,11 @@ class FilesView extends StatelessWidget {
                             },
                           ),
                         ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
-        ),
       ),
     );
   }

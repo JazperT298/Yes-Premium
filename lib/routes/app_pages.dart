@@ -9,7 +9,7 @@ import 'package:yes_premium/modules/educatorlist/educatorlist_view.dart';
 import 'package:yes_premium/modules/filesadd/filesadd_view.dart';
 import 'package:yes_premium/modules/filesshare/filesshare_view.dart';
 import 'package:yes_premium/modules/meeting/facultymeeting_view.dart';
-import 'package:yes_premium/modules/home/home_view.dart';
+// import 'package:yes_premium/modules/home/home_view.dart';
 import 'package:yes_premium/modules/login/login_view.dart';
 import 'package:yes_premium/modules/profile/profile_view.dart';
 import 'package:yes_premium/modules/search/search_view.dart';
@@ -26,12 +26,12 @@ class AppPages {
       name: AppRoutes.SPLASHSCREEN,
       page: () => SplashScreenView(),
     ),
-    GetPage(
-      name: AppRoutes.HOME,
-      page: () => HomeView(),
-      transition: Transition.rightToLeft,
-      curve: Curves.linearToEaseOut,
-    ),
+    // GetPage(
+    //   name: AppRoutes.HOME,
+    //   page: () => HomeView(),
+    //   transition: Transition.rightToLeft,
+    //   curve: Curves.linearToEaseOut,
+    // ),
     GetPage(
       name: AppRoutes.BOTTOMNAV,
       page: () => BottomNavView(),

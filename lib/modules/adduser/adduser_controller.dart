@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yes_premium/modules/adduser/adduser_api.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_controller.dart';
+import 'package:yes_premium/modules/studentlist/studentlist_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 
@@ -14,6 +15,7 @@ class AddUserController extends GetxController {
   RxList<String> attachments2 = <String>[].obs;
   late String platformResponse;
 
+  var userIDEditingController = TextEditingController();
   var firstnameEditingController = TextEditingController();
   var lastnameEditingController = TextEditingController();
   var middlenameEditingController = TextEditingController();
@@ -56,28 +58,30 @@ class AddUserController extends GetxController {
     super.onInit();
   }
 
-  void checkInput(context) {
+  void checkEducatorInput(context) {
     if (firstnameEditingController.text.trim().isEmpty) {
-      Dialogs.showMyToast(context, "Please input users firstname");
+      Dialogs.showWarningToast(context, "Please input users firstname");
     } else if (lastnameEditingController.text.trim().isEmpty) {
-      Dialogs.showMyToast(context, "Please input users lastname");
+      Dialogs.showWarningToast(context, "Please input users lastname");
     } else if (emailEditingController.text.trim().isEmpty) {
-      Dialogs.showMyToast(context, "Please input users email");
-      // } else if (profileImage != null && coverImage == null) {
-      //   //print('BURIKAT 1');
-      //   uploadUserPhoto(context);
-      //   addUserDetails();
-      // } else if (profileImage == null && coverImage != null) {
-      //   //print('BURIKAT 2');
-      //   uploadUserCoverPhoto(context);
-      //   addUserDetails();
-      // } else if (profileImage != null && coverImage != null) {
-      //   //print('BURIKAT 3');
-      //   uploadUserPhoto(context);
-      //   uploadUserCoverPhoto(context);
-      //   addUserDetails();
+      Dialogs.showWarningToast(context, "Please input users email");
     } else {
-      //print('BURIKAT 4');
+      addUserDetails(context);
+    }
+  }
+
+  void checkStudentInput(context) {
+    if (firstnameEditingController.text.trim().isEmpty) {
+      Dialogs.showWarningToast(context, "Please input users firstname");
+    } else if (lastnameEditingController.text.trim().isEmpty) {
+      Dialogs.showWarningToast(context, "Please input users lastname");
+    } else if (emailEditingController.text.trim().isEmpty) {
+      Dialogs.showWarningToast(context, "Please input users email");
+    } else if (parentfullnameEditingController.text.trim().isEmpty &&
+        parentemailEditingController.text.trim().isEmpty &&
+        parentcontactnoEditingController.text.trim().isEmpty) {
+      Dialogs.showWarningToast(context, "Parents info is required");
+    } else {
       addUserDetails(context);
     }
   }
@@ -87,7 +91,7 @@ class AddUserController extends GetxController {
       isLoading.value = true;
       var result = await AddUserApi.addUserDetails(
         Get.find<GetStorageService>().appdata.read('School_ID'),
-        userCode,
+        userIDEditingController.text.trim(),
         firstnameEditingController.text.trim(),
         lastnameEditingController.text.trim(),
         middlenameEditingController.text.trim(),
@@ -118,15 +122,19 @@ class AddUserController extends GetxController {
         Dialogs.showMyToast(context, "New User successfully saved!");
       } else if (result == "Email already exists") {
         isLoading.value = false;
-        Dialogs.showMyToast(context, "Email already exists");
+        Dialogs.showErrorToast(context, "Email already exists");
       } else {
         isLoading.value = false;
-        Dialogs.showMyToast(context, "Error in inserting new user  !");
+        Dialogs.showErrorToast(context, "Error in inserting new user  !");
       }
     } catch (error) {
       print("addUserDetails $error");
     } finally {
-      Get.find<EducatorListController>().getAllEducatorBySchoolId(1);
+      if (userType.value == 'Educator') {
+        Get.find<EducatorListController>().getAllEducatorBySchoolId(1);
+      } else {
+        Get.find<StudentListController>().getAllStudentBySchoolId(1);
+      }
     }
   }
 
@@ -144,7 +152,7 @@ class AddUserController extends GetxController {
         profileImage = null;
         attachments2.length = 0;
       } else {
-        Dialogs.showMyToast(context, "Error in saving profile image!");
+        Dialogs.showErrorToast(context, "Error in saving profile image!");
       }
     } catch (e) {
       print('err $e');
@@ -165,7 +173,7 @@ class AddUserController extends GetxController {
         coverImage = null;
         attachments1.length = 0;
       } else {
-        Dialogs.showMyToast(context, "Error in saving cover photo!");
+        Dialogs.showErrorToast(context, "Error in saving cover photo!");
       }
     } catch (e) {
       print('err $e');

@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yes_premium/modules/account/account_view.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yes_premium/modules/files/files_view.dart';
+import 'package:yes_premium/modules/home/home_view.dart';
+import 'package:yes_premium/modules/notification/notification_view.dart';
+import 'package:yes_premium/modules/videolab/videolab_view.dart';
 import 'package:yes_premium/shared/dialogs.dart';
 
-class BottomNavView extends StatelessWidget {
-  final controller = Get.put(BottomNavController());
+class BottomNavView extends GetView<BottomNavController> {
+  BottomNavView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.put(BottomNavController());
     final theme = Theme.of(context);
+
+    List<Widget> bodyContext = [
+      HomeView(),
+      VideoLabView(),
+      FilesView(),
+      NotificationView(),
+      AccountView(),
+    ];
 
     List<BottomNavigationBarItem> navItem = [
       BottomNavigationBarItem(
@@ -52,8 +66,7 @@ class BottomNavView extends StatelessWidget {
       body: WillPopScope(
         onWillPop: () => Dialogs.onBackPressedExit(context),
         child: Obx(
-          () =>
-              controller.bodyContext.elementAt(controller.selectedIndex.value),
+          () => bodyContext[controller.selectedIndex.value],
         ),
       ),
       bottomNavigationBar: Obx(

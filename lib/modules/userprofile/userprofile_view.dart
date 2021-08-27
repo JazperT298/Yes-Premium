@@ -59,9 +59,9 @@ class UserProfileView extends GetView<UserProfileController> {
                               ),
                         child: Container(
                           width: double.infinity,
-                          height: 250,
+                          height: 200,
                           child: Container(
-                            alignment: Alignment(0.0, 2.7),
+                            alignment: Alignment(0.0, 4.6),
                             child: CircleAvatar(
                               backgroundImage: NetworkImage(
                                 "$photoDir/${controller.userImage.value}",

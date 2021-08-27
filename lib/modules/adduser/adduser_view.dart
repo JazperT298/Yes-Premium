@@ -19,7 +19,9 @@ class AddUserView extends GetView<AddUserController> {
         actions: [
           MaterialButton(
               onPressed: () {
-                controller.checkInput(context);
+                controller.userType.value == "Student"
+                    ? controller.checkStudentInput(context)
+                    : controller.checkEducatorInput(context);
                 _node.unfocus();
               },
               child: Text(
@@ -61,25 +63,25 @@ class AddUserView extends GetView<AddUserController> {
                               //onTap: () => controller.getProfileImage(),
                               child: controller.attachments2.length == 0
                                   ? Container(
-                                      alignment: Alignment(0.0, 2.4),
+                                      alignment: Alignment(0.0, 4.6),
                                       child: CircleAvatar(
                                         backgroundColor: Colors.grey,
-                                        radius: 60.0,
+                                        radius: 80.0,
                                         // child: Text('Add Photo'),
                                         backgroundImage: AssetImage(
                                             'assets/images/ic_educator_profile.png'),
                                       ),
                                     )
                                   : Container(
-                                      alignment: Alignment(0.0, 2.4),
+                                      alignment: Alignment(0.0, 4.6),
                                       child: CircleAvatar(
                                         backgroundColor: Colors.grey,
-                                        radius: 60.0,
+                                        radius: 80.0,
                                         child: CircleAvatar(
                                           backgroundImage: FileImage(
                                             controller.profileImage!,
                                           ),
-                                          radius: 59.0,
+                                          radius: 79.0,
                                         ),
                                       ),
                                     ),
@@ -137,6 +139,38 @@ class AddUserView extends GetView<AddUserController> {
         SizedBox(
           height: 12.0,
         ),
+        controller.userType.value == "Student"
+            ? TextField(
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12.sp,
+                ),
+                controller: controller.userIDEditingController,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                onEditingComplete: () => _node.nextFocus(),
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: mainColor, width: 1.0),
+                  ),
+                  labelText: 'Student ID (Required)',
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12.sp,
+                  ),
+                  alignLabelWithHint: true,
+                  contentPadding: EdgeInsets.only(
+                    left: 10.0,
+                    top: 5.0,
+                    right: 5.0,
+                    bottom: 5.0,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+              ).paddingOnly(left: 10.0, right: 10.0, bottom: 12.0)
+            : Container(),
         TextField(
           style: TextStyle(
             color: Colors.black,
@@ -150,7 +184,7 @@ class AddUserView extends GetView<AddUserController> {
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: mainColor, width: 1.0),
             ),
-            labelText: 'Firstname *',
+            labelText: 'Firstname (Required)',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 12.sp,
@@ -180,7 +214,7 @@ class AddUserView extends GetView<AddUserController> {
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: mainColor, width: 1.0),
             ),
-            labelText: 'Lastname *',
+            labelText: 'Lastname (Required)',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 12.sp,
@@ -270,7 +304,7 @@ class AddUserView extends GetView<AddUserController> {
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: mainColor, width: 1.0),
             ),
-            labelText: 'Email *',
+            labelText: 'Email (Required)',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 12.sp,
@@ -363,7 +397,9 @@ class AddUserView extends GetView<AddUserController> {
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: mainColor, width: 1.0),
             ),
-            labelText: 'Parents Fullname',
+            labelText: controller.userType.value == "Student"
+                ? 'Parents Fullname (Required)'
+                : 'Parents Fullname',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 12.sp,
@@ -393,7 +429,9 @@ class AddUserView extends GetView<AddUserController> {
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: mainColor, width: 1.0),
             ),
-            labelText: 'Parents Email',
+            labelText: controller.userType.value == "Student"
+                ? 'Parents Email {Required}'
+                : 'Parets Email',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 12.sp,
@@ -423,7 +461,9 @@ class AddUserView extends GetView<AddUserController> {
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: mainColor, width: 1.0),
             ),
-            labelText: 'Parents Contact #',
+            labelText: controller.userType.value == "Student"
+                ? 'Parents Contact # (Required)'
+                : 'Parents Contact #',
             labelStyle: TextStyle(
               color: Colors.black,
               fontSize: 12.sp,

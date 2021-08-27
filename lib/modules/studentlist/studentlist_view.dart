@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/shared/dialogs.dart';
+import 'package:yes_premium/shared/loading.dart';
 
 class StudentListView extends StatelessWidget {
   const StudentListView({Key? key}) : super(key: key);
@@ -16,130 +17,134 @@ class StudentListView extends StatelessWidget {
     final node = FocusScope.of(context);
     final controller = Get.put(StudentListController());
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          controller: controller.scrollController,
-          slivers: [
-            SliverAppBar(
-              brightness: Brightness.light,
-              backgroundColor: Colors.white,
-              title: Obx(
-                () => controller.isSearchClick.value != true
-                    ? Text('Student List')
-                    : Container(
-                        height: 4.h,
-                        //margin: EdgeInsets.only(top: 5, bottom: 5),
-                        child: TextField(
-                          maxLines: 1,
-                          style: TextStyle(fontSize: 17),
-                          textAlignVertical: TextAlignVertical.center,
-                          controller: controller.searchEditingController,
-                          textInputAction: TextInputAction.search,
-                          onSubmitted: (value) {
-                            controller.searchStudent(
-                                Get.find<GetStorageService>()
-                                    .appdata
-                                    .read('SchoolId'),
-                                controller.searchEditingController.text);
-                            node.unfocus();
-                          },
-                          decoration: InputDecoration(
-                            filled: true,
-                            prefixIcon: Icon(Icons.search,
-                                color: Theme.of(context).iconTheme.color),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            fillColor: Theme.of(context)
-                                .inputDecorationTheme
-                                .fillColor,
-                            contentPadding: EdgeInsets.zero,
-                            hintText: 'Search',
-                          ),
-                        ),
+      body: Obx(
+        () => controller.isLoading.value &&
+                controller.studentsDataList.length <= 0
+            ? LoadingView()
+            : SafeArea(
+                child: CustomScrollView(
+                  controller: controller.scrollController,
+                  slivers: [
+                    SliverAppBar(
+                      brightness: Brightness.light,
+                      backgroundColor: Colors.white,
+                      title: Obx(
+                        () => controller.isSearchClick.value != true
+                            ? Text('Student List')
+                            : Container(
+                                height: 4.h,
+                                //margin: EdgeInsets.only(top: 5, bottom: 5),
+                                child: TextField(
+                                  maxLines: 1,
+                                  style: TextStyle(fontSize: 17),
+                                  textAlignVertical: TextAlignVertical.center,
+                                  controller:
+                                      controller.searchEditingController,
+                                  textInputAction: TextInputAction.search,
+                                  onSubmitted: (value) {
+                                    controller.searchStudent(
+                                        Get.find<GetStorageService>()
+                                            .appdata
+                                            .read('SchoolId'),
+                                        controller
+                                            .searchEditingController.text);
+                                    node.unfocus();
+                                  },
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    prefixIcon: Icon(Icons.search,
+                                        color:
+                                            Theme.of(context).iconTheme.color),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30))),
+                                    fillColor: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .fillColor,
+                                    contentPadding: EdgeInsets.zero,
+                                    hintText: 'Search',
+                                  ),
+                                ),
+                              ),
                       ),
-              ),
-              centerTitle: false,
-              floating: true,
-              actions: [
-                Obx(
-                  () => controller.isSearchClick.value != true
-                      ? Container(
-                          margin: EdgeInsets.only(top: 6.0, bottom: 6.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey.shade300,
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              controller.isSearchClick.value = true;
-                            },
-                            icon: Icon(
-                              Icons.search_rounded,
-                              size: 25,
-                            ),
-                          ),
-                        )
-                      : Container(),
-                ),
-                // if (GetStorageService.c.appdata.read('userName') != null)
-                Obx(
-                  () => controller.isSearchClick.value != true
-                      ? Container(
-                          margin: EdgeInsets.only(
-                              top: 6.0, bottom: 6.0, right: 6.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey.shade300,
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              //controller.isSearchClick.value = true;
-                            }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
-                            icon: Icon(
-                              Icons.person_add,
-                              size: 25,
-                            ),
-                          ),
-                        )
-                      : Container(),
-                ),
-                Obx(
-                  () => controller.isSearchClick.value == true
-                      ? Container(
-                          margin: EdgeInsets.only(
-                              top: 6.0, bottom: 6.0, right: 6.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey.shade300,
-                          ),
-                          child: IconButton(
-                            onPressed: () {
-                              controller.isSearchClick.value = false;
-                              controller.searchEditingController.text = '';
-                              controller.getAllStudentBySchoolId(1);
-                              node.unfocus();
-                            },
-                            icon: Icon(
-                              Icons.close,
-                              size: 25,
-                            ),
-                          ),
-                        )
-                      : Container(),
-                ),
-              ],
-            ),
-            SliverToBoxAdapter(
-              child: Obx(
-                () => controller.isLoading.value &&
-                        controller.studentsDataList.length <= 0
-                    ? Container(
-                        height: 30.h,
-                        color: Colors.grey[200],
-                      )
-                    : ListView.builder(
+                      centerTitle: false,
+                      floating: true,
+                      actions: [
+                        Obx(
+                          () => controller.isSearchClick.value != true
+                              ? Container(
+                                  margin:
+                                      EdgeInsets.only(top: 6.0, bottom: 6.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      controller.isSearchClick.value = true;
+                                    },
+                                    icon: Icon(
+                                      Icons.search_rounded,
+                                      size: 25,
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                        ),
+                        // if (GetStorageService.c.appdata.read('userName') != null)
+                        Obx(
+                          () => controller.isSearchClick.value != true
+                              ? Container(
+                                  margin: EdgeInsets.only(
+                                      top: 6.0, bottom: 6.0, right: 6.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Get.toNamed(AppRoutes.ADDUSER,
+                                          arguments: {'UserType': 'Student'});
+                                      //controller.isSearchClick.value = true;
+                                    }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                                    icon: Icon(
+                                      Icons.person_add,
+                                      size: 25,
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                        ),
+                        Obx(
+                          () => controller.isSearchClick.value == true
+                              ? Container(
+                                  margin: EdgeInsets.only(
+                                      top: 6.0, bottom: 6.0, right: 6.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      controller.isSearchClick.value = false;
+                                      controller.searchEditingController.text =
+                                          '';
+                                      controller.getAllStudentBySchoolId(1);
+                                      node.unfocus();
+                                    },
+                                    icon: Icon(
+                                      Icons.close,
+                                      size: 25,
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                        ),
+                      ],
+                    ),
+                    SliverToBoxAdapter(
+                      child: ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: controller.studentsDataList.length,
@@ -307,6 +312,10 @@ class StudentListView extends StatelessWidget {
                                               ),
                                               onPressed: () => {
                                                 print(
+                                                    '${controller.studentsDataList[index].name}'),
+                                                print(
+                                                    '${controller.studentsDataList[index].userCode}'),
+                                                print(
                                                     '${controller.studentsDataList.length}'),
                                                 print(
                                                     '${controller.studentsDataList[index].lockoutEnabled}'),
@@ -323,10 +332,10 @@ class StudentListView extends StatelessWidget {
                           );
                         },
                       ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
