@@ -19,8 +19,7 @@ class HomeView extends GetView<HomeController> {
     var controller = Get.put(HomeController());
     return Scaffold(
       body: Obx(
-        () => controller.isLoading.value &&
-                controller.listofAnnouncement.length <= 0
+        () => controller.isLoading.value && controller.listofAnnouncement.length <= 0
             ? LoadingView()
             : SafeArea(
                 child: RefreshIndicator(
@@ -40,16 +39,14 @@ class HomeView extends GetView<HomeController> {
                         backgroundColor: Colors.white,
                         title: Text(
                           'Yestech Premium',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16.sp),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                         ),
                         centerTitle: false,
                         floating: true,
                         automaticallyImplyLeading: false,
                         actions: [
                           Container(
-                            margin: EdgeInsets.only(
-                                top: 6.0, bottom: 6.0, right: 6.0),
+                            margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.grey.shade300,
@@ -66,22 +63,17 @@ class HomeView extends GetView<HomeController> {
                           ),
                           // if (GetStorageService.c.appdata.read('userName') != null)
                           Container(
-                            margin: EdgeInsets.only(
-                                top: 6.0, bottom: 6.0, right: 6.0),
+                            margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.grey.shade300,
                             ),
                             child: IconButton(
                               onPressed: () {
-                                print(
-                                    '${Get.find<GetStorageService>().appdata.read('UserId')}');
-                                print(
-                                    '${Get.find<GetStorageService>().appdata.read('SchoolId')}');
-                                print(
-                                    '${Get.find<GetStorageService>().appdata.read('access_token')}');
-                                print(
-                                    '${Get.find<GetStorageService>().appdata.read('School_Name')}');
+                                print('${Get.find<GetStorageService>().appdata.read('UserId')}');
+                                print('${Get.find<GetStorageService>().appdata.read('SchoolId')}');
+                                print('${Get.find<GetStorageService>().appdata.read('access_token')}');
+                                print('${Get.find<GetStorageService>().appdata.read('School_Name')}');
                               },
                               icon: Icon(
                                 Icons.chat_bubble_outlined,
@@ -106,159 +98,149 @@ class HomeView extends GetView<HomeController> {
                         ],
                       ),
                       SliverToBoxAdapter(
-                        child:  Get.find<GetStorageService>()
-                                                .appdata
-                                                .read('Roles') ==
-                                            'SchoolAdmin'
-                                        ? Card(
-                          child: Container(
-                            // height: 120.0,
-                            // width: double.infinity,
-                            padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
-                            // color: Colors.red,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Get.find<GetStorageService>()
-                                                .appdata
-                                                .read('Roles') ==
-                                            'SchoolAdmin'
-                                        ? GestureDetector(
-                                            onTap: () =>
-                                                Get.toNamed(AppRoutes.PROFILE),
-                                            child: Container(
-                                              width: 10.w,
-                                              height: 7.h,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                shape: BoxShape.circle,
-                                              ),
-                                            ),
-                                          )
-                                        : GestureDetector(
-                                            onTap: () =>
-                                                Get.toNamed(AppRoutes.PROFILE),
-                                            child: Container(
-                                              width: 10.w,
-                                              height: 7.h,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                shape: BoxShape.circle,
-                                              ),
-                                            ),
-                                          ),
-                                    // Image.asset(
-                                    //   'assets/images/user_placeholder.png',
-                                    //   width: 40.0,
-                                    //   height: 40.0,
-                                    // ),
-                                    SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () =>
-                                          Get.toNamed(AppRoutes.ANNOUNCEMENT),
-                                      child: Container(
-                                        width: 79.0.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50.0),
-                                          ),
-                                          border: Border.all(
-                                            color: Colors.grey.shade300,
-                                          ),
-                                        ),
-                                        padding: EdgeInsets.only(
-                                          top: 1.h,
-                                          bottom: 1.h,
-                                          left: 3.w,
-                                        ),
-                                        child: Text(
-                                          'Write something here...',
-                                          style: TextStyle(
-                                            fontSize: 11.sp,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Expanded(
-                                    //   child: TextField(
-                                    //     decoration: InputDecoration.collapsed(
-                                    //       hintText: 'Write something here...',
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                                Divider(
-                                  height: 10.0,
-                                  thickness: 0.5,
-                                  color: Colors.grey.shade300,
-                                ),
-                                Container(
-                                  height: 40.0,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                        child: Get.find<GetStorageService>().appdata.read('Roles') == 'SchoolAdmin'
+                            ? Card(
+                                child: Container(
+                                  // height: 120.0,
+                                  // width: double.infinity,
+                                  padding: EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
+                                  // color: Colors.red,
+                                  child: Column(
                                     children: [
-                                      ElevatedButton.icon(
-                                        onPressed: () {
-                                          announceController.getVideo();
-                                          Get.toNamed(AppRoutes.ANNOUNCEMENT);
-                                        },
-                                        icon: Icon(
-                                          Icons.videocam,
-                                          color: Colors.red,
-                                        ),
-                                        label: Text(
-                                          'Video',
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.white,
-                                          elevation: 0.0,
-                                          shadowColor: Colors.transparent,
-                                        ),
+                                      Row(
+                                        children: [
+                                          Get.find<GetStorageService>().appdata.read('Roles') == 'SchoolAdmin'
+                                              ? GestureDetector(
+                                                  onTap: () => Get.toNamed(AppRoutes.PROFILE),
+                                                  child: Container(
+                                                    width: 10.w,
+                                                    height: 7.h,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image:
+                                                            NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                  ),
+                                                )
+                                              : GestureDetector(
+                                                  onTap: () => Get.toNamed(AppRoutes.PROFILE),
+                                                  child: Container(
+                                                    width: 10.w,
+                                                    height: 7.h,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                  ),
+                                                ),
+                                          // Image.asset(
+                                          //   'assets/images/user_placeholder.png',
+                                          //   width: 40.0,
+                                          //   height: 40.0,
+                                          // ),
+                                          SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () => Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                                            child: Container(
+                                              width: 79.0.w,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(50.0),
+                                                ),
+                                                border: Border.all(
+                                                  color: Colors.grey.shade300,
+                                                ),
+                                              ),
+                                              padding: EdgeInsets.only(
+                                                top: 1.h,
+                                                bottom: 1.h,
+                                                left: 3.w,
+                                              ),
+                                              child: Text(
+                                                'Write something here...',
+                                                style: TextStyle(
+                                                  fontSize: 11.sp,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          // Expanded(
+                                          //   child: TextField(
+                                          //     decoration: InputDecoration.collapsed(
+                                          //       hintText: 'Write something here...',
+                                          //     ),
+                                          //   ),
+                                          // ),
+                                        ],
                                       ),
-                                      VerticalDivider(
-                                        width: 8.0,
+                                      Divider(
+                                        height: 10.0,
+                                        thickness: 0.5,
                                         color: Colors.grey.shade300,
                                       ),
-                                      ElevatedButton.icon(
-                                        onPressed: () {
-                                          announceController.getImage();
-                                          Get.toNamed(AppRoutes.ANNOUNCEMENT);
-                                        },
-                                        icon: Icon(
-                                          Icons.photo_library,
-                                          color: Colors.green,
-                                        ),
-                                        label: Text(
-                                          'Photo',
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.white,
-                                          elevation: 0.0,
-                                          shadowColor: Colors.transparent,
+                                      Container(
+                                        height: 40.0,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ElevatedButton.icon(
+                                              onPressed: () {
+                                                announceController.getVideo();
+                                                Get.toNamed(AppRoutes.ANNOUNCEMENT);
+                                              },
+                                              icon: Icon(
+                                                Icons.videocam,
+                                                color: Colors.red,
+                                              ),
+                                              label: Text(
+                                                'Video',
+                                                style: TextStyle(color: Colors.black),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Colors.white,
+                                                elevation: 0.0,
+                                                shadowColor: Colors.transparent,
+                                              ),
+                                            ),
+                                            VerticalDivider(
+                                              width: 8.0,
+                                              color: Colors.grey.shade300,
+                                            ),
+                                            ElevatedButton.icon(
+                                              onPressed: () {
+                                                announceController.getImage();
+                                                Get.toNamed(AppRoutes.ANNOUNCEMENT);
+                                              },
+                                              icon: Icon(
+                                                Icons.photo_library,
+                                                color: Colors.green,
+                                              ),
+                                              label: Text(
+                                                'Photo',
+                                                style: TextStyle(color: Colors.black),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Colors.white,
+                                                elevation: 0.0,
+                                                shadowColor: Colors.transparent,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ): Container(),
+                              )
+                            : Container(),
                       ),
                       SliverToBoxAdapter(
                         child: ListView.builder(
@@ -273,11 +255,9 @@ class HomeView extends GetView<HomeController> {
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 12.0),
+                                      padding: EdgeInsets.symmetric(horizontal: 12.0),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                           //Post Header
                                           Row(
@@ -295,15 +275,13 @@ class HomeView extends GetView<HomeController> {
                                               ),
                                               Expanded(
                                                 child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       '${Get.find<GetStorageService>().appdata.read('School')}',
                                                       style: TextStyle(
                                                         fontSize: 11.sp,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                        fontWeight: FontWeight.w600,
                                                       ),
                                                     ),
                                                     Row(
@@ -311,15 +289,13 @@ class HomeView extends GetView<HomeController> {
                                                         Text(
                                                           '${controller.listofAnnouncement[index].announceCreatedDate}  •  ',
                                                           style: TextStyle(
-                                                            color: Colors
-                                                                .grey[600],
+                                                            color: Colors.grey[600],
                                                             fontSize: 9.sp,
                                                           ),
                                                         ),
                                                         Icon(
                                                           Icons.public,
-                                                          color:
-                                                              Colors.grey[400],
+                                                          color: Colors.grey[400],
                                                           size: 12.0,
                                                         ),
                                                       ],
@@ -327,18 +303,10 @@ class HomeView extends GetView<HomeController> {
                                                   ],
                                                 ),
                                               ),
-                                               Get.find<GetStorageService>()
-                                                .appdata
-                                                .read('Roles') ==
-                                            'SchoolAdmin'
-                                        ? deleteButton(
-                                                  context,
-                                                  controller
-                                                      .listofAnnouncement[index]
-                                                      .announceID,
-                                                  controller
-                                                      .listofAnnouncement[index]
-                                                      .announceSchoolID) : Container(),
+                                              Get.find<GetStorageService>().appdata.read('Roles') == 'SchoolAdmin'
+                                                  ? deleteButton(context, controller.listofAnnouncement[index].announceID,
+                                                      controller.listofAnnouncement[index].announceSchoolID)
+                                                  : Container(),
                                               // IconButton(
                                               //   icon: Icon(
                                               //     Icons.delete,
@@ -380,14 +348,8 @@ class HomeView extends GetView<HomeController> {
                                             style: TextStyle(fontSize: 11.sp),
                                           ),
 
-                                          controller.listofAnnouncement[index]
-                                                          .announceFile !=
-                                                      null ||
-                                                  controller
-                                                          .listofAnnouncement[
-                                                              index]
-                                                          .announceFile !=
-                                                      ""
+                                          controller.listofAnnouncement[index].announceFile != null ||
+                                                  controller.listofAnnouncement[index].announceFile != ""
                                               ? SizedBox.shrink()
                                               : SizedBox(
                                                   height: 6.0,
@@ -396,37 +358,20 @@ class HomeView extends GetView<HomeController> {
                                       ),
                                     ),
                                     controller.listofAnnouncement[index].announceFile != "" &&
-                                                controller.listofAnnouncement[index].announceFileExt ==
-                                                    ".jpg" ||
-                                            controller.listofAnnouncement[index]
-                                                    .announceFileExt ==
-                                                ".jpeg" ||
-                                            controller.listofAnnouncement[index]
-                                                    .announceFileExt ==
-                                                ".png"
+                                                controller.listofAnnouncement[index].announceFileExt == ".jpg" ||
+                                            controller.listofAnnouncement[index].announceFileExt == ".jpeg" ||
+                                            controller.listofAnnouncement[index].announceFileExt == ".png"
                                         ? Image.network('$photoDir/${controller.listofAnnouncement[index].announceFile}')
                                             .paddingSymmetric(vertical: 8.0)
-                                        : controller.listofAnnouncement[index]
-                                                            .announceFile !=
-                                                        "" &&
-                                                    controller
-                                                            .listofAnnouncement[
-                                                                index]
-                                                            .announceFileExt ==
-                                                        ".mp4" ||
-                                                controller.listofAnnouncement[index].announceFileExt ==
-                                                    ".flv" ||
-                                                controller
-                                                        .listofAnnouncement[index]
-                                                        .announceFileExt ==
-                                                    ".wmv"
+                                        : controller.listofAnnouncement[index].announceFile != "" &&
+                                                    controller.listofAnnouncement[index].announceFileExt == ".mp4" ||
+                                                controller.listofAnnouncement[index].announceFileExt == ".flv" ||
+                                                controller.listofAnnouncement[index].announceFileExt == ".wmv"
                                             ? Container(
                                                 width: double.infinity,
                                                 height: 345.0,
                                                 child: HomeVideoWidget(
-                                                    play: true,
-                                                    url:
-                                                        '$photoDir/${controller.listofAnnouncement[index].announceFile}'),
+                                                    play: true, url: '$photoDir/${controller.listofAnnouncement[index].announceFile}'),
                                               )
                                             : SizedBox.shrink(),
                                   ],

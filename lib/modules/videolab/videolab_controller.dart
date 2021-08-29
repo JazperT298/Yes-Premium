@@ -101,8 +101,7 @@ class VideolabController extends GetxController {
 
   String parseHtmlString(String htmlString) {
     final document = parse(htmlString);
-    final String parsedString =
-        parse(document.body!.text).documentElement!.text;
+    final String parsedString = parse(document.body!.text).documentElement!.text;
 
     return parsedString;
   }
@@ -132,12 +131,10 @@ class VideolabController extends GetxController {
     } else {}
   }
 
-  void uploadVideoLibrary(
-      context, fileToUpload, title, details, schoolId) async {
+  void uploadVideoLibrary(context, fileToUpload, title, details, schoolId) async {
     try {
       isLoading.value = true;
-      var result = await VideoLabApi.uploadVideoLibrary(
-          fileToUpload, title, details, schoolId);
+      var result = await VideoLabApi.uploadVideoLibrary(fileToUpload, title, details, schoolId);
       if (result == "Successfully Uploaded") {
         Get.back();
         isLoading.value = false;

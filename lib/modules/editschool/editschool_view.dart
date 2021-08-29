@@ -81,10 +81,7 @@ class EditSchoolView extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
+                          decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.all(Radius.circular(5))),
 
                           // alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(left: 12.0),
@@ -354,10 +351,7 @@ class EditSchoolView extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
+                          decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.all(Radius.circular(5))),
 
                           // alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(left: 12.0),

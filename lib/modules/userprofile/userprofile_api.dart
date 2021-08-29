@@ -19,15 +19,13 @@ class UserProfileApi {
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getUserDetailsById Services Connection timeout.");
+          throw TimeoutException("getUserDetailsById Services Connection timeout.");
         },
       );
       print(response.body);

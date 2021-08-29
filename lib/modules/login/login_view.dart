@@ -72,17 +72,14 @@ class LoginView extends StatelessWidget {
               ),
               onPressed: () async {
                 node.unfocus();
-                if (!controller.username.text.contains('@') ||
-                    !controller.username.text.endsWith('.com')) {
+                if (!controller.username.text.contains('@') || !controller.username.text.endsWith('.com')) {
                   Dialogs.showMyToast(context, "Invalid email address");
                 } else if (controller.username.text.isEmpty) {
-                  Dialogs.showMyToast(
-                      context, "Phone number must not be Empty");
+                  Dialogs.showMyToast(context, "Phone number must not be Empty");
                 } else if (controller.password.text.isEmpty) {
                   Dialogs.showMyToast(context, "Password must not be Empty");
                 } else {
-                  var loginReturn = await controller.loadingLogin(context,
-                      controller.username.text, controller.password.text);
+                  var loginReturn = await controller.loadingLogin(context, controller.username.text, controller.password.text);
                   await controller.getUserDetails();
                   await controller.getSchoolDetails();
                   print(loginReturn);

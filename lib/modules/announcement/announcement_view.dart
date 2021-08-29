@@ -54,15 +54,13 @@ class AnnouncementView extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Get.find<GetStorageService>().appdata.read('Roles') ==
-                                  'SchoolAdmin'
+                          Get.find<GetStorageService>().appdata.read('Roles') == 'SchoolAdmin'
                               ? Container(
                                   width: 10.w,
                                   height: 7.h,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage(
-                                          "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                                      image: NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
                                       fit: BoxFit.cover,
                                     ),
                                     shape: BoxShape.circle,
@@ -73,8 +71,7 @@ class AnnouncementView extends StatelessWidget {
                                   height: 7.h,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage(
-                                          "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
+                                      image: NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
                                       fit: BoxFit.cover,
                                     ),
                                     shape: BoxShape.circle,
@@ -126,8 +123,7 @@ class AnnouncementView extends StatelessWidget {
                         () => controller.attachments.length == 0
                             ? Container()
                             : Badge(
-                                position:
-                                    BadgePosition.topEnd(top: -10, end: -5),
+                                position: BadgePosition.topEnd(top: -10, end: -5),
                                 badgeColor: Colors.grey,
                                 badgeContent: GestureDetector(
                                   onTap: () {
@@ -146,39 +142,36 @@ class AnnouncementView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                child:
-                                    controller.filenamevideoprofile.value != ""
-                                        ? Text(
-                                            '${controller.filenamevideoprofile.value}',
-                                            style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w600),
-                                          )
-                                        : Container(
-                                            // margin: EdgeInsets.only(left: 4.0, right: 8.0),
-                                            height: 180,
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[200],
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(
-                                                  5.0,
-                                                ),
-                                              ),
+                                child: controller.filenamevideoprofile.value != ""
+                                    ? Text(
+                                        '${controller.filenamevideoprofile.value}',
+                                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
+                                      )
+                                    : Container(
+                                        // margin: EdgeInsets.only(left: 4.0, right: 8.0),
+                                        height: 180,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                              5.0,
                                             ),
-                                            child: Center(
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: FileImage(
-                                                      controller.image!,
-                                                    ),
-                                                    fit: BoxFit.fitHeight,
-                                                  ),
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: FileImage(
+                                                  controller.image!,
                                                 ),
+                                                fit: BoxFit.fitHeight,
                                               ),
                                             ),
                                           ),
+                                        ),
+                                      ),
                               ),
                       ),
                     ],
@@ -215,9 +208,7 @@ class AnnouncementView extends StatelessWidget {
                     SizedBox(
                       width: 12.0,
                     ),
-                    Text('Photos',
-                        style: TextStyle(
-                            fontSize: 10.sp, fontWeight: FontWeight.w600)),
+                    Text('Photos', style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
                   ],
                 ).paddingOnly(left: 12.0, right: 12.0, top: 8.0, bottom: 8.0),
               ),
@@ -241,9 +232,7 @@ class AnnouncementView extends StatelessWidget {
                     SizedBox(
                       width: 12.0,
                     ),
-                    Text('Videos',
-                        style: TextStyle(
-                            fontSize: 10.sp, fontWeight: FontWeight.w600)),
+                    Text('Videos', style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
                   ],
                 ).paddingOnly(left: 12.0, right: 12.0, top: 8.0, bottom: 8.0),
               ),

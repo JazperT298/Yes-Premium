@@ -19,15 +19,13 @@ class FilesApi {
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getUserNotesLists Services Connection timeout.");
+          throw TimeoutException("getUserNotesLists Services Connection timeout.");
         },
       );
       print(response.body);
@@ -55,12 +53,10 @@ class FilesApi {
 
   static Future deleteUserNotes(notesID, userID, schoolID) async {
     try {
-      var response = await client
-          .post(Uri.parse('$baseUrl/api/UserNotes/DeleteUserNotes'), headers: {
+      var response = await client.post(Uri.parse('$baseUrl/api/UserNotes/DeleteUserNotes'), headers: {
         "access-control-allow-origin": "*",
         'content-type': 'application/x-www-form-urlencoded',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       }, body: {
         "Notes_ID": notesID.toString(),
         "User_ID": userID.toString(),
@@ -68,8 +64,7 @@ class FilesApi {
       }).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "deleteUserNotes Services Connection timeout.");
+          throw TimeoutException("deleteUserNotes Services Connection timeout.");
         },
       );
       if (response.statusCode == 200) {

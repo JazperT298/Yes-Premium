@@ -35,15 +35,9 @@ class FilesShareView extends StatelessWidget {
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
                             filled: true,
-                            prefixIcon: Icon(Icons.search,
-                                color: Theme.of(context).iconTheme.color),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            fillColor: Theme.of(context)
-                                .inputDecorationTheme
-                                .fillColor,
+                            prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
+                            border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
+                            fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                             contentPadding: EdgeInsets.zero,
                             hintText: 'Search',
                           ),
@@ -56,8 +50,7 @@ class FilesShareView extends StatelessWidget {
                 Obx(
                   () => controller.isSearchClick.value != true
                       ? Container(
-                          margin: EdgeInsets.only(
-                              top: 6.0, bottom: 6.0, right: 6.0),
+                          margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
@@ -77,8 +70,7 @@ class FilesShareView extends StatelessWidget {
                 Obx(
                   () => controller.isSearchClick.value == true
                       ? Container(
-                          margin: EdgeInsets.only(
-                              top: 6.0, bottom: 6.0, right: 6.0),
+                          margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
@@ -112,11 +104,9 @@ class FilesShareView extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12.0),
+                                    padding: EdgeInsets.symmetric(horizontal: 12.0),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         //Post Header
                                         Row(
@@ -134,15 +124,13 @@ class FilesShareView extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     '${controller.educatorsDataList[index].userLastname}, ${controller.educatorsDataList[index].userFirstname}',
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -153,8 +141,7 @@ class FilesShareView extends StatelessWidget {
                                                       Text(
                                                         'Position : ${controller.educatorsDataList[index].userPosition} ',
                                                         style: TextStyle(
-                                                          color:
-                                                              Colors.grey[600],
+                                                          color: Colors.grey[600],
                                                           fontSize: 11.sp,
                                                         ),
                                                       ),
@@ -165,24 +152,10 @@ class FilesShareView extends StatelessWidget {
                                             ),
                                             MaterialButton(
                                               onPressed: () {
-                                                filesShareController
-                                                    .shareNotesToUser(
-                                                        context,
-                                                        filesController
-                                                            .notesdataList[
-                                                                index]
-                                                            .notesID,
-                                                        controller
-                                                            .educatorsDataList[
-                                                                index]
-                                                            .userID,
-                                                        filesController
-                                                            .notesdataList[
-                                                                index]
-                                                            .userID);
+                                                filesShareController.shareNotesToUser(context, filesController.notesdataList[index].notesID,
+                                                    controller.educatorsDataList[index].userID, filesController.notesdataList[index].userID);
 
-                                                print(
-                                                    '${controller.educatorsDataList[index].userID}');
+                                                print('${controller.educatorsDataList[index].userID}');
                                               },
                                               color: mainColor,
                                               child: Text(

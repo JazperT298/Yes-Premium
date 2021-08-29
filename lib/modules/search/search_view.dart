@@ -26,19 +26,14 @@ class SearchView extends StatelessWidget {
             controller: controller.searchEditingController,
             textInputAction: TextInputAction.search,
             onSubmitted: (value) {
-              controller.getAllUserBySearchKeyword(
-                  Get.find<GetStorageService>().appdata.read('SchoolId'),
-                  controller.searchEditingController.text);
+              controller.getAllUserBySearchKeyword(Get.find<GetStorageService>().appdata.read('SchoolId'), controller.searchEditingController.text);
               node.unfocus();
             },
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
               filled: true,
-              prefixIcon:
-                  Icon(Icons.search, color: Theme.of(context).iconTheme.color),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
+              border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
               fillColor: Theme.of(context).inputDecorationTheme.fillColor,
               contentPadding: EdgeInsets.zero,
               hintText: 'Search',
@@ -66,8 +61,7 @@ class SearchView extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'No User Found!',
-                        style: TextStyle(
-                            fontSize: 12.sp, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
                       ),
                     ),
                   )
@@ -85,8 +79,7 @@ class SearchView extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 12.0),
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     //Post Header
                                     Row(
@@ -104,8 +97,7 @@ class SearchView extends StatelessWidget {
                                         ),
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 '${controller.userSearchList[index].userLastname}, ${controller.userSearchList[index].userFirstname}',
@@ -137,8 +129,7 @@ class SearchView extends StatelessWidget {
                                             color: Colors.green,
                                           ),
                                           onPressed: () => {
-                                            print(
-                                                '${controller.userSearchList.length}'),
+                                            print('${controller.userSearchList.length}'),
                                           },
                                         ),
                                       ],

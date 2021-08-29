@@ -13,8 +13,7 @@ class FilesShareController extends GetxController {
   void shareNotesToUser(context, notesID, sharedUserID, ownerUserID) async {
     try {
       isLoading.value = true;
-      var result = await FilesShareApi.shareNotesToUser(
-          notesID, sharedUserID, ownerUserID);
+      var result = await FilesShareApi.shareNotesToUser(notesID, sharedUserID, ownerUserID);
       if (result == "Success") {
         isLoading.value = false;
         Get.back();

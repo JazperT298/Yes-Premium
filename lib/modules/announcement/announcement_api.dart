@@ -14,17 +14,14 @@ class AnnouncementApi {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': '*',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       };
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('$baseUrl/api/Announcement/UploadSchoolPost'));
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/api/Announcement/UploadSchoolPost'));
       request.fields.addAll({
         'Details': details.toString(),
         'SchoolId': schoolId.toString(),
       });
-      request.files
-          .add(await http.MultipartFile.fromPath('Images', fileToUpload.path));
+      request.files.add(await http.MultipartFile.fromPath('Images', fileToUpload.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -79,22 +76,17 @@ class AnnouncementApi {
 
   static Future deleteAnnouncement(announceID, schoolID) async {
     try {
-      var response = await client.post(
-          Uri.parse('$baseUrl/api/Announcement/DeleteAnnouncement'),
-          headers: {
-            "access-control-allow-origin": "*",
-            'content-type': 'application/x-www-form-urlencoded',
-            'Authorization':
-                'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
-          },
-          body: {
-            "Announce_ID": announceID.toString(),
-            "Announce_School_ID": schoolID.toString(),
-          }).timeout(
+      var response = await client.post(Uri.parse('$baseUrl/api/Announcement/DeleteAnnouncement'), headers: {
+        "access-control-allow-origin": "*",
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+      }, body: {
+        "Announce_ID": announceID.toString(),
+        "Announce_School_ID": schoolID.toString(),
+      }).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "deleteAnnouncement Services Connection timeout.");
+          throw TimeoutException("deleteAnnouncement Services Connection timeout.");
         },
       );
       if (response.statusCode == 200 && json.decode(response.body)['Success']) {

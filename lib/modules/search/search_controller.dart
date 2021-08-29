@@ -20,8 +20,7 @@ class SearchController extends GetxController {
 
   void getAllUserBySearchKeyword(schoolID, searchKeyword) async {
     try {
-      List result =
-          await SearchApi.getAllUserBySearchKeyword(schoolID, searchKeyword);
+      List result = await SearchApi.getAllUserBySearchKeyword(schoolID, searchKeyword);
       userSearchList.clear();
       isLoading.value = true;
       for (var i = 0; i < result.length; i++) {

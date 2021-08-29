@@ -37,16 +37,14 @@ class FilesView extends StatelessWidget {
                         backgroundColor: Colors.white,
                         title: Text(
                           'My Files',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16.sp),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                         ),
                         centerTitle: false,
                         floating: true,
                         automaticallyImplyLeading: false,
                         actions: [
                           Container(
-                            margin: EdgeInsets.only(
-                                top: 6.0, bottom: 6.0, right: 6.0),
+                            margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.grey.shade300,
@@ -60,8 +58,7 @@ class FilesView extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(
-                                top: 6.0, bottom: 6.0, right: 6.0),
+                            margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.grey.shade300,
@@ -112,11 +109,9 @@ class FilesView extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 12.0),
+                                        padding: EdgeInsets.symmetric(horizontal: 12.0),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                           children: [
                                             //Post Header
                                             Row(
@@ -134,16 +129,13 @@ class FilesView extends StatelessWidget {
                                                 ),
                                                 Expanded(
                                                   child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         '${Get.find<GetStorageService>().appdata.read('School')}',
                                                         style: TextStyle(
                                                           fontSize: 11.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                          fontWeight: FontWeight.w600,
                                                         ),
                                                       ),
                                                       Row(
@@ -151,15 +143,13 @@ class FilesView extends StatelessWidget {
                                                           Text(
                                                             '${controller.notesdataList[index].notesCreatedDate}  •  ',
                                                             style: TextStyle(
-                                                              color: Colors
-                                                                  .grey[600],
+                                                              color: Colors.grey[600],
                                                               fontSize: 9.sp,
                                                             ),
                                                           ),
                                                           Icon(
                                                             Icons.public,
-                                                            color: Colors
-                                                                .grey[400],
+                                                            color: Colors.grey[400],
                                                             size: 12.0,
                                                           ),
                                                         ],
@@ -175,45 +165,18 @@ class FilesView extends StatelessWidget {
                                                         color: Colors.green,
                                                       ),
                                                       onPressed: () => {
-                                                        print(
-                                                            '${controller.notesdataList[index].notesFile}'),
+                                                        print('${controller.notesdataList[index].notesFile}'),
                                                         Get.toNamed(
                                                           AppRoutes.FILESADD,
                                                           arguments: {
-                                                            'Title':
-                                                                'Update Files',
-                                                            'Notes_ID': controller
-                                                                .notesdataList[
-                                                                    index]
-                                                                .notesID,
-                                                            'User_ID': controller
-                                                                .notesdataList[
-                                                                    index]
-                                                                .userID,
-                                                            'School_ID': controller
-                                                                .notesdataList[
-                                                                    index]
-                                                                .schoolID,
-                                                            'Notes_Title':
-                                                                controller
-                                                                    .notesdataList[
-                                                                        index]
-                                                                    .notesTitle,
-                                                            'Notes_Desc':
-                                                                controller
-                                                                    .notesdataList[
-                                                                        index]
-                                                                    .notesDesc,
-                                                            'Notes_FileName':
-                                                                controller
-                                                                    .notesdataList[
-                                                                        index]
-                                                                    .notesFileName,
-                                                            'Notes_File':
-                                                                controller
-                                                                    .notesdataList[
-                                                                        index]
-                                                                    .notesFile,
+                                                            'Title': 'Update Files',
+                                                            'Notes_ID': controller.notesdataList[index].notesID,
+                                                            'User_ID': controller.notesdataList[index].userID,
+                                                            'School_ID': controller.notesdataList[index].schoolID,
+                                                            'Notes_Title': controller.notesdataList[index].notesTitle,
+                                                            'Notes_Desc': controller.notesdataList[index].notesDesc,
+                                                            'Notes_FileName': controller.notesdataList[index].notesFileName,
+                                                            'Notes_File': controller.notesdataList[index].notesFile,
                                                           },
                                                         )
                                                       },
@@ -223,21 +186,8 @@ class FilesView extends StatelessWidget {
                                                         Icons.delete,
                                                         color: Colors.redAccent,
                                                       ),
-                                                      onPressed: () => Dialogs
-                                                          .showDeleteFile(
-                                                              context,
-                                                              controller
-                                                                  .notesdataList[
-                                                                      index]
-                                                                  .notesID,
-                                                              controller
-                                                                  .notesdataList[
-                                                                      index]
-                                                                  .userID,
-                                                              controller
-                                                                  .notesdataList[
-                                                                      index]
-                                                                  .schoolID),
+                                                      onPressed: () => Dialogs.showDeleteFile(context, controller.notesdataList[index].notesID,
+                                                          controller.notesdataList[index].userID, controller.notesdataList[index].schoolID),
                                                     ),
                                                   ],
                                                 ),
@@ -249,123 +199,72 @@ class FilesView extends StatelessWidget {
                                             ),
                                             Row(
                                               children: [
-                                                controller.notesdataList[index]
-                                                            .notesFileExt ==
-                                                        ".pdf"
+                                                controller.notesdataList[index].notesFileExt == ".pdf"
                                                     ? Container(
                                                         height: 50.0,
                                                         width: 50.0,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                        decoration: BoxDecoration(
                                                           border: Border.all(
-                                                            color: Colors
-                                                                .grey.shade400,
+                                                            color: Colors.grey.shade400,
                                                           ),
-                                                          borderRadius:
-                                                              BorderRadius.all(
+                                                          borderRadius: BorderRadius.all(
                                                             Radius.circular(5),
                                                           ),
-                                                          image:
-                                                              DecorationImage(
-                                                            image: NetworkImage(
-                                                                "https://yestechpremium.com/assets/img/static_img/pdf.png"),
+                                                          image: DecorationImage(
+                                                            image: NetworkImage("https://yestechpremium.com/assets/img/static_img/pdf.png"),
                                                             fit: BoxFit.cover,
                                                           ),
                                                         ),
                                                       )
-                                                    : controller
-                                                                .notesdataList[
-                                                                    index]
-                                                                .notesFileExt ==
-                                                            ".docx"
+                                                    : controller.notesdataList[index].notesFileExt == ".docx"
                                                         ? Container(
                                                             height: 50.0,
                                                             width: 50.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border:
-                                                                  Border.all(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade400,
+                                                            decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                color: Colors.grey.shade400,
                                                               ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    5),
+                                                              borderRadius: BorderRadius.all(
+                                                                Radius.circular(5),
                                                               ),
-                                                              image:
-                                                                  DecorationImage(
-                                                                image: NetworkImage(
-                                                                    "https://yestechpremium.com/assets/img/static_img/word.jpg"),
-                                                                fit: BoxFit
-                                                                    .cover,
+                                                              image: DecorationImage(
+                                                                image: NetworkImage("https://yestechpremium.com/assets/img/static_img/word.jpg"),
+                                                                fit: BoxFit.cover,
                                                               ),
                                                             ),
                                                           )
-                                                        : controller
-                                                                    .notesdataList[
-                                                                        index]
-                                                                    .notesFileExt ==
-                                                                ".xlsx"
+                                                        : controller.notesdataList[index].notesFileExt == ".xlsx"
                                                             ? Container(
                                                                 height: 50.0,
                                                                 width: 50.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade400,
+                                                                decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                    color: Colors.grey.shade400,
                                                                   ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .all(
-                                                                    Radius
-                                                                        .circular(
-                                                                            5),
+                                                                  borderRadius: BorderRadius.all(
+                                                                    Radius.circular(5),
                                                                   ),
-                                                                  image:
-                                                                      DecorationImage(
-                                                                    image: NetworkImage(
-                                                                        "https://yestechpremium.com/assets/img/static_img/excel.jpg"),
-                                                                    fit: BoxFit
-                                                                        .cover,
+                                                                  image: DecorationImage(
+                                                                    image: NetworkImage("https://yestechpremium.com/assets/img/static_img/excel.jpg"),
+                                                                    fit: BoxFit.cover,
                                                                   ),
                                                                 ),
                                                               )
-                                                            : controller
-                                                                        .notesdataList[
-                                                                            index]
-                                                                        .notesFileExt ==
-                                                                    ".pptx"
+                                                            : controller.notesdataList[index].notesFileExt == ".pptx"
                                                                 ? Container(
-                                                                    height:
-                                                                        50.0,
+                                                                    height: 50.0,
                                                                     width: 50.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Colors
-                                                                            .grey
-                                                                            .shade400,
+                                                                    decoration: BoxDecoration(
+                                                                      border: Border.all(
+                                                                        color: Colors.grey.shade400,
                                                                       ),
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .all(
-                                                                        Radius.circular(
-                                                                            5),
+                                                                      borderRadius: BorderRadius.all(
+                                                                        Radius.circular(5),
                                                                       ),
-                                                                      image:
-                                                                          DecorationImage(
+                                                                      image: DecorationImage(
                                                                         image: NetworkImage(
                                                                             "https://yestechpremium.com/assets/img/static_img/powerpoint.jpg"),
-                                                                        fit: BoxFit
-                                                                            .cover,
+                                                                        fit: BoxFit.cover,
                                                                       ),
                                                                     ),
                                                                   )
@@ -375,29 +274,20 @@ class FilesView extends StatelessWidget {
                                                 ),
                                                 Expanded(
                                                   child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       Text(
                                                         '${controller.parseHtmlString(controller.notesdataList[index].notesTitle!)}',
-                                                        style: TextStyle(
-                                                            fontSize: 11.sp),
+                                                        style: TextStyle(fontSize: 11.sp),
                                                       ),
                                                       RaisedButton.icon(
                                                         onPressed: () {
-                                                          Get.toNamed(AppRoutes
-                                                              .FILESSHARE);
-                                                          print(
-                                                              '${controller.notesdataList[index].notesID}');
+                                                          Get.toNamed(AppRoutes.FILESSHARE);
+                                                          print('${controller.notesdataList[index].notesID}');
                                                         },
                                                         elevation: 2.0,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
+                                                        shape: RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.circular(5.0),
                                                         ),
                                                         color: colorPeterriver,
                                                         icon: Icon(
@@ -408,8 +298,7 @@ class FilesView extends StatelessWidget {
                                                           "Share",
                                                           style: TextStyle(
                                                             fontSize: 9.sp,
-                                                            fontWeight:
-                                                                FontWeight.w900,
+                                                            fontWeight: FontWeight.w900,
                                                             color: Colors.white,
                                                           ),
                                                         ),

@@ -11,12 +11,10 @@ class FilesShareApi {
   static var client = http.Client();
   static Future shareNotesToUser(notesID, sharedUserID, ownerUserID) async {
     try {
-      var response = await client
-          .post(Uri.parse('$baseUrl/api/UserNotes/ShareNotesToUser'), headers: {
+      var response = await client.post(Uri.parse('$baseUrl/api/UserNotes/ShareNotesToUser'), headers: {
         "access-control-allow-origin": "*",
         'content-type': 'application/x-www-form-urlencoded',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       }, body: {
         "SharedUserID": sharedUserID.toString(),
         "Notes_ID": notesID.toString(),
@@ -24,8 +22,7 @@ class FilesShareApi {
       }).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "shareNotesToUser Services Connection timeout.");
+          throw TimeoutException("shareNotesToUser Services Connection timeout.");
         },
       );
       if (response.statusCode == 200) {

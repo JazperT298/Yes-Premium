@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:yes_premium/colors.dart';
 import 'package:sizer/sizer.dart';
-import 'package:yes_premium/modules/adduser/adduser_controller.dart';
+import 'package:yes_premium/colors.dart';
+import 'package:yes_premium/configs/app_endpoints.dart';
+import 'package:yes_premium/modules/edituser/edituser_controller.dart';
+import 'package:yes_premium/shared/loading.dart';
 
-class AddUserView extends GetView<AddUserController> {
-  const AddUserView({Key? key}) : super(key: key);
+class EditUserView extends GetView<EditUserController> {
+  const EditUserView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(AddUserController());
+    Get.put(EditUserController());
     final _node = FocusScope.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Add New User'),
+        title: Text('Edit User'),
         actions: [
           MaterialButton(
               onPressed: () {
-                controller.userType.value == "Student" ? controller.checkStudentInput(context) : controller.checkEducatorInput(context);
-                _node.unfocus();
+                // controller.userType.value == "Student"
+                //     ? controller.checkStudentInput(context)
+                //     : controller.checkEducatorInput(context);
+                // _node.unfocus();
               },
               child: Text(
-                'Save',
+                'Update',
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
@@ -42,12 +45,12 @@ class AddUserView extends GetView<AddUserController> {
                           //controller.getCoverImage();
                         },
                         child: Container(
-                          decoration: controller.attachments1.length != 0
+                          decoration: controller.userCoverImage.value != 'null'
                               ? BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   image: DecorationImage(
-                                    image: FileImage(
-                                      controller.coverImage!,
+                                    image: NetworkImage(
+                                      "$photoDir/${controller.userCoverImage.value}",
                                     ),
                                     fit: BoxFit.cover,
                                   ))
@@ -66,7 +69,9 @@ class AddUserView extends GetView<AddUserController> {
                                         backgroundColor: Colors.grey,
                                         radius: 80.0,
                                         // child: Text('Add Photo'),
-                                        backgroundImage: AssetImage('assets/images/ic_educator_profile.png'),
+                                        backgroundImage: NetworkImage(
+                                          "$photoDir/${controller.userImage.value}",
+                                        ),
                                       ),
                                     )
                                   : Container(
@@ -90,6 +95,7 @@ class AddUserView extends GetView<AddUserController> {
                       parentInformation(context),
                       userBackground(context),
                       socialAccounts(context),
+                      userCredentials(context),
                       SizedBox(
                         height: 100.0,
                       )
@@ -97,12 +103,7 @@ class AddUserView extends GetView<AddUserController> {
                   ),
                 ),
               )
-            : Center(
-                child: SpinKitThreeBounce(
-                  color: mainColor,
-                  size: 30,
-                ),
-              ),
+            : LoadingView(),
       ),
     );
   }
@@ -889,6 +890,223 @@ class AddUserView extends GetView<AddUserController> {
             ),
           ),
         ).paddingOnly(left: 10.0, right: 10.0, bottom: 12.0),
+      ],
+    );
+  }
+
+  Widget userCredentials(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 25.0,
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Container(
+            decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.all(Radius.circular(5))),
+
+            // alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(left: 12.0),
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'User Credentials',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12.sp,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 12.0,
+        ),
+        Container(
+          height: 60.0,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: mainColor,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                5.0,
+              ),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 20.0,
+                    width: 350.0,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Username',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 30.0,
+                    width: 350.0,
+                    padding: EdgeInsets.all(5.0),
+                    child: TextField(
+                      controller: controller.usernameEditingController,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ).paddingOnly(left: 10.0),
+            ],
+          ),
+        ).marginSymmetric(horizontal: 12.0),
+        SizedBox(
+          height: 12.0,
+        ),
+        Container(
+          height: 60.0,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: mainColor,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                5.0,
+              ),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 20.0,
+                    width: 350.0,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Password',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 30.0,
+                    width: 350.0,
+                    padding: EdgeInsets.all(5.0),
+                    child: TextField(
+                      controller: controller.passwordEditingController,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      keyboardType: TextInputType.name,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: '********',
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ).paddingOnly(left: 10.0),
+            ],
+          ),
+        ).marginSymmetric(horizontal: 12.0),
+        SizedBox(
+          height: 12.0,
+        ),
+        Container(
+          height: 60.0,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: mainColor,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                5.0,
+              ),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 20.0,
+                    width: 350.0,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Confirm Password',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 30.0,
+                    width: 350.0,
+                    padding: EdgeInsets.all(5.0),
+                    child: TextField(
+                      controller: controller.confirmpasswordEditingController,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      keyboardType: TextInputType.name,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: '********',
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ).paddingOnly(left: 10.0),
+            ],
+          ),
+        ).marginSymmetric(horizontal: 12.0),
       ],
     );
   }

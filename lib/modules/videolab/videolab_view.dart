@@ -28,14 +28,12 @@ class VideoLabView extends StatelessWidget {
                       backgroundColor: Colors.white,
                       title: Text(
                         'Videos',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.sp),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                       ),
                       automaticallyImplyLeading: false,
                       actions: [
                         Container(
-                          margin: EdgeInsets.only(
-                              top: 6.0, bottom: 6.0, right: 6.0),
+                          margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
@@ -49,15 +47,13 @@ class VideoLabView extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(
-                              top: 6.0, bottom: 6.0, right: 6.0),
+                          margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
                           ),
                           child: IconButton(
-                            onPressed: () => Get.toNamed(AppRoutes
-                                .VIDEOLABADD), //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
+                            onPressed: () => Get.toNamed(AppRoutes.VIDEOLABADD), //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
                             icon: Icon(
                               Icons.add_to_drive_sharp,
                               size: 25,
@@ -81,11 +77,9 @@ class VideoLabView extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12.0),
+                                    padding: EdgeInsets.symmetric(horizontal: 12.0),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         //Post Header
                                         Row(
@@ -103,15 +97,13 @@ class VideoLabView extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     '${Get.find<GetStorageService>().appdata.read('School')}',
                                                     style: TextStyle(
                                                       fontSize: 11.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                                   ),
                                                   Row(
@@ -119,8 +111,7 @@ class VideoLabView extends StatelessWidget {
                                                       Text(
                                                         '${controller.videolibList[index].videoLibCreatedDate}  •  ',
                                                         style: TextStyle(
-                                                          color:
-                                                              Colors.grey[600],
+                                                          color: Colors.grey[600],
                                                           fontSize: 9.sp,
                                                         ),
                                                       ),
@@ -134,13 +125,8 @@ class VideoLabView extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            deleteButton(
-                                                context,
-                                                controller.videolibList[index]
-                                                    .videoLibID,
-                                                Get.find<GetStorageService>()
-                                                    .appdata
-                                                    .read('SchoolId')),
+                                            deleteButton(context, controller.videolibList[index].videoLibID,
+                                                Get.find<GetStorageService>().appdata.read('SchoolId')),
                                             // IconButton(
                                             //   icon: const Icon(Icons.more_horiz),
                                             //   onPressed: () => {
@@ -161,12 +147,8 @@ class VideoLabView extends StatelessWidget {
                                           style: TextStyle(fontSize: 11.sp),
                                         ),
 
-                                        controller.videolibList[index]
-                                                        .videoLibFileName !=
-                                                    null ||
-                                                controller.videolibList[index]
-                                                        .videoLibFileName !=
-                                                    ""
+                                        controller.videolibList[index].videoLibFileName != null ||
+                                                controller.videolibList[index].videoLibFileName != ""
                                             ? SizedBox.shrink()
                                             : SizedBox(
                                                 height: 6.0,
@@ -190,10 +172,7 @@ class VideoLabView extends StatelessWidget {
                                         //             controller.chewieController!)
                                         //     : Center(
                                         //         child: CircularProgressIndicator()),
-                                        VideoWidget(
-                                            play: true,
-                                            url:
-                                                '$photoDir/${controller.videolibList[index].videoLibFileName}'),
+                                        VideoWidget(play: true, url: '$photoDir/${controller.videolibList[index].videoLibFileName}'),
                                   ),
                                 ],
                               ),

@@ -55,14 +55,12 @@ class LoginApi {
   static Future getUserDetails() async {
     try {
       var response = await client.get(
-        Uri.parse(
-            '$baseUrl/api/Users/GetUserDetails?userName=${Get.find<GetStorageService>().appdata.read('userName')}'),
+        Uri.parse('$baseUrl/api/Users/GetUserDetails?userName=${Get.find<GetStorageService>().appdata.read('userName')}'),
 
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
@@ -96,21 +94,18 @@ class LoginApi {
   static Future getSchoolDetailsByUserId() async {
     try {
       var response = await client.get(
-        Uri.parse(
-            '$baseUrl/api/Schools/GetSchoolDetailsByUserId?userId=${Get.find<GetStorageService>().appdata.read('UserId')}'),
+        Uri.parse('$baseUrl/api/Schools/GetSchoolDetailsByUserId?userId=${Get.find<GetStorageService>().appdata.read('UserId')}'),
 
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getSchoolDetailsByUserId Services Connection timeout.");
+          throw TimeoutException("getSchoolDetailsByUserId Services Connection timeout.");
         },
       );
       print(response.body);

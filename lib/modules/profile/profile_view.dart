@@ -25,11 +25,8 @@ class ProfileView extends StatelessWidget {
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
               filled: true,
-              prefixIcon:
-                  Icon(Icons.search, color: Theme.of(context).iconTheme.color),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
+              border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
               fillColor: Theme.of(context).inputDecorationTheme.fillColor,
               contentPadding: EdgeInsets.zero,
               hintText: 'Search',
@@ -69,11 +66,7 @@ class ProfileView extends StatelessWidget {
               ),
               Text(
                 '${Get.find<GetStorageService>().appdata.read('School_Name')}',
-                style: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.blueGrey,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 25.0, color: Colors.blueGrey, letterSpacing: 2.0, fontWeight: FontWeight.w400),
               ),
               SizedBox(
                 height: 20,
@@ -81,11 +74,7 @@ class ProfileView extends StatelessWidget {
               Text(
                 '${Get.find<GetStorageService>().appdata.read('School_Address')}',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.black45,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 18.0, color: Colors.black45, letterSpacing: 2.0, fontWeight: FontWeight.w400),
               ).marginOnly(left: 12.0, right: 12.0),
               SizedBox(
                 height: 30,
@@ -93,11 +82,7 @@ class ProfileView extends StatelessWidget {
               Text(
                 '${Get.find<GetStorageService>().appdata.read('School_Details')}',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black45,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 16.0, color: Colors.black45, letterSpacing: 2.0, fontWeight: FontWeight.w400),
               ).marginOnly(left: 12.0, right: 12.0),
               SizedBox(
                 height: 30,
@@ -112,11 +97,7 @@ class ProfileView extends StatelessWidget {
               ),
               Text(
                 '${Get.find<GetStorageService>().appdata.read('School_Motto')}',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black45,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 20.0, color: Colors.black45, letterSpacing: 2.0, fontWeight: FontWeight.w600),
               ),
               // Card(
               //   margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
@@ -202,23 +183,13 @@ class ProfileView extends StatelessWidget {
             Get.toNamed(
               AppRoutes.EDITSCHOOL,
               arguments: {
-                "schoolID":
-                    Get.find<GetStorageService>().appdata.read('School_ID'),
-                "schoolName":
-                    Get.find<GetStorageService>().appdata.read('School_Name'),
-                "schoolLogo":
-                    Get.find<GetStorageService>().appdata.read('School_Logo'),
-                "schoolAddress": Get.find<GetStorageService>()
-                    .appdata
-                    .read('School_Address'),
-                "schoolDetails": Get.find<GetStorageService>()
-                    .appdata
-                    .read('School_Details'),
-                "schoolMotto":
-                    Get.find<GetStorageService>().appdata.read('School_Motto'),
-                "adminUsername": Get.find<GetStorageService>()
-                    .appdata
-                    .read('Admin_Username'),
+                "schoolID": Get.find<GetStorageService>().appdata.read('School_ID'),
+                "schoolName": Get.find<GetStorageService>().appdata.read('School_Name'),
+                "schoolLogo": Get.find<GetStorageService>().appdata.read('School_Logo'),
+                "schoolAddress": Get.find<GetStorageService>().appdata.read('School_Address'),
+                "schoolDetails": Get.find<GetStorageService>().appdata.read('School_Details'),
+                "schoolMotto": Get.find<GetStorageService>().appdata.read('School_Motto'),
+                "adminUsername": Get.find<GetStorageService>().appdata.read('Admin_Username'),
               },
             );
           },

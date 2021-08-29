@@ -19,15 +19,13 @@ class EducatorAoi {
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getAllEducatorBySchoolId Services Connection timeout.");
+          throw TimeoutException("getAllEducatorBySchoolId Services Connection timeout.");
         },
       );
       print(response.body);
@@ -56,13 +54,11 @@ class EducatorAoi {
   static Future searchEducator(schoolID, searchWord) async {
     try {
       var response = await client.get(
-        Uri.parse(
-            '$baseUrl/api/Educator/SearchEducator?schoolID=$schoolID&searchWord=$searchWord'),
+        Uri.parse('$baseUrl/api/Educator/SearchEducator?schoolID=$schoolID&searchWord=$searchWord'),
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
       ).timeout(
         const Duration(seconds: 10),

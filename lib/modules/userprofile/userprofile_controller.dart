@@ -57,8 +57,7 @@ class UserProfileController extends GetxController {
   //Get customer details from server
   Future<void> getUserDetailsById() async {
     try {
-      userModelDetails.value =
-          await UserProfileApi.getUserDetailsById(userID.value);
+      userModelDetails.value = await UserProfileApi.getUserDetailsById(userID.value);
       //Assign values from server to variables
       userSchoolID..value = "${userModelDetails[0].userSchoolID}";
       userCode.value = "${userModelDetails[0].userCode}";
@@ -70,8 +69,7 @@ class UserProfileController extends GetxController {
       userGender.value = "${userModelDetails[0].userGender}";
       userImage.value = "${userModelDetails[0].userImage}";
       userCoverImage.value = "${userModelDetails[0].userCoverImage}";
-      userEducationalAttainment.value =
-          "${userModelDetails[0].userEducationalAttainment}";
+      userEducationalAttainment.value = "${userModelDetails[0].userEducationalAttainment}";
       userSubjMajor.value = "${userModelDetails[0].userSubjMajor}";
       userPosition.value = "${userModelDetails[0].userPosition}";
       userFacebook.value = "${userModelDetails[0].userFacebook}";

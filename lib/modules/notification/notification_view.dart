@@ -44,8 +44,7 @@ class NotificationView extends StatelessWidget {
           SliverToBoxAdapter(
             // final VideoLab post = controller.videoList[index];
             child: Obx(
-              () => controller.isLoading.value &&
-                      controller.notificationList.length <= 0
+              () => controller.isLoading.value && controller.notificationList.length <= 0
                   ? Container(
                       height: 30.h,
                       color: Colors.grey[200],
@@ -62,11 +61,9 @@ class NotificationView extends StatelessWidget {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 12.0),
+                                  padding: EdgeInsets.symmetric(horizontal: 12.0),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
                                       //Post Header
                                       Row(
@@ -84,8 +81,7 @@ class NotificationView extends StatelessWidget {
                                           ),
                                           Expanded(
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   '${controller.notificationList[index].content}',
@@ -116,8 +112,7 @@ class NotificationView extends StatelessWidget {
                                           IconButton(
                                             icon: const Icon(Icons.more_horiz),
                                             onPressed: () => {
-                                              print(
-                                                  '${controller.notificationList.length}'),
+                                              print('${controller.notificationList.length}'),
                                             },
                                           ),
                                         ],

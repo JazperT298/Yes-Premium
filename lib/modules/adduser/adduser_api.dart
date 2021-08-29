@@ -37,12 +37,10 @@ class AddUserApi {
     parentContactNumber,
   ) async {
     try {
-      var response = await client
-          .post(Uri.parse('$baseUrl/api/Users/AddUpdateUserDetails'), headers: {
+      var response = await client.post(Uri.parse('$baseUrl/api/Users/AddUpdateUserDetails'), headers: {
         "access-control-allow-origin": "*",
         'content-type': 'application/x-www-form-urlencoded',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       }, body: {
         "User_SchoolID": userSchoolID.toString(),
         "User_Code": userCode.toString(),
@@ -124,12 +122,10 @@ class AddUserApi {
     parentContactNumber,
   ) async {
     try {
-      var response = await client
-          .post(Uri.parse('$baseUrl/api/Users/AddUpdateUserDetails'), headers: {
+      var response = await client.post(Uri.parse('$baseUrl/api/Users/AddUpdateUserDetails'), headers: {
         "access-control-allow-origin": "*",
         'content-type': 'application/x-www-form-urlencoded',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       }, body: {
         "User_ID": userID.toString(),
         "User_SchoolID": userSchoolID.toString(),
@@ -160,8 +156,7 @@ class AddUserApi {
       }).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "updateUserDetails Services Connection timeout.");
+          throw TimeoutException("updateUserDetails Services Connection timeout.");
         },
       );
       print('${response.body}');
@@ -190,16 +185,13 @@ class AddUserApi {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': '*',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       };
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('$baseUrl/api/Users/UploadUserPhoto'));
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/api/Users/UploadUserPhoto'));
       request.fields.addAll({
         'UserId': userId.toString(),
       });
-      request.files
-          .add(await http.MultipartFile.fromPath('Images', fileToUpload.path));
+      request.files.add(await http.MultipartFile.fromPath('Images', fileToUpload.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -232,16 +224,13 @@ class AddUserApi {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': '*',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       };
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('$baseUrl/api/Users/UploadUserCoverPhoto'));
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/api/Users/UploadUserCoverPhoto'));
       request.fields.addAll({
         'UserId': userId.toString(),
       });
-      request.files
-          .add(await http.MultipartFile.fromPath('Images', fileToUpload.path));
+      request.files.add(await http.MultipartFile.fromPath('Images', fileToUpload.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -272,12 +261,10 @@ class AddUserApi {
     password,
   ) async {
     try {
-      var response = await client
-          .post(Uri.parse('$baseUrl/api/Users/ChangeUserCredential'), headers: {
+      var response = await client.post(Uri.parse('$baseUrl/api/Users/ChangeUserCredential'), headers: {
         "access-control-allow-origin": "*",
         'content-type': 'application/x-www-form-urlencoded',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       }, body: {
         "Id": userID.toString(),
         "UserName": userName.toString(),
@@ -285,8 +272,7 @@ class AddUserApi {
       }).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "changeUserCredentials Services Connection timeout.");
+          throw TimeoutException("changeUserCredentials Services Connection timeout.");
         },
       );
       if (response.statusCode == 200 && json.decode(response.body)['Success']) {

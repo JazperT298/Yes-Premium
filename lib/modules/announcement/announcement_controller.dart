@@ -87,8 +87,7 @@ class AnnouncementController extends GetxController {
   void uploadSchoolPosts(context, fileToUpload, details, schoolId) async {
     try {
       isLoading.value = true;
-      var result = await AnnouncementApi.uploadSchoolPost(
-          fileToUpload, details, schoolId);
+      var result = await AnnouncementApi.uploadSchoolPost(fileToUpload, details, schoolId);
       if (result == "Success") {
         Get.back();
         isLoading.value = false;

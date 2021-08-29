@@ -48,12 +48,10 @@ class FilesAddController extends GetxController {
     print(imgprofile);
   }
 
-  void addUserNotes(context, userID, schoolID, notesTitle, notesDesc,
-      filenameprofile, file) async {
+  void addUserNotes(context, userID, schoolID, notesTitle, notesDesc, filenameprofile, file) async {
     try {
       isLoading.value = true;
-      var result = await FilesAddApi.addUserNotes(
-          userID, schoolID, notesTitle, notesDesc, filenameprofile, file!);
+      var result = await FilesAddApi.addUserNotes(userID, schoolID, notesTitle, notesDesc, filenameprofile, file!);
       if (result == "Success") {
         Get.back();
         isLoading.value = false;
@@ -99,11 +97,9 @@ class FilesAddController extends GetxController {
     } else {}
   }
 
-  void updateUserNotes(context, notesID, userID, schoolID, notesTitle,
-      notesDesc, filenameprofile, file) async {
+  void updateUserNotes(context, notesID, userID, schoolID, notesTitle, notesDesc, filenameprofile, file) async {
     try {
-      var result = await FilesAddApi.updateUserNotes(notesID, userID, schoolID,
-          notesTitle, notesDesc, filenameprofile, file!);
+      var result = await FilesAddApi.updateUserNotes(notesID, userID, schoolID, notesTitle, notesDesc, filenameprofile, file!);
       if (result == "Success") {
         Get.back();
         Dialogs.showMyToast(context, "Notes successfully updated!");

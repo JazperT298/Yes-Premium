@@ -18,8 +18,7 @@ class StudentListView extends StatelessWidget {
     final controller = Get.put(StudentListController());
     return Scaffold(
       body: Obx(
-        () => controller.isLoading.value &&
-                controller.studentsDataList.length <= 0
+        () => controller.isLoading.value && controller.studentsDataList.length <= 0
             ? LoadingView()
             : SafeArea(
                 child: CustomScrollView(
@@ -38,30 +37,18 @@ class StudentListView extends StatelessWidget {
                                   maxLines: 1,
                                   style: TextStyle(fontSize: 17),
                                   textAlignVertical: TextAlignVertical.center,
-                                  controller:
-                                      controller.searchEditingController,
+                                  controller: controller.searchEditingController,
                                   textInputAction: TextInputAction.search,
                                   onSubmitted: (value) {
                                     controller.searchStudent(
-                                        Get.find<GetStorageService>()
-                                            .appdata
-                                            .read('SchoolId'),
-                                        controller
-                                            .searchEditingController.text);
+                                        Get.find<GetStorageService>().appdata.read('SchoolId'), controller.searchEditingController.text);
                                     node.unfocus();
                                   },
                                   decoration: InputDecoration(
                                     filled: true,
-                                    prefixIcon: Icon(Icons.search,
-                                        color:
-                                            Theme.of(context).iconTheme.color),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    fillColor: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .fillColor,
+                                    prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
+                                    border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
+                                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                                     contentPadding: EdgeInsets.zero,
                                     hintText: 'Search',
                                   ),
@@ -74,8 +61,7 @@ class StudentListView extends StatelessWidget {
                         Obx(
                           () => controller.isSearchClick.value != true
                               ? Container(
-                                  margin:
-                                      EdgeInsets.only(top: 6.0, bottom: 6.0),
+                                  margin: EdgeInsets.only(top: 6.0, bottom: 6.0),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey.shade300,
@@ -96,16 +82,14 @@ class StudentListView extends StatelessWidget {
                         Obx(
                           () => controller.isSearchClick.value != true
                               ? Container(
-                                  margin: EdgeInsets.only(
-                                      top: 6.0, bottom: 6.0, right: 6.0),
+                                  margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey.shade300,
                                   ),
                                   child: IconButton(
                                     onPressed: () {
-                                      Get.toNamed(AppRoutes.ADDUSER,
-                                          arguments: {'UserType': 'Student'});
+                                      Get.toNamed(AppRoutes.ADDUSER, arguments: {'UserType': 'Student'});
                                       //controller.isSearchClick.value = true;
                                     }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
                                     icon: Icon(
@@ -119,8 +103,7 @@ class StudentListView extends StatelessWidget {
                         Obx(
                           () => controller.isSearchClick.value == true
                               ? Container(
-                                  margin: EdgeInsets.only(
-                                      top: 6.0, bottom: 6.0, right: 6.0),
+                                  margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey.shade300,
@@ -128,8 +111,7 @@ class StudentListView extends StatelessWidget {
                                   child: IconButton(
                                     onPressed: () {
                                       controller.isSearchClick.value = false;
-                                      controller.searchEditingController.text =
-                                          '';
+                                      controller.searchEditingController.text = '';
                                       controller.getAllStudentBySchoolId(1);
                                       node.unfocus();
                                     },
@@ -156,11 +138,9 @@ class StudentListView extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12.0),
+                                    padding: EdgeInsets.symmetric(horizontal: 12.0),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         //Post Header
                                         Row(
@@ -169,9 +149,7 @@ class StudentListView extends StatelessWidget {
                                               onTap: () => Get.toNamed(
                                                 AppRoutes.USERPROFILE,
                                                 arguments: {
-                                                  "userID": controller
-                                                      .studentsDataList[index]
-                                                      .userID,
+                                                  "userID": controller.studentsDataList[index].userID,
                                                 },
                                               ),
                                               child: ClipOval(
@@ -188,15 +166,13 @@ class StudentListView extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     '${controller.studentsDataList[index].userLastname}, ${controller.studentsDataList[index].userFirstname}',
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -216,19 +192,11 @@ class StudentListView extends StatelessWidget {
                                                   //             .value ==
                                                   //         false
                                                   //     ?
-                                                  controller
-                                                              .studentsDataList[
-                                                                  index]
-                                                              .lockoutEnabled ==
-                                                          false
+                                                  controller.studentsDataList[index].lockoutEnabled == false
                                                       ? GestureDetector(
-                                                          onTap: () => Dialogs
-                                                              .showDisableAccount(
+                                                          onTap: () => Dialogs.showDisableAccount(
                                                             context,
-                                                            controller
-                                                                .studentsDataList[
-                                                                    index]
-                                                                .userID,
+                                                            controller.studentsDataList[index].userID,
                                                           ),
                                                           // onTap: () => controller
                                                           //     .isAccountDisabled
@@ -236,39 +204,27 @@ class StudentListView extends StatelessWidget {
                                                           child: Container(
                                                             height: 3.h,
                                                             width: 130,
-                                                            decoration:
-                                                                BoxDecoration(
+                                                            decoration: BoxDecoration(
                                                               color: mainColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    5),
+                                                              borderRadius: BorderRadius.all(
+                                                                Radius.circular(5),
                                                               ),
                                                             ),
                                                             child: Center(
                                                               child: Text(
                                                                 'Account Enabled',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
+                                                                style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontWeight: FontWeight.w600,
                                                                 ),
                                                               ),
                                                             ),
                                                           ),
                                                         )
                                                       : GestureDetector(
-                                                          onTap: () => Dialogs
-                                                              .showEnableAccount(
+                                                          onTap: () => Dialogs.showEnableAccount(
                                                             context,
-                                                            controller
-                                                                .studentsDataList[
-                                                                    index]
-                                                                .userID,
+                                                            controller.studentsDataList[index].userID,
                                                           ),
                                                           // onTap: () => controller
                                                           //     .isAccountDisabled
@@ -276,27 +232,18 @@ class StudentListView extends StatelessWidget {
                                                           child: Container(
                                                             height: 3.h,
                                                             width: 130,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Colors
-                                                                  .redAccent,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    5),
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.redAccent,
+                                                              borderRadius: BorderRadius.all(
+                                                                Radius.circular(5),
                                                               ),
                                                             ),
                                                             child: Center(
                                                               child: Text(
                                                                 'Account Disabled',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
+                                                                style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontWeight: FontWeight.w600,
                                                                 ),
                                                               ),
                                                             ),
@@ -311,14 +258,41 @@ class StudentListView extends StatelessWidget {
                                                 color: Colors.green,
                                               ),
                                               onPressed: () => {
-                                                print(
-                                                    '${controller.studentsDataList[index].name}'),
-                                                print(
-                                                    '${controller.studentsDataList[index].userCode}'),
-                                                print(
-                                                    '${controller.studentsDataList.length}'),
-                                                print(
-                                                    '${controller.studentsDataList[index].lockoutEnabled}'),
+                                                Get.toNamed(
+                                                  AppRoutes.EDITUSER,
+                                                  arguments: {
+                                                    "User_ID": controller.studentsDataList[index].userID,
+                                                    // "User_SchoolID": controller.educatorsDataList[index].userSchoolID,
+                                                    // "User_Code": controller.educatorsDataList[index].userCode,
+                                                    // "User_Firstname": controller.educatorsDataList[index].userFirstname,
+                                                    // "User_Lastname": controller.educatorsDataList[index].userLastname,
+                                                    // "User_Middlename": controller.educatorsDataList[index].userMiddlename,
+                                                    // "User_Address": controller.educatorsDataList[index].userAddress,
+                                                    // "User_Gender": controller.educatorsDataList[index].userGender,
+                                                    // "User_Image": controller.educatorsDataList[index].userImage,
+                                                    // "User_EducationalAttainment": controller.educatorsDataList[index].userEducationalAttainment,
+                                                    // "User_SubjMajor": controller.educatorsDataList[index].userSubjMajor,
+                                                    // "User_Position": controller.educatorsDataList[index].userPosition,
+                                                    // "User_Facebook": controller.educatorsDataList[index].userFacebook,
+                                                    // "User_Twitter": controller.educatorsDataList[index].userTwitter,
+                                                    // "User_Instagram": controller.educatorsDataList[index].userInstagram,
+                                                    // "User_Email": controller.educatorsDataList[index].userEmail,
+                                                    // "User_Skype": controller.educatorsDataList[index]..userSkype,
+                                                    // "User_Zoom": controller.educatorsDataList[index].userZoom,
+                                                    // "User_Motto": controller.educatorsDataList[index].userMotto,
+                                                    // "User_Nickname": controller.educatorsDataList[index].userNickname,
+                                                    // "User_Dreamjob": controller.educatorsDataList[index].userDreamjob,
+                                                    // "User_Year": controller.educatorsDataList[index].userYear,
+                                                    // "User_Type": controller.educatorsDataList[index].userType,
+                                                    // "Parent_Fullname": controller.educatorsDataList[index].parentFullname,
+                                                    // "Parent_Email": controller.educatorsDataList[index].parentEmail,
+                                                    // "Parent_ContactNumber": controller.educatorsDataList[index].parentContactNumber,
+                                                  },
+                                                ),
+                                                print('${controller.studentsDataList[index].name}'),
+                                                print('${controller.studentsDataList[index].userCode}'),
+                                                print('${controller.studentsDataList.length}'),
+                                                print('${controller.studentsDataList[index].lockoutEnabled}'),
                                               },
                                             ),
                                           ],

@@ -16,4 +16,5 @@ class AppRoutes {
   static const String EDITSCHOOL = '/editschool';
   static const String USERPROFILE = '/userprofile';
   static const String ADDUSER = '/adduser';
+  static const String EDITUSER = '/edituser';
 }

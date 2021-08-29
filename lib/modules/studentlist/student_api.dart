@@ -13,21 +13,18 @@ class StudentApi {
   static Future getAllStudentBySchoolId(counter) async {
     try {
       var response = await client.get(
-        Uri.parse(
-            '$baseUrl/api/Student/GetAllStudentBySchoolId?schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=$counter'),
+        Uri.parse('$baseUrl/api/Student/GetAllStudentBySchoolId?schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=$counter'),
 
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getAllStudentBySchoolId Services Connection timeout.");
+          throw TimeoutException("getAllStudentBySchoolId Services Connection timeout.");
         },
       );
       print(response.body);
@@ -56,13 +53,11 @@ class StudentApi {
   static Future searchStudent(schoolID, searchWord) async {
     try {
       var response = await client.get(
-        Uri.parse(
-            '$baseUrl/api/Student/SearchStudent?schoolID=$schoolID&searchWord=$searchWord'),
+        Uri.parse('$baseUrl/api/Student/SearchStudent?schoolID=$schoolID&searchWord=$searchWord'),
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
       ).timeout(
         const Duration(seconds: 10),
@@ -93,22 +88,17 @@ class StudentApi {
 
   static Future disableEnableStudent(studentID, bool value) async {
     try {
-      var response = await client.post(
-          Uri.parse('$baseUrl/api/Student/DisableEnableStudent'),
-          headers: {
-            "access-control-allow-origin": "*",
-            'content-type': 'application/x-www-form-urlencoded',
-            'Authorization':
-                'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
-          },
-          body: {
-            'Id': studentID.toString(),
-            'LockoutEnabled': value.toString(),
-          }).timeout(
+      var response = await client.post(Uri.parse('$baseUrl/api/Student/DisableEnableStudent'), headers: {
+        "access-control-allow-origin": "*",
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+      }, body: {
+        'Id': studentID.toString(),
+        'LockoutEnabled': value.toString(),
+      }).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "disableEnableStudent Services Connection timeout.");
+          throw TimeoutException("disableEnableStudent Services Connection timeout.");
         },
       );
       print(response.body);

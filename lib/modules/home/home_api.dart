@@ -13,21 +13,18 @@ class HomeApi {
   static Future getAllAnnouncementBySchool() async {
     try {
       var response = await client.get(
-        Uri.parse(
-            '$baseUrl/api/Announcement/GetAllAnnouncementBySchool?schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=1'),
+        Uri.parse('$baseUrl/api/Announcement/GetAllAnnouncementBySchool?schoolId=${Get.find<GetStorageService>().appdata.read('SchoolId')}&offset=1'),
 
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
         // encoding: Encoding.getByName('utf-8'),
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getAllAnnouncementBySchool Services Connection timeout.");
+          throw TimeoutException("getAllAnnouncementBySchool Services Connection timeout.");
         },
       );
       print(response.body);
@@ -56,22 +53,17 @@ class HomeApi {
 
   static Future deleteAnnouncement(announceID, schoolId) async {
     try {
-      var response = await client.post(
-          Uri.parse('$baseUrl/api/Announcement/DeleteAnnouncement'),
-          headers: {
-            "access-control-allow-origin": "*",
-            'content-type': 'application/x-www-form-urlencoded',
-            'Authorization':
-                'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
-          },
-          body: {
-            "Announce_ID": announceID.toString(),
-            "Announce_School_ID": schoolId.toString(),
-          }).timeout(
+      var response = await client.post(Uri.parse('$baseUrl/api/Announcement/DeleteAnnouncement'), headers: {
+        "access-control-allow-origin": "*",
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+      }, body: {
+        "Announce_ID": announceID.toString(),
+        "Announce_School_ID": schoolId.toString(),
+      }).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "deleteAnnouncement Services Connection timeout.");
+          throw TimeoutException("deleteAnnouncement Services Connection timeout.");
         },
       );
       print('deleteAnnouncement.body ${response.body}');

@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yes_premium/colors.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/userprofile/userprofile_controller.dart';
+import 'package:yes_premium/shared/loading.dart';
 
 class UserProfileView extends GetView<UserProfileController> {
   @override
@@ -21,11 +22,8 @@ class UserProfileView extends GetView<UserProfileController> {
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
               filled: true,
-              prefixIcon:
-                  Icon(Icons.search, color: Theme.of(context).iconTheme.color),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
+              border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
               fillColor: Theme.of(context).inputDecorationTheme.fillColor,
               contentPadding: EdgeInsets.zero,
               hintText: 'Search',
@@ -36,11 +34,8 @@ class UserProfileView extends GetView<UserProfileController> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Obx(
-            () => controller.isLoading.value
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Column(
+            () => controller.isLoading.value == false
+                ? Column(
                     children: [
                       Container(
                         // color: mainColor,
@@ -78,7 +73,8 @@ class UserProfileView extends GetView<UserProfileController> {
                         height: 100.0,
                       ),
                     ],
-                  ),
+                  )
+                : LoadingView(),
           ),
         ),
       ),
@@ -94,9 +90,7 @@ class UserProfileView extends GetView<UserProfileController> {
         Align(
           alignment: Alignment.centerLeft,
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(5))),
+            decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.all(Radius.circular(5))),
 
             // alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 12.0),
@@ -447,9 +441,7 @@ class UserProfileView extends GetView<UserProfileController> {
         Align(
           alignment: Alignment.centerLeft,
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(5))),
+            decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.all(Radius.circular(5))),
 
             // alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 12.0),
@@ -638,9 +630,7 @@ class UserProfileView extends GetView<UserProfileController> {
         Align(
           alignment: Alignment.centerLeft,
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(5))),
+            decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.all(Radius.circular(5))),
 
             // alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 12.0),

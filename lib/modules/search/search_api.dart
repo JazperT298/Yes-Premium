@@ -12,19 +12,16 @@ class SearchApi {
   static Future getAllUserBySearchKeyword(schoolID, searchKeyword) async {
     try {
       var response = await client.get(
-        Uri.parse(
-            '$baseUrl/api/Users/GetAllUserBySearchKeyword?schoolID=$schoolID&searchKeyword=$searchKeyword'),
+        Uri.parse('$baseUrl/api/Users/GetAllUserBySearchKeyword?schoolID=$schoolID&searchKeyword=$searchKeyword'),
         headers: {
           "access-control-allow-origin": "*",
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization':
-              'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+          'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
         },
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          throw TimeoutException(
-              "getAllUserBySearchKeyword Services Connection timeout.");
+          throw TimeoutException("getAllUserBySearchKeyword Services Connection timeout.");
         },
       );
       print(response.body);

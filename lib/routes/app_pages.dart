@@ -5,6 +5,7 @@ import 'package:yes_premium/modules/announcement/announcement_view.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_binding.dart';
 import 'package:yes_premium/modules/bottomnav/bottomnav_view.dart';
 import 'package:yes_premium/modules/editschool/editschool_view.dart';
+import 'package:yes_premium/modules/edituser/edituser_view.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_view.dart';
 import 'package:yes_premium/modules/filesadd/filesadd_view.dart';
 import 'package:yes_premium/modules/filesshare/filesshare_view.dart';
@@ -118,6 +119,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.ADDUSER,
       page: () => AddUserView(),
+      transition: Transition.downToUp,
+      curve: Curves.linearToEaseOut,
+    ),
+    GetPage(
+      name: AppRoutes.EDITUSER,
+      page: () => EditUserView(),
       transition: Transition.downToUp,
       curve: Curves.linearToEaseOut,
     ),

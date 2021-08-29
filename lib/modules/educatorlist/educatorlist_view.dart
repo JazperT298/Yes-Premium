@@ -15,8 +15,7 @@ class EducatorListView extends StatelessWidget {
     final node = FocusScope.of(context);
     return Scaffold(
       body: Obx(
-        () => controller.isLoading.value == true &&
-                controller.educatorsDataList.length <= 0
+        () => controller.isLoading.value == true && controller.educatorsDataList.length <= 0
             ? LoadingView()
             : SafeArea(
                 child: CustomScrollView(
@@ -35,30 +34,18 @@ class EducatorListView extends StatelessWidget {
                                   maxLines: 1,
                                   style: TextStyle(fontSize: 17),
                                   textAlignVertical: TextAlignVertical.center,
-                                  controller:
-                                      controller.searchEditingController,
+                                  controller: controller.searchEditingController,
                                   textInputAction: TextInputAction.search,
                                   onSubmitted: (value) {
                                     controller.searchEducator(
-                                        Get.find<GetStorageService>()
-                                            .appdata
-                                            .read('SchoolId'),
-                                        controller
-                                            .searchEditingController.text);
+                                        Get.find<GetStorageService>().appdata.read('SchoolId'), controller.searchEditingController.text);
                                     node.unfocus();
                                   },
                                   decoration: InputDecoration(
                                     filled: true,
-                                    prefixIcon: Icon(Icons.search,
-                                        color:
-                                            Theme.of(context).iconTheme.color),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    fillColor: Theme.of(context)
-                                        .inputDecorationTheme
-                                        .fillColor,
+                                    prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
+                                    border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(30))),
+                                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                                     contentPadding: EdgeInsets.zero,
                                     hintText: 'Search',
                                   ),
@@ -71,8 +58,7 @@ class EducatorListView extends StatelessWidget {
                         Obx(
                           () => controller.isSearchClick.value != true
                               ? Container(
-                                  margin:
-                                      EdgeInsets.only(top: 6.0, bottom: 6.0),
+                                  margin: EdgeInsets.only(top: 6.0, bottom: 6.0),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey.shade300,
@@ -93,16 +79,14 @@ class EducatorListView extends StatelessWidget {
                         Obx(
                           () => controller.isSearchClick.value != true
                               ? Container(
-                                  margin: EdgeInsets.only(
-                                      top: 6.0, bottom: 6.0, right: 6.0),
+                                  margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey.shade300,
                                   ),
                                   child: IconButton(
                                     onPressed: () {
-                                      Get.toNamed(AppRoutes.ADDUSER,
-                                          arguments: {'UserType': 'Educator'});
+                                      Get.toNamed(AppRoutes.ADDUSER, arguments: {'UserType': 'Educator'});
                                       //controller.isSearchClick.value = true;
                                     }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
                                     icon: Icon(
@@ -116,8 +100,7 @@ class EducatorListView extends StatelessWidget {
                         Obx(
                           () => controller.isSearchClick.value == true
                               ? Container(
-                                  margin: EdgeInsets.only(
-                                      top: 6.0, bottom: 6.0, right: 6.0),
+                                  margin: EdgeInsets.only(top: 6.0, bottom: 6.0, right: 6.0),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey.shade300,
@@ -125,8 +108,7 @@ class EducatorListView extends StatelessWidget {
                                   child: IconButton(
                                     onPressed: () {
                                       controller.isSearchClick.value = false;
-                                      controller.searchEditingController.text =
-                                          '';
+                                      controller.searchEditingController.text = '';
                                       controller.getAllEducatorBySchoolId(1);
                                       node.unfocus();
                                     }, //=> Get.toNamed(AppRoutes.ANNOUNCEMENT),
@@ -153,11 +135,9 @@ class EducatorListView extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12.0),
+                                    padding: EdgeInsets.symmetric(horizontal: 12.0),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         //Post Header
                                         Row(
@@ -166,9 +146,7 @@ class EducatorListView extends StatelessWidget {
                                               onTap: () => Get.toNamed(
                                                 AppRoutes.USERPROFILE,
                                                 arguments: {
-                                                  "userID": controller
-                                                      .educatorsDataList[index]
-                                                      .userID,
+                                                  "userID": controller.educatorsDataList[index].userID,
                                                 },
                                               ),
                                               child: ClipOval(
@@ -185,15 +163,13 @@ class EducatorListView extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     '${controller.educatorsDataList[index].userLastname}, ${controller.educatorsDataList[index].userFirstname}',
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                     ),
                                                   ),
                                                   SizedBox(
@@ -204,8 +180,7 @@ class EducatorListView extends StatelessWidget {
                                                       Text(
                                                         'Position : ${controller.educatorsDataList[index].userPosition} ',
                                                         style: TextStyle(
-                                                          color:
-                                                              Colors.grey[600],
+                                                          color: Colors.grey[600],
                                                           fontSize: 11.sp,
                                                         ),
                                                       ),
@@ -221,20 +196,40 @@ class EducatorListView extends StatelessWidget {
                                               ),
                                               onPressed: () => {
                                                 Get.toNamed(
-                                                  AppRoutes.USERPROFILE,
+                                                  AppRoutes.EDITUSER,
                                                   arguments: {
-                                                    "userID": controller
-                                                        .educatorsDataList[
-                                                            index]
-                                                        .userID,
+                                                    "User_ID": controller.educatorsDataList[index].userID,
+                                                    // "User_SchoolID": controller.educatorsDataList[index].userSchoolID,
+                                                    // "User_Code": controller.educatorsDataList[index].userCode,
+                                                    // "User_Firstname": controller.educatorsDataList[index].userFirstname,
+                                                    // "User_Lastname": controller.educatorsDataList[index].userLastname,
+                                                    // "User_Middlename": controller.educatorsDataList[index].userMiddlename,
+                                                    // "User_Address": controller.educatorsDataList[index].userAddress,
+                                                    // "User_Gender": controller.educatorsDataList[index].userGender,
+                                                    // "User_Image": controller.educatorsDataList[index].userImage,
+                                                    // "User_EducationalAttainment": controller.educatorsDataList[index].userEducationalAttainment,
+                                                    // "User_SubjMajor": controller.educatorsDataList[index].userSubjMajor,
+                                                    // "User_Position": controller.educatorsDataList[index].userPosition,
+                                                    // "User_Facebook": controller.educatorsDataList[index].userFacebook,
+                                                    // "User_Twitter": controller.educatorsDataList[index].userTwitter,
+                                                    // "User_Instagram": controller.educatorsDataList[index].userInstagram,
+                                                    // "User_Email": controller.educatorsDataList[index].userEmail,
+                                                    // "User_Skype": controller.educatorsDataList[index]..userSkype,
+                                                    // "User_Zoom": controller.educatorsDataList[index].userZoom,
+                                                    // "User_Motto": controller.educatorsDataList[index].userMotto,
+                                                    // "User_Nickname": controller.educatorsDataList[index].userNickname,
+                                                    // "User_Dreamjob": controller.educatorsDataList[index].userDreamjob,
+                                                    // "User_Year": controller.educatorsDataList[index].userYear,
+                                                    // "User_Type": controller.educatorsDataList[index].userType,
+                                                    // "Parent_Fullname": controller.educatorsDataList[index].parentFullname,
+                                                    // "Parent_Email": controller.educatorsDataList[index].parentEmail,
+                                                    // "Parent_ContactNumber": controller.educatorsDataList[index].parentContactNumber,
                                                   },
                                                 ),
-                                                print(
-                                                    '${controller.educatorsDataList[index].userID}'),
-                                                print(
-                                                    '${controller.educatorsDataList[index].userName}'),
-                                                print(
-                                                    '${controller.educatorsDataList.length}'),
+                                                print('${controller.educatorsDataList[index].userID}'),
+                                                print('${controller.educatorsDataList[index].userMiddlename}'),
+                                                print('${controller.educatorsDataList[index].userTwitter}'),
+                                                print('${controller.educatorsDataList.length}'),
                                               },
                                             ),
                                           ],

@@ -61,15 +61,13 @@ class AccountView extends GetView<AccountController> {
                     children: [
                       Row(
                         children: [
-                          Get.find<GetStorageService>().appdata.read('Roles') ==
-                                  'SchoolAdmin'
+                          Get.find<GetStorageService>().appdata.read('Roles') == 'SchoolAdmin'
                               ? Container(
                                   width: 10.w,
                                   height: 7.h,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage(
-                                          "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                                      image: NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
                                       fit: BoxFit.cover,
                                     ),
                                     shape: BoxShape.circle,
@@ -80,8 +78,7 @@ class AccountView extends GetView<AccountController> {
                                   height: 7.h,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage(
-                                          "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
+                                      image: NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
                                       fit: BoxFit.cover,
                                     ),
                                     shape: BoxShape.circle,
@@ -264,9 +261,7 @@ class AccountView extends GetView<AccountController> {
                         SizedBox(
                           width: 8.0,
                         ),
-                        Text('Help & Support',
-                            style: TextStyle(
-                                fontSize: 10.sp, fontWeight: FontWeight.w600)),
+                        Text('Help & Support', style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_down_sharp),
@@ -288,9 +283,7 @@ class AccountView extends GetView<AccountController> {
                         SizedBox(
                           width: 8.0,
                         ),
-                        Text('Settings & Privacy',
-                            style: TextStyle(
-                                fontSize: 10.sp, fontWeight: FontWeight.w600)),
+                        Text('Settings & Privacy', style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_down_sharp),
@@ -350,8 +343,7 @@ class AccountView extends GetView<AccountController> {
           ),
           Text(
             title!,
-            style: whiteText.copyWith(
-                fontWeight: FontWeight.bold, fontSize: 11.sp),
+            style: whiteText.copyWith(fontWeight: FontWeight.bold, fontSize: 11.sp),
           ),
         ],
       ),

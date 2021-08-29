@@ -10,17 +10,14 @@ import 'package:yes_premium/services/get_storage_service.dart';
 class FilesAddApi {
   static var client = http.Client();
 
-  static Future addUserNotes(userID, schoolID, notesTitle, notesDesc,
-      notesFileName, File notesFile) async {
+  static Future addUserNotes(userID, schoolID, notesTitle, notesDesc, notesFileName, File notesFile) async {
     try {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': '*',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       };
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('$baseUrl/api/UserNotes/AddUserNotes'));
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/api/UserNotes/AddUserNotes'));
       request.fields.addAll({
         'User_ID': userID,
         'School_ID': schoolID!,
@@ -28,8 +25,7 @@ class FilesAddApi {
         'Notes_Desc': notesDesc,
         'Notes_FileName': notesFileName,
       });
-      request.files
-          .add(await http.MultipartFile.fromPath('Notes_File', notesFile.path));
+      request.files.add(await http.MultipartFile.fromPath('Notes_File', notesFile.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -54,17 +50,14 @@ class FilesAddApi {
     }
   }
 
-  static Future updateUserNotes(notesID, userID, schoolID, notesTitle,
-      notesDesc, notesFileName, File notesFile) async {
+  static Future updateUserNotes(notesID, userID, schoolID, notesTitle, notesDesc, notesFileName, File notesFile) async {
     try {
       var headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': '*',
-        'Authorization':
-            'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
+        'Authorization': 'Bearer ${Get.find<GetStorageService>().appdata.read('access_token').toString()}',
       };
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('$baseUrl/api/UserNotes/AddUserNotes'));
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/api/UserNotes/AddUserNotes'));
       request.fields.addAll({
         'Notes_ID': notesID,
         'User_ID': userID,
@@ -73,8 +66,7 @@ class FilesAddApi {
         'Notes_Desc': notesDesc,
         'Notes_FileName': notesFileName,
       });
-      request.files
-          .add(await http.MultipartFile.fromPath('Notes_File', notesFile.path));
+      request.files.add(await http.MultipartFile.fromPath('Notes_File', notesFile.path));
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();

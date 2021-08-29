@@ -34,9 +34,7 @@ class FilesAddView extends StatelessWidget {
                       controller.addUserNotes(
                           context,
                           Get.find<GetStorageService>().appdata.read('UserId'),
-                          Get.find<GetStorageService>()
-                              .appdata
-                              .read('SchoolId'),
+                          Get.find<GetStorageService>().appdata.read('SchoolId'),
                           controller.titleEditingController.text,
                           controller.detailsEditingController.text,
                           controller.filenameprofile.value,
@@ -86,15 +84,13 @@ class FilesAddView extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Get.find<GetStorageService>().appdata.read('Roles') ==
-                                'SchoolAdmin'
+                        Get.find<GetStorageService>().appdata.read('Roles') == 'SchoolAdmin'
                             ? Container(
                                 width: 10.w,
                                 height: 7.h,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(
-                                        "$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
+                                    image: NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('SchoolAvatar')}"),
                                     fit: BoxFit.cover,
                                   ),
                                   shape: BoxShape.circle,
@@ -105,8 +101,7 @@ class FilesAddView extends StatelessWidget {
                                 height: 7.h,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(
-                                        "$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
+                                    image: NetworkImage("$photoDir/${Get.find<GetStorageService>().appdata.read('Avatar')}"),
                                     fit: BoxFit.cover,
                                   ),
                                   shape: BoxShape.circle,
@@ -173,8 +168,7 @@ class FilesAddView extends StatelessWidget {
                       () => controller.attachments.length == 0
                           ? controller.filenameprofile.value != ""
                               ? Badge(
-                                  position:
-                                      BadgePosition.topEnd(top: -10, end: -5),
+                                  position: BadgePosition.topEnd(top: -10, end: -5),
                                   badgeColor: Colors.grey,
                                   badgeContent: GestureDetector(
                                     onTap: () {
@@ -197,9 +191,7 @@ class FilesAddView extends StatelessWidget {
                                   child: controller.filenameprofile.value != ""
                                       ? Text(
                                           '${controller.filenameprofile.value}',
-                                          style: TextStyle(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w600),
+                                          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
                                         )
                                       : Container(
                                           // margin: EdgeInsets.only(left: 4.0, right: 8.0),
@@ -252,9 +244,7 @@ class FilesAddView extends StatelessWidget {
                               child: controller.filenameprofile.value != ""
                                   ? Text(
                                       '${controller.filenameprofile.value}',
-                                      style: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w600),
+                                      style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
                                     )
                                   : Container(
                                       // margin: EdgeInsets.only(left: 4.0, right: 8.0),
@@ -316,9 +306,7 @@ class FilesAddView extends StatelessWidget {
                     SizedBox(
                       width: 12.0,
                     ),
-                    Text('Files',
-                        style: TextStyle(
-                            fontSize: 10.sp, fontWeight: FontWeight.w600)),
+                    Text('Files', style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600)),
                   ],
                 ).paddingOnly(left: 12.0, right: 12.0, top: 8.0, bottom: 8.0),
               ),
