@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/search/search_controller.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/shared/loading.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -59,84 +60,99 @@ class SearchView extends StatelessWidget {
         // ],
       ),
       body: Obx(
-        () => ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: controller.userSearchList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: Container(
-                margin: EdgeInsets.symmetric(vertical: 5.0),
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          //Post Header
-                          Row(
+        () => controller.isLoading.value == false
+            ? controller.userSearchList.length == 0
+                ? Container(
+                    child: Center(
+                      child: Text(
+                        'No User Found!',
+                        style: TextStyle(
+                            fontSize: 12.sp, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: controller.userSearchList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 5.0),
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Column(
                             children: [
-                              ClipOval(
-                                child: Image.network(
-                                  '$photoDir/${controller.userSearchList[index].userImage}',
-                                  height: 60.0,
-                                  width: 60.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              Expanded(
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.0),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
-                                    Text(
-                                      '${controller.userSearchList[index].userLastname}, ${controller.userSearchList[index].userFirstname}',
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
+                                    //Post Header
                                     Row(
                                       children: [
-                                        Text(
-                                          'Position : ${controller.userSearchList[index].userPosition} ',
-                                          style: TextStyle(
-                                            color: Colors.grey[600],
-                                            fontSize: 11.sp,
+                                        ClipOval(
+                                          child: Image.network(
+                                            '$photoDir/${controller.userSearchList[index].userImage}',
+                                            height: 60.0,
+                                            width: 60.0,
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${controller.userSearchList[index].userLastname}, ${controller.userSearchList[index].userFirstname}',
+                                                style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5.0,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Position : ${controller.userSearchList[index].userPosition} ',
+                                                    style: TextStyle(
+                                                      color: Colors.grey[600],
+                                                      fontSize: 11.sp,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(
+                                            Icons.edit,
+                                            color: Colors.green,
+                                          ),
+                                          onPressed: () => {
+                                            print(
+                                                '${controller.userSearchList.length}'),
+                                          },
+                                        ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.edit,
-                                  color: Colors.green,
-                                ),
-                                onPressed: () => {
-                                  print('${controller.userSearchList.length}'),
-                                },
-                              ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
+                        ),
+                      );
+                    },
+                  )
+            : LoadingView(),
       ),
     );
   }

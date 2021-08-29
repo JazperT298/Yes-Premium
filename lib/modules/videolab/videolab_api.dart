@@ -118,7 +118,7 @@ class VideoLabApi {
 
       if (response.statusCode == 200) {
         var message = jsonDecode(response.body)['Message'];
-        print('$message');
+        print('message $message');
         return message;
       } else {
         print('deleteVideoLibrary Services  error');

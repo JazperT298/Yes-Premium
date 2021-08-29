@@ -206,9 +206,10 @@ class AccountView extends GetView<AccountController> {
                       Expanded(
                         child: GestureDetector(
                           child: _buildTile(
-                            color: Colors.purple,
+                            //color: Colors.purple,
+
                             icon: Icons.note,
-                            title: "Groups",
+                            title: "",
                           ),
                         ),
                       ),
@@ -220,27 +221,27 @@ class AccountView extends GetView<AccountController> {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Row(
                     children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: _buildTile(
-                            color: colorGrey,
-                            icon: Icons.calendar_today,
-                            title: "Events",
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 15.0),
-                      Expanded(
-                        child: GestureDetector(
-                          child: _buildTile(
-                            color: taglineColor,
-                            icon: Icons.group_work,
-                            title: "Pages",
-                          ),
-                        ),
-                      ),
+                      // Expanded(
+                      //   flex: 1,
+                      //   child: GestureDetector(
+                      //     onTap: () {},
+                      //     child: _buildTile(
+                      //       color: colorGrey,
+                      //       icon: Icons.calendar_today,
+                      //       title: "Events",
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(width: 15.0),
+                      // Expanded(
+                      //   child: GestureDetector(
+                      //     child: _buildTile(
+                      //       color: taglineColor,
+                      //       icon: Icons.group_work,
+                      //       title: "Pages",
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

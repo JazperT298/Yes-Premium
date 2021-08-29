@@ -51,18 +51,20 @@ class FilesAddController extends GetxController {
   void addUserNotes(context, userID, schoolID, notesTitle, notesDesc,
       filenameprofile, file) async {
     try {
+      isLoading.value = true;
       var result = await FilesAddApi.addUserNotes(
           userID, schoolID, notesTitle, notesDesc, filenameprofile, file!);
       if (result == "Success") {
         Get.back();
+        isLoading.value = false;
         Dialogs.showMyToast(context, "Notes successfully posted!");
         filenameprofile.value = '';
         fileTypeprofile.value = '';
         detailsEditingController.text = "";
         titleEditingController.text = "";
-
         attachments.length = 0;
       } else {
+        isLoading.value = false;
         Dialogs.showMyToast(context, "Error posting an Notes!");
       }
     } catch (e) {

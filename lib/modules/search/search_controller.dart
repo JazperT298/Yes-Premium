@@ -12,13 +12,18 @@ class SearchController extends GetxController {
   RxBool isSearchClick = false.obs;
   var isLoading = true.obs;
   RxList<UserSearch> userSearchList = <UserSearch>[].obs;
+  @override
+  void onInit() {
+    isLoading.value = false;
+    super.onInit();
+  }
 
   void getAllUserBySearchKeyword(schoolID, searchKeyword) async {
     try {
       List result =
           await SearchApi.getAllUserBySearchKeyword(schoolID, searchKeyword);
       userSearchList.clear();
-      if (!isLoading.value) isLoading(true);
+      isLoading.value = true;
       for (var i = 0; i < result.length; i++) {
         Map mapping = {
           "User_ID": result[i]['User_ID'],
@@ -59,7 +64,7 @@ class SearchController extends GetxController {
         var jsonStringEncoded = jsonEncode(mapping);
         userSearchList.add(usersearchFromJson(jsonStringEncoded));
       }
-      isLoading(false);
+      isLoading.value = false;
     } catch (e) {
       print('err $e');
     }

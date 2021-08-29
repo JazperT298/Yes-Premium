@@ -72,12 +72,12 @@ class FilesApi {
               "deleteUserNotes Services Connection timeout.");
         },
       );
-      if (response.statusCode == 200 && json.decode(response.body)['Success']) {
-        // var message = jsonDecode(response.body)['Message'];
-        // print('$message');
-        // return message;
-        return response.body;
+      if (response.statusCode == 200) {
+        var message = jsonDecode(response.body)['Message'];
+        print('message $message');
+        return message;
       } else {
+        print('deleteVideoLibrary Services  error');
         return null;
       }
     } on TimeoutException catch (_) {

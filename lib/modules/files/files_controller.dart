@@ -8,6 +8,7 @@ import 'package:html/parser.dart';
 import 'package:yes_premium/models/notes.dart';
 import 'package:yes_premium/modules/files/files_api.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
+import 'package:yes_premium/shared/dialogs.dart';
 
 class FilesController extends GetxController {
   final scrollController = TrackingScrollController();
@@ -86,9 +87,18 @@ class FilesController extends GetxController {
     return parsedString;
   }
 
-  void deleteUserNotes(notesID, userID, schoolID) async {
+  void deleteUserNotes(context, notesID, userID, schoolID) async {
     try {
-      await FilesApi.deleteUserNotes(notesID, userID, schoolID);
+      isLoading.value = true;
+      var result = await FilesApi.deleteUserNotes(notesID, userID, schoolID);
+
+      if (result == "Success") {
+        isLoading.value = false;
+        Dialogs.showMyToast(context, "Note successfully deleted!");
+      } else {
+        isLoading.value = false;
+        Dialogs.showWarningToast(context, "Error in deleting a note  !");
+      }
     } catch (error) {
       print("deleteStoreRider $error");
     } finally {

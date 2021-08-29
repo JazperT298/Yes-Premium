@@ -262,7 +262,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
                       Get.find<GetStorageService>().deleteAnnouncementItems();
                       Get.find<GetStorageService>().deleteVideoLibItems();
@@ -326,8 +326,12 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
+                      Get.find<GetStorageService>().deleteAnnouncementItems();
+                      Get.find<GetStorageService>().deleteVideoLibItems();
+                      Get.find<GetStorageService>().deleteNotesItems();
+                      //  Get.find<GetStorageService>().deleteNotificationItems();
                       Get.find<BottomNavController>().resetIndex(0);
                     },
                   ),
@@ -535,7 +539,7 @@ class Dialogs {
                     ),
                     onPressed: () {
                       Get.find<VideolabController>()
-                          .deleteVideoLibrary(videoLibId, schoolID);
+                          .deleteVideoLibrary(context, videoLibId, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -597,7 +601,7 @@ class Dialogs {
                     ),
                     onPressed: () {
                       Get.find<VideolabController>()
-                          .deleteVideoLibrary(videoLibId, schoolID);
+                          .deleteVideoLibrary(context, videoLibId, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -671,7 +675,7 @@ class Dialogs {
                     ),
                     onPressed: () {
                       Get.find<FilesController>()
-                          .deleteUserNotes(notesID, userID, schoolID);
+                          .deleteUserNotes(context, notesID, userID, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -733,7 +737,7 @@ class Dialogs {
                     ),
                     onPressed: () {
                       Get.find<FilesController>()
-                          .deleteUserNotes(notesID, userID, schoolID);
+                          .deleteUserNotes(context, notesID, userID, schoolID);
                       Get.back();
                     },
                   ),
@@ -791,7 +795,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
                       Get.find<GetStorageService>().deleteAnnouncementItems();
                       Get.find<GetStorageService>().deleteVideoLibItems();
@@ -842,7 +846,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.toNamed(AppRoutes.LOGOUTLOADING);
+                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
                       Get.find<GetStorageService>().deleteAnnouncementItems();
                       Get.find<GetStorageService>().deleteVideoLibItems();

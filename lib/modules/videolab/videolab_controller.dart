@@ -57,6 +57,7 @@ class VideolabController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    isLoading.value = false;
   }
 
   @override
@@ -134,35 +135,47 @@ class VideolabController extends GetxController {
   void uploadVideoLibrary(
       context, fileToUpload, title, details, schoolId) async {
     try {
+      isLoading.value = true;
       var result = await VideoLabApi.uploadVideoLibrary(
           fileToUpload, title, details, schoolId);
       if (result == "Successfully Uploaded") {
         Get.back();
+        isLoading.value = false;
         Dialogs.showMyToast(context, "Video successfully posted!");
         filenamevideoprofile.value = '';
         fileTypevideoprofile.value = '';
+        titleEditingController.text = "";
         detailsEditingController.text = "";
         filenameimageprofile.value = "";
         fileTypeimageprofile.value = "";
         attachments.length = 0;
       } else {
-        Dialogs.showMyToast(context, "Error posting an video  !");
+        isLoading.value = false;
+        Dialogs.showWarningToast(context, "Error in posting a video  !");
       }
     } catch (e) {
       print('err $e');
     } finally {
-      getSchoolVideoLibrary();
+      Get.find<VideolabController>().getSchoolVideoLibrary();
     }
   }
 
-  void deleteVideoLibrary(videoLibId, schoolId) async {
+  void deleteVideoLibrary(context, videoLibId, schoolId) async {
     try {
-      await VideoLabApi.deleteVideoLibrary(videoLibId, schoolId);
+      isLoading.value = true;
+      var result = await VideoLabApi.deleteVideoLibrary(videoLibId, schoolId);
+      if (result == "Success") {
+        isLoading.value = false;
+        Dialogs.showMyToast(context, "Video successfully deleted!");
+      } else {
+        isLoading.value = false;
+        Dialogs.showWarningToast(context, "Error in deleting a video  !");
+      }
     } catch (error) {
       print("deleteStoreRider $error");
     } finally {
       //HomeApi.getAllAnnouncementBySchool();
-      getSchoolVideoLibrary();
+      Get.find<VideolabController>().getSchoolVideoLibrary();
     }
   }
 

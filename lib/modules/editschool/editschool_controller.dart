@@ -29,6 +29,7 @@ class EditSchoolController extends GetxController {
   var filenameimageProfile = ''.obs;
   var fileTypeimageProfile = ''.obs;
   RxList<String> attachments1 = <String>[].obs;
+  RxBool isLoading = true.obs;
 
   @override
   void onInit() {
@@ -46,6 +47,8 @@ class EditSchoolController extends GetxController {
     details.text = schoolDetails.value;
     motto.text = schoolMotto.value;
     username.text = adminUsername.value;
+
+    isLoading.value = false;
   }
 
   Future<void> getImage() async {
@@ -98,7 +101,7 @@ class EditSchoolController extends GetxController {
       }
     } else {
       if (password.text.trim() != confirmpassword.text.trim()) {
-        Dialogs.showMyToast(context, "Password didn't match!");
+        Dialogs.showWarningToast(context, "Password didn't match!");
       } else if (imgprofile != null) {
         //print('AGAY 2');
         updateSchoolDetailsWithPassword(context);
@@ -123,6 +126,7 @@ class EditSchoolController extends GetxController {
 
   void updateSchoolDetailsWithoutPassword(context) async {
     try {
+      isLoading.value = true;
       var result = await EditSchoolApi.updateSchoolDetails(
         Get.find<GetStorageService>().appdata.read('School_ID'),
         name.text.trim(),
@@ -136,13 +140,15 @@ class EditSchoolController extends GetxController {
         null,
       );
       if (result == "Success") {
+        isLoading.value = false;
         Get.back();
         Dialogs.showMyToast(context, "School account successfully updated!");
         filenameimageProfile.value = '';
         fileTypeimageProfile.value = '';
         attachments1.length = 0;
       } else {
-        Dialogs.showMyToast(context, "Error in updating school account  !");
+        isLoading.value = false;
+        Dialogs.showErrorToast(context, "Error in updating school account  !");
       }
     } catch (e) {
       print('err $e');
@@ -165,6 +171,7 @@ class EditSchoolController extends GetxController {
 
   void updateSchoolDetailsWithPassword(context) async {
     try {
+      isLoading.value = true;
       var result = await EditSchoolApi.updateSchoolDetails(
           Get.find<GetStorageService>().appdata.read('School_ID'),
           name.text.trim(),
@@ -177,6 +184,7 @@ class EditSchoolController extends GetxController {
           username.text.trim(),
           password.text.trim());
       if (result == "Success") {
+        isLoading.value = false;
         Get.back();
         Dialogs.showMyToast(context, "School account successfully updated!");
         filenameimageProfile.value = '';
@@ -184,7 +192,8 @@ class EditSchoolController extends GetxController {
 
         attachments1.length = 0;
       } else {
-        Dialogs.showMyToast(context, "Error in updating school account  !");
+        isLoading.value = false;
+        Dialogs.showErrorToast(context, "Error in updating school account  !");
       }
     } catch (e) {
       print('err $e');

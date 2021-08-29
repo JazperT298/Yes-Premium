@@ -28,14 +28,14 @@ class AnnouncementApi {
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
-
+      print('message ${response.statusCode}');
       if (response.statusCode == 200) {
         var data = await response.stream.bytesToString();
         var message = jsonDecode(data)['Message'];
-        print('$message');
+        print('message $message');
         return message;
       } else {
-        print(response.reasonPhrase);
+        print('message ${response.reasonPhrase}');
       }
       // var response = await client.post(
       //     Uri.parse('$baseUrl/api/Announcement/UploadSchoolPost'),

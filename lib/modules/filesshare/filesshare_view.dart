@@ -6,6 +6,7 @@ import 'package:yes_premium/configs/app_endpoints.dart';
 import 'package:yes_premium/modules/educatorlist/educatorlist_controller.dart';
 import 'package:yes_premium/modules/files/files_controller.dart';
 import 'package:yes_premium/modules/filesshare/filesshare_controller.dart';
+import 'package:yes_premium/shared/loading.dart';
 
 class FilesShareView extends StatelessWidget {
   final controller = Get.put(EducatorListController());
@@ -98,13 +99,8 @@ class FilesShareView extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Obx(
-                () => controller.isLoading.value &&
-                        controller.educatorsDataList.length <= 0
-                    ? Container(
-                        height: 30.h,
-                        color: Colors.grey[200],
-                      )
-                    : ListView.builder(
+                () => controller.isLoading.value == false
+                    ? ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: controller.educatorsDataList.length,
@@ -217,7 +213,8 @@ class FilesShareView extends StatelessWidget {
                             ),
                           );
                         },
-                      ),
+                      )
+                    : LoadingView(),
               ),
             ),
           ],

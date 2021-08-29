@@ -37,7 +37,7 @@ class FilesAddApi {
       if (response.statusCode == 200) {
         var data = await response.stream.bytesToString();
         var message = jsonDecode(data)['Message'];
-        print('$message');
+        print('meesage $message');
         return message;
       } else {
         print(response.reasonPhrase);

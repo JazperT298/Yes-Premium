@@ -22,6 +22,7 @@ class AnnouncementController extends GetxController {
   var filenamevideoprofile = "".obs;
   var fileTypevideoprofile = "".obs;
   var filenamewholeimge = "".obs;
+  RxBool isLoading = true.obs;
 
   Future getImage() async {
     FilePickerResult? pickedFile = await FilePicker.platform.pickFiles(
@@ -80,14 +81,17 @@ class AnnouncementController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    isLoading.value = false;
   }
 
   void uploadSchoolPosts(context, fileToUpload, details, schoolId) async {
     try {
+      isLoading.value = true;
       var result = await AnnouncementApi.uploadSchoolPost(
           fileToUpload, details, schoolId);
       if (result == "Success") {
         Get.back();
+        isLoading.value = false;
         Dialogs.showMyToast(context, "Annoucenment successfully posted!");
         filenamevideoprofile.value = '';
         fileTypevideoprofile.value = '';
@@ -96,12 +100,12 @@ class AnnouncementController extends GetxController {
         fileTypeimageprofile.value = "";
         attachments.length = 0;
       } else {
-        Dialogs.showMyToast(context, "Error posting an announcement  !");
+        isLoading.value = false;
+        Dialogs.showErrorToast(context, "Error posting an announcement  !");
       }
     } catch (e) {
       print('err $e');
     } finally {
-      // HomeApi.getAllAnnouncementBySchool(1);
       Get.find<HomeController>().getAllAnnouncementBySchool();
     }
   }

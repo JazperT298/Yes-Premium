@@ -18,9 +18,8 @@ class FilesView extends StatelessWidget {
     final controller = Get.put(FilesController());
     return Scaffold(
       body: Obx(
-        () => controller.isLoading.value && controller.notesdataList.length <= 0
-            ? LoadingView()
-            : SafeArea(
+        () => controller.isLoading.value == false
+            ? SafeArea(
                 child: RefreshIndicator(
                   onRefresh: () {
                     return Future.delayed(
@@ -434,7 +433,8 @@ class FilesView extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
+              )
+            : LoadingView(),
       ),
     );
   }
