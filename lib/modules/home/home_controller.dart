@@ -62,7 +62,7 @@ class HomeController extends GetxController {
           };
 
           var jsonStringEncoded = jsonEncode(mapping);
-          storageService.saveAnnouncementItems(jsonStringEncoded);
+          // storageService.saveAnnouncementItems(jsonStringEncoded);
           listofAnnouncement.add(announcementdataFromJson(jsonStringEncoded));
         }
       }

@@ -84,7 +84,7 @@ class VideolabController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        storageService.saveVideoLibItems(jsonStringEncoded);
+        // storageService.saveVideoLibItems(jsonStringEncoded);
         videolibList.add(videolibdataFromJson(jsonStringEncoded));
 
         // for (var category in videolibList) {

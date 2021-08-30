@@ -26,15 +26,10 @@ class SplashScreenController extends GetxController {
 
   //Check if user has logged in
   void _checkUserLoggedIn() {
-    if (box.read('UserId') == "" || box.read('UserId') == null) {
-      Get.offNamed(AppRoutes.LOGIN);
-    }
-    // else if (box.read('expires_in') == 0) {
-    //   // Dialogs.showSessionExpire(context);
-    //   print('${box.read('expires_in')}');
-    // }
-    else {
+    if (box.read('UserId') != "" || box.read('UserId') != null) {
       Get.offNamed(AppRoutes.BOTTOMNAV);
+    } else {
+      Get.offNamed(AppRoutes.LOGIN);
     }
   }
 }

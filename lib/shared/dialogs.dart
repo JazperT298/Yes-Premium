@@ -262,13 +262,14 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
-                      Get.find<GetStorageService>().deleteAnnouncementItems();
-                      Get.find<GetStorageService>().deleteVideoLibItems();
-                      Get.find<GetStorageService>().deleteNotesItems();
+                      Get.find<GetStorageService>().removeSchoolStorage();
+                      // Get.find<GetStorageService>().deleteAnnouncementItems();
+                      // Get.find<GetStorageService>().deleteVideoLibItems();
+                      // Get.find<GetStorageService>().deleteNotesItems();
                       //  Get.find<GetStorageService>().deleteNotificationItems();
                       Get.find<BottomNavController>().resetIndex(0);
+                      Get.offNamed(AppRoutes.LOGIN);
                     },
                   ),
                 ],
@@ -326,13 +327,14 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
-                      Get.find<GetStorageService>().deleteAnnouncementItems();
-                      Get.find<GetStorageService>().deleteVideoLibItems();
-                      Get.find<GetStorageService>().deleteNotesItems();
+                      Get.find<GetStorageService>().removeSchoolStorage();
+                      // Get.find<GetStorageService>().deleteAnnouncementItems();
+                      // Get.find<GetStorageService>().deleteVideoLibItems();
+                      // Get.find<GetStorageService>().deleteNotesItems();
                       //  Get.find<GetStorageService>().deleteNotificationItems();
                       Get.find<BottomNavController>().resetIndex(0);
+                      Get.offNamed(AppRoutes.LOGIN);
                     },
                   ),
                 ],
@@ -402,8 +404,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<AnnouncementController>()
-                          .deleteAnnouncement(announceID, schoolID);
+                      Get.find<AnnouncementController>().deleteAnnouncement(announceID, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -464,8 +465,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<AnnouncementController>()
-                          .deleteAnnouncement(announceID, schoolID);
+                      Get.find<AnnouncementController>().deleteAnnouncement(announceID, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -538,8 +538,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<VideolabController>()
-                          .deleteVideoLibrary(context, videoLibId, schoolID);
+                      Get.find<VideolabController>().deleteVideoLibrary(context, videoLibId, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -600,8 +599,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<VideolabController>()
-                          .deleteVideoLibrary(context, videoLibId, schoolID);
+                      Get.find<VideolabController>().deleteVideoLibrary(context, videoLibId, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -674,8 +672,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<FilesController>()
-                          .deleteUserNotes(context, notesID, userID, schoolID);
+                      Get.find<FilesController>().deleteUserNotes(context, notesID, userID, schoolID);
                       Get.back();
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -736,8 +733,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<FilesController>()
-                          .deleteUserNotes(context, notesID, userID, schoolID);
+                      Get.find<FilesController>().deleteUserNotes(context, notesID, userID, schoolID);
                       Get.back();
                     },
                   ),
@@ -795,13 +791,14 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
-                      Get.find<GetStorageService>().deleteAnnouncementItems();
-                      Get.find<GetStorageService>().deleteVideoLibItems();
-                      Get.find<GetStorageService>().deleteNotesItems();
+                      Get.find<GetStorageService>().removeSchoolStorage();
+                      // Get.find<GetStorageService>().deleteAnnouncementItems();
+                      // Get.find<GetStorageService>().deleteVideoLibItems();
+                      // Get.find<GetStorageService>().deleteNotesItems();
                       //  Get.find<GetStorageService>().deleteNotificationItems();
                       Get.find<BottomNavController>().resetIndex(0);
+                      Get.offNamed(AppRoutes.LOGIN);
                     },
                   ),
                 ],
@@ -846,13 +843,14 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.offNamed(AppRoutes.LOGOUTLOADING);
                       Get.find<GetStorageService>().removeUserStorage();
-                      Get.find<GetStorageService>().deleteAnnouncementItems();
-                      Get.find<GetStorageService>().deleteVideoLibItems();
-                      Get.find<GetStorageService>().deleteNotesItems();
+                      Get.find<GetStorageService>().removeSchoolStorage();
+                      // Get.find<GetStorageService>().deleteAnnouncementItems();
+                      // Get.find<GetStorageService>().deleteVideoLibItems();
+                      // Get.find<GetStorageService>().deleteNotesItems();
                       //  Get.find<GetStorageService>().deleteNotificationItems();
                       Get.find<BottomNavController>().resetIndex(0);
+                      Get.offNamed(AppRoutes.LOGIN);
                     },
                   ),
                 ],
@@ -924,8 +922,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<StudentListController>()
-                          .disableStudent(context, studentID);
+                      Get.find<StudentListController>().disableStudent(context, studentID);
 
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
@@ -988,8 +985,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<StudentListController>()
-                          .disableStudent(context, studentID);
+                      Get.find<StudentListController>().disableStudent(context, studentID);
                     },
                   ),
                 ],
@@ -1061,8 +1057,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<StudentListController>()
-                          .enableStudent(context, studentID);
+                      Get.find<StudentListController>().enableStudent(context, studentID);
                       // Get.toNamed(AppRoutes.LOGOUTLOADING);
                       // Get.find<GetStorageService>().removeUserStorage();
                     },
@@ -1124,8 +1119,7 @@ class Dialogs {
                       ),
                     ),
                     onPressed: () {
-                      Get.find<StudentListController>()
-                          .enableStudent(context, studentID);
+                      Get.find<StudentListController>().enableStudent(context, studentID);
 
                       // Get.back();
                     },

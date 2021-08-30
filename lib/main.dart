@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
             const Locale('en', 'US'),
           ],
           title: 'Yes Premium',
-          smartManagement: SmartManagement.full,
+          smartManagement: SmartManagement.keepFactory,
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.SPLASHSCREEN,
           getPages: AppPages.list,

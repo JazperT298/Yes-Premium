@@ -72,7 +72,7 @@ class StudentListController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        storageService.saveStudentItems(jsonStringEncoded);
+        // storageService.saveStudentItems(jsonStringEncoded);
         studentsDataList.add(studentsdataFromJson(jsonStringEncoded));
       }
       isLoading(false);

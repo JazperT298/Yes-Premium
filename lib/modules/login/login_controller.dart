@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:yes_premium/models/login_data.dart';
 import 'package:yes_premium/models/school.dart';
 import 'package:yes_premium/models/user_data.dart';
+import 'package:yes_premium/modules/bottomnav/bottomnav_controller.dart';
+import 'package:yes_premium/modules/home/home_controller.dart';
 import 'package:yes_premium/modules/login/login_api.dart';
+import 'package:yes_premium/modules/videolab/videolab_controller.dart';
 import 'package:yes_premium/routes/app_routes.dart';
 import 'package:yes_premium/services/get_storage_service.dart';
 import 'package:yes_premium/widgets/custom_dialog.dart';
@@ -136,10 +139,11 @@ class LoginController extends GetxController {
 
   void successNavigate() {
     Future.delayed(Duration(milliseconds: 200), () {
+      Get.find<HomeController>().getAllAnnouncementBySchool();
+      Get.find<VideolabController>().getSchoolVideoLibrary();
       Get.offNamed(
         AppRoutes.BOTTOMNAV,
       );
-
       username.clear();
       password.clear();
     });

@@ -68,7 +68,7 @@ class EducatorListController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        storageService.saveEducatorItems(jsonStringEncoded);
+        // storageService.saveEducatorItems(jsonStringEncoded);
         educatorsDataList.add(eucatorsdataFromJson(jsonStringEncoded));
       }
       isLoading(false);

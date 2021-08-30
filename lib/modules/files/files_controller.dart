@@ -70,7 +70,7 @@ class FilesController extends GetxController {
         };
 
         var jsonStringEncoded = jsonEncode(mapping);
-        storageService.saveNotesItems(jsonStringEncoded);
+        // storageService.saveNotesItems(jsonStringEncoded);
         notesdataList.add(notesdataFromJson(jsonStringEncoded));
       }
       isLoading(false);

@@ -32,8 +32,7 @@ class GetStorageService extends GetxService {
     }
   }
 
-  void setLoginStorage(
-      accessToekn, tokenType, expiresIn, userName, issued, expires) {
+  void setLoginStorage(accessToekn, tokenType, expiresIn, userName, issued, expires) {
     appdata.write('access_token', accessToekn);
     appdata.write('token_type', tokenType);
     appdata.write('expires_in', expiresIn);
@@ -96,6 +95,11 @@ class GetStorageService extends GetxService {
     print('erase user Data storage..');
   }
 
+  void removeSchoolStorage() {
+    appdata.erase();
+    print('erase school Data storage..');
+  }
+
   void printStorage() {
     print(appdata.read('UserId'));
     print(appdata.read('School'));
@@ -103,53 +107,53 @@ class GetStorageService extends GetxService {
     print(appdata.read('SchoolAvatar'));
   }
 
-  void saveAnnouncementItems(announcementItems) {
-    appdata.write('announcementItems', announcementItems);
-  }
+  // void saveAnnouncementItems(announcementItems) {
+  //   appdata.write('announcementItems', announcementItems);
+  // }
 
-  void deleteAnnouncementItems() {
-    appdata.remove('announcementItems');
-  }
+  // void deleteAnnouncementItems() {
+  //   appdata.remove('announcementItems');
+  // }
 
-  void saveVideoLibItems(videoLibItems) {
-    appdata.write('videoLibItems', videoLibItems);
-  }
+  // void saveVideoLibItems(videoLibItems) {
+  //   appdata.write('videoLibItems', videoLibItems);
+  // }
 
-  void deleteVideoLibItems() {
-    appdata.remove('videoLibItems');
-  }
+  // void deleteVideoLibItems() {
+  //   appdata.remove('videoLibItems');
+  // }
 
-  void saveNotesItems(notesItems) {
-    appdata.write('notesItems', notesItems);
-  }
+  // void saveNotesItems(notesItems) {
+  //   appdata.write('notesItems', notesItems);
+  // }
 
-  void deleteNotesItems() {
-    appdata.remove('notesItems');
-  }
+  // void deleteNotesItems() {
+  //   appdata.remove('notesItems');
+  // }
 
-  void saveNotificationItems(notificationItems) {
-    appdata.write('notificationItems', notificationItems);
-  }
+  // void saveNotificationItems(notificationItems) {
+  //   appdata.write('notificationItems', notificationItems);
+  // }
 
-  void deleteNotificationItems() {
-    appdata.remove('notificationItems');
-  }
+  // void deleteNotificationItems() {
+  //   appdata.remove('notificationItems');
+  // }
 
-  void saveEducatorItems(educatorItems) {
-    appdata.write('educatorItems', educatorItems);
-  }
+  // void saveEducatorItems(educatorItems) {
+  //   appdata.write('educatorItems', educatorItems);
+  // }
 
-  void deleteEducatorItems() {
-    appdata.remove('educatorItems');
-  }
+  // void deleteEducatorItems() {
+  //   appdata.remove('educatorItems');
+  // }
 
-  void saveStudentItems(studentItems) {
-    appdata.write('studentItems', studentItems);
-  }
+  // void saveStudentItems(studentItems) {
+  //   appdata.write('studentItems', studentItems);
+  // }
 
-  void deleteStudentItems() {
-    appdata.remove('studentItems');
-  }
+  // void deleteStudentItems() {
+  //   appdata.remove('studentItems');
+  // }
 
   DeviceInfoPlugin androiddeviceInfo = DeviceInfoPlugin();
   DeviceInfoPlugin iosdeviceInfo = DeviceInfoPlugin();
