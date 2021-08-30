@@ -20,10 +20,9 @@ class EditUserView extends GetView<EditUserController> {
         actions: [
           MaterialButton(
               onPressed: () {
-                // controller.userType.value == "Student"
-                //     ? controller.checkStudentInput(context)
-                //     : controller.checkEducatorInput(context);
-                // _node.unfocus();
+                controller.userType.value == "Student" ? controller.checkStudentInput(context) : controller.checkEducatorInput(context);
+                // print('${controller.usernameEditingController.text}');
+                _node.unfocus();
               },
               child: Text(
                 'Update',
@@ -45,23 +44,25 @@ class EditUserView extends GetView<EditUserController> {
                           //controller.getCoverImage();
                         },
                         child: Container(
-                          decoration: controller.userCoverImage.value != 'null'
-                              ? BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      "$photoDir/${controller.userCoverImage.value}",
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ))
-                              : BoxDecoration(
-                                  color: mainColor,
-                                ),
+                          decoration:
+                              // controller.userCoverImage.value != 'null'
+                              //     ? BoxDecoration(
+                              //         border: Border.all(color: Colors.grey),
+                              //         image: DecorationImage(
+                              //           image: NetworkImage(
+                              //             "$photoDir/${controller.userCoverImage.value}",
+                              //           ),
+                              //           fit: BoxFit.cover,
+                              //         ))
+                              //     :
+                              BoxDecoration(
+                            color: mainColor,
+                          ),
                           child: Container(
                             width: double.infinity,
                             height: 200,
                             child: GestureDetector(
-                              //onTap: () => controller.getProfileImage(),
+                              onTap: () => controller.getProfileImage(),
                               child: controller.attachments2.length == 0
                                   ? Container(
                                       alignment: Alignment(0.0, 4.6),
@@ -135,13 +136,13 @@ class EditUserView extends GetView<EditUserController> {
         SizedBox(
           height: 12.0,
         ),
-        controller.userType.value == "Student"
+        controller.usernameEditingController.text != 'null'
             ? TextField(
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 12.sp,
                 ),
-                controller: controller.userIDEditingController,
+                controller: controller.usernameEditingController,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => _node.nextFocus(),
